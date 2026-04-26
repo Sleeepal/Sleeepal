@@ -1,25 +1,22 @@
 {
-  "version": "0.3.4",
-  "buildTime": "2026-04-22 21:11 CEST",
-  "buildNote": {
-    "zh": "官网升级 · 双语切换 · 品牌焕新",
-    "en": "Website refresh · bilingual switch · brand update"
-  },
-  "appSize": "pending validation",
-  "downloadFile": "GitHub project",
-  "downloadPath": "https://github.com/HiClawBot/Sleeepal",
-  "downloadSize": "85M",
+  "version": "0.3.28",
+  "buildTime": "2026-04-25 21:24 CEST",
+  "buildNote": "Night report · Focus loop · Bluetooth trial · Wired calibration",
+  "appSize": "172M",
+  "downloadFile": "SleeePal-0.3.28.dmg",
+  "downloadPath": "../app/dist/SleeePal-0.3.28.dmg",
+  "downloadSize": "86M",
   "downloadSub": {
-    "zh": "官网升级版已公开 · App 产物将在验证完成后单独发布",
-    "en": "The refreshed website is now public · app builds will be released separately after validation"
+    "zh": "Mac 桌面版已更新至 v0.3.28 · 夜报 / 蓝牙体验 / 有线升级",
+    "en": "Mac desktop build updated to v0.3.28 · reports / bluetooth trial / wired upgrade"
   },
   "downloadButton": {
-    "zh": "查看 GitHub 项目",
-    "en": "View GitHub project"
+    "zh": "下载 Mac 版 v0.3.28",
+    "en": "Download for Mac v0.3.28"
   },
   "sysreq": {
-    "zh": "官网已上线 · 二进制产物后续发布",
-    "en": "Website is live · binaries will follow later"
+    "zh": "macOS 12+ · Apple Silicon & Intel · DMG 86M",
+    "en": "macOS 12+ · Apple Silicon & Intel · DMG 86M"
   },
   "releaseLabel": {
     "zh": "当前构建",
@@ -31,14 +28,14 @@
   },
   "progress": {
     "zh": [
-      "官网风格升级，品牌图标更新为金色月牙 + 深蓝色 zzz。",
-      "新增中英文切换脚手架，先覆盖核心公开页面文案。",
-      "应用端 UI 统一、全量双语和正式产物发布继续在验证链路中。"
+      "完整夜报：支持 severity、bucket、clip 预览与昨夜对比。",
+      "低门槛上手：先支持手机直出和蓝牙体验，再引导到有线路径。",
+      "增强链路：有线校准、今晚重点跟进、次日 follow-up 已接通。"
     ],
     "en": [
-      "The site has been refreshed with the new gold crescent and deep-blue zzz brand mark.",
-      "A bilingual switch now covers the core public-facing content in Chinese and English.",
-      "App UI alignment, full bilingual product surfaces, and public binaries remain in active validation."
+      "Full night reports with severity, buckets, clip previews, and next-night follow-up.",
+      "Lower-friction onboarding with phone speaker and bluetooth trial before a wired upgrade.",
+      "Enhanced path now includes wired calibration, tonight focus, and follow-up loops."
     ]
   }
 }
