@@ -5,6 +5,8 @@
 ### Product clarity
 
 - Reframed the homepage around a Mac-first, local-first nightly workflow.
+- Replaced ambiguous “antiphase quiet” wording with an action–mechanism–result model: start noise relief, emit antiphase sound, and form a near-field quiet zone.
+- Renamed waveform outcomes from “theoretical cancellation” to the more accurate “estimated residual after cancellation.”
 - Replaced unverified implementation numbers with plain-language validation boundaries.
 - Clarified that the baby scenario is environment observation, not breathing, life-safety, or emergency monitoring.
 - Kept public app downloads closed while signing, notarization, and physical acceptance remain incomplete.
