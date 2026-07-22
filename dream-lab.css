@@ -643,10 +643,15 @@ img {
 
 .dream-examples button:hover,
 .dream-examples button:focus-visible,
+.dream-examples button[aria-pressed="true"],
 .dream-card-actions button:hover,
 .dream-card-actions button:focus-visible {
   border-color: var(--dream-gold);
   color: var(--dream-cream);
+}
+
+.dream-examples button[aria-pressed="true"] {
+  background: rgba(236, 186, 119, 0.12);
 }
 
 .dream-field-row {

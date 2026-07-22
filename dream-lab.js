@@ -52,6 +52,7 @@ const editButton = document.querySelector("[data-dream-edit]");
 const pauseButton = document.querySelector("[data-dream-pause]");
 const exportButton = document.querySelector("[data-dream-export]");
 const deleteButton = document.querySelector("[data-dream-delete]");
+const exampleButtons = [...document.querySelectorAll("[data-dream-example]")];
 
 let activeTrajectory = null;
 let isGenerating = false;
@@ -86,6 +87,16 @@ function updateWishMeter() {
   if (!wishInput || !wishMeter) return;
   wishMeter.textContent = `${wishInput.value.length} / 800`;
   wishInput.removeAttribute("aria-invalid");
+}
+
+function updateExampleSelection() {
+  const wish = normalizeText(wishInput?.value);
+  const artifactType = artifactInput?.value;
+  exampleButtons.forEach((button) => {
+    const isSelected = wish === normalizeText(button.getAttribute("data-dream-example"))
+      && artifactType === button.getAttribute("data-dream-artifact");
+    button.setAttribute("aria-pressed", String(isSelected));
+  });
 }
 
 function isValidTrajectory(value) {
@@ -234,6 +245,7 @@ function populateForm(value) {
   if (constraintInput) constraintInput.value = value.boundary || "";
   if (localConsent) localConsent.checked = true;
   updateWishMeter();
+  updateExampleSelection();
 }
 
 function resetDeleteButton() {
@@ -322,13 +334,22 @@ function initializeReveals() {
   reveals.forEach((node) => observer.observe(node));
 }
 
-wishInput?.addEventListener("input", updateWishMeter);
+wishInput?.addEventListener("input", () => {
+  updateWishMeter();
+  updateExampleSelection();
+});
 
-document.querySelectorAll("[data-dream-example]").forEach((button) => {
+artifactInput?.addEventListener("change", updateExampleSelection);
+
+exampleButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (!wishInput) return;
     wishInput.value = button.getAttribute("data-dream-example") || "";
+    const artifactType = button.getAttribute("data-dream-artifact");
+    if (artifactInput && ARTIFACTS[artifactType]) artifactInput.value = artifactType;
     updateWishMeter();
+    updateExampleSelection();
+    setMessage(formStatus, "示例已填入，并同步了第一件产物类型。你可以继续修改。");
     wishInput.focus();
   });
 });
@@ -436,6 +457,7 @@ deleteButton?.addEventListener("click", () => {
   if (card) card.hidden = true;
   workspace?.classList.remove("is-card-visible");
   updateWishMeter();
+  updateExampleSelection();
   setMessage(formStatus, "本地梦卡已删除。你可以从一个新的愿望重新开始。");
   wishInput?.focus();
 });
