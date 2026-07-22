@@ -1,26 +1,29 @@
 {
-  "version": "0.3.28",
-  "buildTime": "2026-04-25 21:24 CEST",
+  "version": "0.3.133",
+  "buildTime": "2026-06-06 01:12 CEST",
   "buildNote": "Night report · Focus loop · Bluetooth trial · Wired calibration",
-  "appSize": "172M",
-  "downloadFile": "SleeePal-0.3.28.dmg",
-  "downloadPath": "../app/dist/SleeePal-0.3.28.dmg",
-  "downloadSize": "86M",
+  "appSize": "97M",
+  "arch": "darwin-arm64",
+  "publicDownload": false,
+  "artifactStatus": "withdrawn",
+  "signed": false,
+  "notarized": false,
+  "progressUrl": "https://github.com/HiClawBot/Sleeepal",
   "downloadSub": {
-    "zh": "Mac 桌面版已更新至 v0.3.28 · 夜报 / 蓝牙体验 / 有线升级",
-    "en": "Mac desktop build updated to v0.3.28 · reports / bluetooth trial / wired upgrade"
+    "zh": "v0.3.133 QA 构建记录 · 尚未完成公开签名、公证与物理验收",
+    "en": "v0.3.133 QA build record · public signing, notarization, and physical acceptance are incomplete"
   },
   "downloadButton": {
-    "zh": "下载 Mac 版 v0.3.28",
-    "en": "Download for Mac v0.3.28"
+    "zh": "查看 v0.3.133 验证进展",
+    "en": "View v0.3.133 validation progress"
   },
   "sysreq": {
-    "zh": "macOS 12+ · Apple Silicon & Intel · DMG 86M",
-    "en": "macOS 12+ · Apple Silicon & Intel · DMG 86M"
+    "zh": "macOS 13+ · Apple Silicon 主测 · 公开下载尚未开放",
+    "en": "macOS 13+ · Apple Silicon primary · public download not open"
   },
   "releaseLabel": {
-    "zh": "当前构建",
-    "en": "Current build"
+    "zh": "QA 构建记录",
+    "en": "QA build record"
   },
   "packagedLabel": {
     "zh": "打包时间",
@@ -37,5 +40,6 @@
       "Lower-friction onboarding with phone speaker and bluetooth trial before a wired upgrade.",
       "Enhanced path now includes wired calibration, tonight focus, and follow-up loops."
     ]
-  }
+  },
+  "alternateDownloads": []
 }

@@ -1,64 +1,32 @@
-# Website And Brand Upload Notes
+# Website release notes
 
-## Scope Of This Upload
+## 2026-07-22
 
-This first GitHub upload is intentionally limited to brand-facing materials and documentation:
+### Product clarity
 
-- GitHub-facing `README.md`
-- brand assets under `assets/brand/`
-- static website under `website/`
-- website bilingual switch scaffolding
-- release notes in this document
+- Reframed the homepage around a Mac-first, local-first nightly workflow.
+- Replaced ambiguous “antiphase quiet” wording with an action–mechanism–result model: start noise relief, emit antiphase sound, and form a near-field quiet zone.
+- Renamed waveform outcomes from “theoretical cancellation” to the more accurate “estimated residual after cancellation.”
+- Replaced unverified implementation numbers with plain-language validation boundaries.
+- Clarified that the baby scenario is environment observation, not breathing, life-safety, or emergency monitoring.
+- Kept public app downloads closed while signing, notarization, and physical acceptance remain incomplete.
 
-## What Changed
+### SleeePal Lab · 梦想成真
 
-### Brand system
+- Rebuilt the former directory-style page as a concise five-stage product method.
+- Removed embedded third-party pages, supplier directories, wallet/payment plans, and protected engineering references.
+- Added a public-safe editorial bedroom image that contains no hardware or engineering design.
+- Added clear “public vs protected” disclosure guidance.
 
-- new app icon built from `🌙` and `💤`
-- updated wordmark and logo lockups
-- regenerated PNG icon sizes
-- regenerated `.icns`
+### Privacy and safety
 
-### Website
+- Added Content Security Policy and referrer controls to every public page.
+- Added a public-sharing acknowledgement before the GitHub Issue action can be enabled.
+- Aligned the privacy notice with local reports and opt-in local audio clips in QA builds.
+- Added an explicit public-file allowlist check before deployment.
 
-- updated navigation and footer branding
-- updated Mac download link to the current DMG path
-- added Chinese / English toggle scaffolding for the site
-- aligned site assets to the new icon and wordmark
+### Responsive quality
 
-### Documentation
-
-- root `README.md` now works as the GitHub project entry point
-- this note clarifies the publication boundary for the first push
-
-## What Is Explicitly Not Published Yet
-
-The following are not being treated as released products in this upload:
-
-- macOS app release announcement
-- iOS app release announcement
-- packaged binaries as a public release
-- production claims around product readiness beyond current local verification
-
-Those stay in development until interface iteration and testing are complete.
-
-## Current Position
-
-The repository should first communicate:
-
-- what SleeePal is
-- why the product exists
-- what the current brand system looks like
-- how the website presents the product
-
-It should not yet overstate shipping maturity for the app surfaces.
-
-## Next Release Candidates
-
-After the current upload, the next publishable areas should be:
-
-1. desktop product UI alignment with the site
-2. mobile product UI refinement
-3. end-to-end bilingual product surfaces
-4. verified product screenshots and updated documentation
-5. public app release packaging only after validation
+- Added mobile navigation to the feedback page.
+- Hardened CJK display typography against clipped final glyphs.
+- Verified desktop and mobile layouts without horizontal overflow or clipped controls.

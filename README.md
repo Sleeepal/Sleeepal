@@ -1,54 +1,30 @@
-# Sleeepal
+# SleeePal public website
 
-Sleeepal is the public website and brand repository for the SleeePal project.
+This branch contains only the allowlisted files published at [sleeepal.com](https://sleeepal.com/).
 
-Sleeepal 是 SleeePal 项目的官网与公开品牌仓库。
+这个分支只保存 `sleeepal.com` 的公开静态内容。应用源码、测试包、音频、内部工程资料、供应链资料和未公开知识产权材料不属于本站发布范围。
 
-## Public Scope
+## Public pages
 
-This repository currently publishes:
+- Product overview and current validation status
+- Local-first feedback package
+- Beta privacy and usage boundaries
+- SleeePal Lab: “梦想成真” product method
 
-- the public marketing website
-- bilingual website copy in Chinese and English
-- the refreshed moon-plus-zzz brand system
-- release notes for the public-facing site
+## Release boundary
 
-当前这个仓库只公开以下内容：
+- No public app download is exposed before signing, notarization, and physical acceptance.
+- Feedback does not upload audio, screenshots, reports, or logs automatically.
+- GitHub Issues are public and stay disabled until the visitor confirms the content contains no sensitive information.
+- Undisclosed implementation, engineering, supplier, and user-submitted material is not published here.
 
-- 官网静态站
-- 中英文公开文案
-- 金色月牙 + 深蓝色 zzz 的新版品牌系统
-- 官网发布说明文档
-
-## Not Public Yet
-
-The following are still under active validation and are not being publicly released from this repository yet:
-
-- Mac app binaries
-- iPhone app binaries
-- internal development snapshots
-- unfinished product experiments
-
-以下内容仍在验证中，暂不通过这个仓库公开发布：
-
-- Mac 应用产物
-- iPhone 应用产物
-- 内部开发快照
-- 尚未完成验证的产品实验
-
-## Local Preview
+## Local preview
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open `http://localhost:8000`.
-
-## Brand Direction
-
-SleeePal is built around a narrow and concrete promise: create a calm, credible quiet zone around the pillow rather than claiming full-room silence.
-
-SleeePal 围绕一个非常具体的目标推进：先在枕边构建可信、可解释的宁静区，而不是夸大成“整间房都静下来”。
+Then open `http://127.0.0.1:8000/`.
 
 ## License
 

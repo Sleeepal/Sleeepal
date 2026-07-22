@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>美梦成真 — 从愿望到真实产物</title>
+  <meta name="description" content="吃饱、喝足、睡好之后，说出一个需求、想法或愿望，进入从梦卡、实现轨迹到可用数字产物的美梦成真入口。" />
+  <meta name="theme-color" content="#070a12" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
+  <link rel="canonical" href="https://sleeepal.com/3d-printing-workshop.html" />
+  <meta property="og:title" content="美梦成真 — 从愿望到真实产物" />
+  <meta property="og:description" content="先睡好，再把一个真实愿望做成可以打开、使用和继续修改的数字产物。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sleeepal.com/3d-printing-workshop.html" />
+  <meta property="og:image" content="https://sleeepal.com/assets/dream-lab-hero-v1.jpg" />
+  <link rel="icon" href="./favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
+  <link rel="stylesheet" href="./dream-lab.css?v=20260722-round2" />
+  <script src="./dream-lab.js?v=20260722-round2" defer></script>
+</head>
+<body class="dream-page">
+  <a class="dream-skip-link" href="#main">跳到主要内容</a>
+
+  <header class="dream-header" data-dream-header>
+    <div class="dream-header-inner">
+      <a class="dream-brand" href="./index.html" aria-label="返回 SleeePal 首页">
+        <img src="./assets/logo-light.svg" alt="SleeePal" />
+        <span>DREAM TRACK / 01</span>
+      </a>
+      <nav class="dream-header-nav" aria-label="美梦成真页面导航">
+        <a href="#trajectory">轨迹</a>
+        <a href="#dream-intake">梦卡</a>
+        <a href="#forge">工具</a>
+        <a href="#proof">SleeePal 案例</a>
+      </nav>
+      <a class="dream-header-action" href="#dream-intake">说出一个美梦</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="dream-hero" aria-labelledby="dream-title">
+      <img class="dream-hero-image" src="./assets/dream-lab-hero-v1.jpg" alt="深靛蓝卧室里，一盏暖灯照着等待记录愿望的笔记本" />
+      <div class="dream-hero-shade" aria-hidden="true"></div>
+      <div class="dream-hero-dawn" aria-hidden="true"></div>
+      <div class="dream-hero-content">
+        <p class="dream-eyebrow">SleeePal · Dream track</p>
+        <h1 id="dream-title">
+          <span>吃饱，喝足，睡好。</span>
+          <span>然后，让<span class="dream-accent">美梦成真。</span></span>
+        </h1>
+        <p class="dream-hero-lead">
+          当身体和注意力恢复，就把下一个需求、想法或愿望说出来。
+          我们把它整理成可以执行的轨迹，再借助大模型与 Agents，走向一个真正可用的数字产物。
+        </p>
+        <div class="dream-actions">
+          <a class="dream-action-primary" href="#dream-intake">说出一个美梦</a>
+          <a class="dream-action-secondary" href="#proof">看 SleeePal 如何成真</a>
+        </div>
+        <ul class="dream-trust-list" aria-label="美梦成真入口原则">
+          <li>草稿默认留在本机</li>
+          <li>每一步由你确认</li>
+          <li>随时导出或删除</li>
+        </ul>
+      </div>
+      <aside class="dream-proof-note" aria-label="第一条美梦成真轨迹">
+        <span>CASE 01</span>
+        <strong>SleeePal</strong>
+        <p>先照顾好一晚睡眠，再把恢复的精力带回生活。</p>
+      </aside>
+      <a class="dream-scroll-cue" href="#foundation" aria-label="继续了解美梦成真轨迹">
+        <span>从恢复走向创造</span>
+        <i aria-hidden="true"></i>
+      </a>
+    </section>
+
+    <section class="dream-foundation dream-reveal" id="foundation" aria-labelledby="foundation-title">
+      <p class="dream-eyebrow">The foundation</p>
+      <div class="dream-foundation-copy">
+        <h2 id="foundation-title">睡好，不是终点。</h2>
+        <p>是重新拥有注意力、好奇心和行动力的起点。</p>
+      </div>
+      <div class="dream-foundation-equation" aria-label="生活底座到美梦成真的关系">
+        <div class="dream-foundation-basics" aria-hidden="true">
+          <span>吃饱</span>
+          <i>＋</i>
+          <span>喝足</span>
+          <i>＋</i>
+          <span>睡好</span>
+        </div>
+        <i class="dream-foundation-arrow" aria-hidden="true">→</i>
+        <strong>美梦成真</strong>
+      </div>
+    </section>
+
+    <section class="dream-intake" id="dream-intake" aria-labelledby="dream-intake-title">
+      <div class="dream-section-intro dream-reveal">
+        <p class="dream-eyebrow">Start with a wish</p>
+        <h2 id="dream-intake-title">你希望什么，真的发生？</h2>
+        <p>
+          不必先想功能或技术。写下希望改变的事情、你最在意的结果，以及不能越过的边界。
+          第一版梦卡只保存在这个浏览器里。
+        </p>
+      </div>
+
+      <div class="dream-workspace dream-reveal">
+        <form class="dream-form" data-dream-form novalidate>
+          <div class="dream-form-heading">
+            <span>01 / 说出愿望</span>
+            <strong>先写你真正想要的变化。</strong>
+          </div>
+
+          <label class="dream-field" for="dream-wish">
+            <span>我的愿望</span>
+            <textarea
+              id="dream-wish"
+              name="wish"
+              rows="7"
+              minlength="12"
+              maxlength="800"
+              required
+              aria-describedby="dream-wish-help dream-wish-meter"
+              placeholder="例如：我想把每天重复整理客户反馈的工作自动化，让我能把时间留给真正需要判断的事情。"
+            ></textarea>
+            <span class="dream-field-meta">
+              <small id="dream-wish-help">写结果和现实场景，不必写技术方案。</small>
+              <small id="dream-wish-meter">0 / 800</small>
+            </span>
+          </label>
+
+          <div class="dream-examples" aria-label="愿望示例">
+            <span>不知道怎么写？试试：</span>
+            <button type="button" aria-pressed="false" data-dream-artifact="tool" data-dream-example="我想做一个每天都愿意打开的私人计划工具，让真正重要的三件事不会再被琐事淹没。">私人计划工具</button>
+            <button type="button" aria-pressed="false" data-dream-artifact="workflow" data-dream-example="我想把每周重复整理资料、分类和提醒的流程自动化，减少机械工作。">自动化流程</button>
+            <button type="button" aria-pressed="false" data-dream-artifact="site" data-dream-example="我有一个新的产品想法，希望先做成一个可以向别人演示和试用的网站。">产品演示网站</button>
+            <button type="button" aria-pressed="false" data-dream-artifact="agent" data-dream-example="我想要一个了解我的资料和工作方法、但每次外部操作都先征求同意的专属 Agent 助手。">专属 Agent</button>
+          </div>
+
+          <div class="dream-field-row">
+            <label class="dream-field" for="dream-artifact">
+              <span>希望先得到什么</span>
+              <select id="dream-artifact" name="artifact">
+                <option value="auto">先由系统建议</option>
+                <option value="tool">私人小工具</option>
+                <option value="site">可打开的网站</option>
+                <option value="workflow">自动化工作流</option>
+                <option value="agent">专属 Agent 助手</option>
+              </select>
+            </label>
+
+            <label class="dream-field" for="dream-constraint">
+              <span>最重要的限制（可选）</span>
+              <input
+                id="dream-constraint"
+                name="constraint"
+                type="text"
+                maxlength="180"
+                placeholder="例如：必须本地处理，不自动发送任何内容"
+              />
+            </label>
+          </div>
+
+          <label class="dream-consent" for="dream-local-consent">
+            <input id="dream-local-consent" name="localConsent" type="checkbox" required />
+            <span>
+              我明白：当前只在本浏览器生成并保存梦卡，不上传内容、不调用模型、不启动 Agents，也不会执行发布、发送、购买或删除等外部操作。
+            </span>
+          </label>
+
+          <button class="dream-submit" type="submit" data-dream-submit>
+            <span>生成我的梦卡</span>
+            <span aria-hidden="true">→</span>
+          </button>
+          <p class="dream-form-status" data-dream-form-status aria-live="polite">
+            尚未生成。你的文字不会离开当前浏览器。
+          </p>
+        </form>
+
+        <section class="dream-card" data-dream-card aria-labelledby="dream-card-title" hidden>
+          <div class="dream-card-heading">
+            <div>
+              <span>02 / 梦卡</span>
+              <h3 id="dream-card-title" data-card-title>等待生成</h3>
+            </div>
+            <span class="dream-card-state" data-card-state>本地草稿</span>
+          </div>
+
+          <dl class="dream-card-details">
+            <div>
+              <dt>真正想改变的事</dt>
+              <dd data-card-wish></dd>
+            </div>
+            <div>
+              <dt>第一件可交付产物</dt>
+              <dd data-card-artifact></dd>
+            </div>
+            <div>
+              <dt>首版成功标准</dt>
+              <dd data-card-success></dd>
+            </div>
+            <div>
+              <dt>边界</dt>
+              <dd data-card-boundary></dd>
+            </div>
+          </dl>
+
+          <ol class="dream-card-route" aria-label="当前美梦成真轨迹">
+            <li data-card-stage="capture"><span>1</span><p><strong>愿望已记录</strong><small>保存在本地浏览器</small></p></li>
+            <li data-card-stage="brief"><span>2</span><p><strong data-card-brief-title>梦卡待确认</strong><small data-card-brief-note>确认目标和边界</small></p></li>
+            <li data-card-stage="forge"><span>3</span><p><strong>等待炼丹炉</strong><small data-card-forge-note>当前尚未调用 Agents</small></p></li>
+            <li data-card-stage="preview"><span>4</span><p><strong>验梦台预览</strong><small>打开、试用、继续修改</small></p></li>
+          </ol>
+
+          <div class="dream-card-actions">
+            <button class="dream-card-primary" type="button" data-dream-confirm>确认梦卡，进入轨迹</button>
+            <button type="button" data-dream-edit>返回修改</button>
+            <button type="button" data-dream-pause hidden>暂停轨迹</button>
+            <button type="button" data-dream-export>导出 Markdown</button>
+            <button class="dream-card-danger" type="button" data-dream-delete>删除本地梦卡</button>
+          </div>
+          <p class="dream-card-note" data-dream-card-status aria-live="polite">
+            梦卡尚未确认。确认只会更新本地轨迹，不会开始真实施工。
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <section class="dream-trajectory" id="trajectory" aria-labelledby="trajectory-title" data-trajectory>
+      <div class="dream-trajectory-copy dream-reveal">
+        <p class="dream-eyebrow">One continuous trajectory</p>
+        <h2 id="trajectory-title">不是一次生成。<br />是一条能继续走下去的轨迹。</h2>
+        <p>
+          愿望会变，理解会变，产物也会迭代。每一次确认、制作、试用和修改都回到同一条梦轨，而不是散落在不同聊天里。
+        </p>
+      </div>
+
+      <ol class="dream-trajectory-list dream-reveal">
+        <li data-stage="rest">
+          <span>01</span>
+          <div><strong>恢复</strong><p>吃饱、喝足、睡好，重新拥有行动力。</p></div>
+        </li>
+        <li data-stage="wish">
+          <span>02</span>
+          <div><strong>说出美梦</strong><p>从生活里的真实变化开始，而不是从功能清单开始。</p></div>
+        </li>
+        <li data-stage="brief">
+          <span>03</span>
+          <div><strong>看懂目标</strong><p>把愿望整理成目标、限制、成功标准与第一件产物。</p></div>
+        </li>
+        <li data-stage="route">
+          <span>04</span>
+          <div><strong>确认路径</strong><p>你看懂接下来会发生什么，并决定是否继续。</p></div>
+        </li>
+        <li data-stage="forge">
+          <span>05</span>
+          <div><strong>炼丹炉制作</strong><p>大模型、Agents、本地工具和能力积木协同施工。</p></div>
+        </li>
+        <li data-stage="preview">
+          <span>06</span>
+          <div><strong>验梦台试用</strong><p>打开真实产物，完成核心任务，提出修改。</p></div>
+        </li>
+        <li data-stage="grow">
+          <span>07</span>
+          <div><strong>继续生长</strong><p>现实反馈进入下一版本，让美梦越来越接近你真正需要的样子。</p></div>
+        </li>
+      </ol>
+      <div class="dream-trajectory-line" aria-hidden="true"><span data-trajectory-progress></span></div>
+    </section>
+
+    <section class="dream-forge" id="forge" aria-labelledby="forge-title">
+      <div class="dream-section-intro dream-reveal">
+        <p class="dream-eyebrow">Tools along the way</p>
+        <h2 id="forge-title">工具在幕后。<br />结果留在你手里。</h2>
+        <p>隐喻帮助记忆，普通话负责说清功能。用户不需要选择模型，也不需要理解工程管线。</p>
+      </div>
+
+      <div class="dream-tool-list dream-reveal">
+        <article>
+          <span>01 / DISCOVER</span>
+          <h3>万花筒</h3>
+          <p><strong>先看可能。</strong>理解愿望可以被做成什么，以及哪些部分暂时不能由软件完成。</p>
+        </article>
+        <article>
+          <span>02 / COMPOSE</span>
+          <h3>积木场</h3>
+          <p><strong>选择能力。</strong>组合搜索、文档、语音、自动化、数据和 Agent 工具。</p>
+        </article>
+        <article>
+          <span>03 / BUILD</span>
+          <h3>炼丹炉</h3>
+          <p><strong>负责制作。</strong>理解目标、规划任务、编程、测试，并交付可以运行的产物。</p>
+        </article>
+        <article>
+          <span>04 / VERIFY</span>
+          <h3>验梦台</h3>
+          <p><strong>打开验收。</strong>亲自试用核心流程，指出问题，确认或退回继续修改。</p>
+        </article>
+      </div>
+
+      <div class="dream-possibilities dream-reveal" aria-labelledby="possibilities-title">
+        <p class="dream-eyebrow">Not limited to sleep</p>
+        <h3 id="possibilities-title">睡眠之外，也可以从一件小而真实的产物开始。</h3>
+        <ul>
+          <li><span>私人小工具</span><p>计划、记录、提醒、整理和决策辅助。</p></li>
+          <li><span>自动化工作流</span><p>把重复的信息处理和交接变成稳定流程。</p></li>
+          <li><span>可打开的网站</span><p>把点子做成能展示、体验和验证的页面。</p></li>
+          <li><span>专属 Agent</span><p>基于你的资料协助工作，但所有外部动作先征求同意。</p></li>
+        </ul>
+        <p class="dream-possibilities-boundary">
+          系统只承诺完成愿望中可以被编程和验证的部分。健康、关系、财富等现实目标会被转化为支持工具或行动路径，而不会被宣传成已经自动实现。
+        </p>
+      </div>
+    </section>
+
+    <section class="dream-case" id="proof" aria-labelledby="proof-title">
+      <div class="dream-case-visual dream-reveal">
+        <img src="./assets/dream-lab-hero-v1.jpg" alt="床边暖灯与一本记录产品愿望的笔记本" loading="lazy" />
+        <p>Case 01 · 从一个失眠夜晚开始</p>
+      </div>
+      <div class="dream-case-copy dream-reveal">
+        <p class="dream-eyebrow">The first dream made tangible</p>
+        <h2 id="proof-title">SleeePal，是第一条正在成为现实的梦轨。</h2>
+        <p class="dream-case-lead">
+          它从“希望今晚更安静”开始，先做成 Mac-first 的本地睡眠辅助工具；再探索通过反向声波抵消部分稳定噪音、形成近场空间的静谧区域，并用真实夜报和实机验证决定下一步。
+        </p>
+        <dl class="dream-case-facts">
+          <div><dt>愿望</dt><dd>让真实夜晚得到更安静、更可理解的陪伴</dd></div>
+          <div><dt>首件产物</dt><dd>Mac 桌面版与本地夜报闭环</dd></div>
+          <div><dt>现实验证</dt><dd>路线状态、实机表现和过夜证据持续回到梦轨</dd></div>
+        </dl>
+        <div class="dream-actions">
+          <a class="dream-action-primary" href="./index.html#download">查看 SleeePal 验证状态</a>
+          <a class="dream-action-secondary" href="sleeepal://tonight">打开桌面版</a>
+        </div>
+        <p class="dream-case-disclaimer">
+          SleeePal 为非药物助眠辅助工具，不构成医疗建议或诊断；近场体验会受空间、设备与摆位影响。
+        </p>
+      </div>
+    </section>
+
+    <section class="dream-boundary" id="boundary" aria-labelledby="boundary-title">
+      <div class="dream-section-intro dream-reveal">
+        <p class="dream-eyebrow">Trust before magic</p>
+        <h2 id="boundary-title">先保护，再公开。<br />先确认，再行动。</h2>
+        <p>愿望可能涉及健康、关系、财务、孩子、工作秘密或尚未公开的创意。默认把控制权留给用户。</p>
+      </div>
+
+      <div class="dream-boundary-grid dream-reveal">
+        <article>
+          <span>01</span>
+          <h3>本地草稿</h3>
+          <p>当前梦卡保存在你的浏览器，不发送到服务器。</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>明确确认</h3>
+          <p>目标、边界、成本与外部动作都应在执行前被看见。</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>没有暗中行动</h3>
+          <p>发布、发送、购买、删除或操作外部账户必须再次授权。</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>可以带走</h3>
+          <p>愿望轨迹、梦卡和产物应可导出、删除和继续维护。</p>
+        </article>
+      </div>
+      <p class="dream-boundary-note dream-reveal">
+        当前 P0＋P1 原型不调用任何大模型或 Agent。后续接入炼丹炉时，仍将保持前端不持有模型密钥、敏感任务提高隐私等级、外部写操作必须确认的边界。
+      </p>
+    </section>
+
+    <section class="dream-final" aria-labelledby="final-title">
+      <p class="dream-eyebrow">After a good night</p>
+      <h2 id="final-title">睡好之后，<br />去做你真正想做的事。</h2>
+      <p>从一个愿望开始。不要求它宏大，只要求它对你真实。</p>
+      <div class="dream-actions">
+        <a class="dream-action-primary" href="#dream-intake">开始我的美梦轨迹</a>
+        <a class="dream-action-secondary" href="./index.html">返回 SleeePal</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dream-footer">
+    <a href="./index.html" aria-label="返回 SleeePal 首页">
+      <img src="./assets/logo-light.svg" alt="SleeePal" />
+    </a>
+    <p>吃饱，喝足，睡好。然后，让美梦成真。</p>
+    <p>© 2026 SleeePal · sleeepal.com</p>
+  </footer>
+
+  <div class="dream-progress" aria-hidden="true"><span data-dream-progress></span></div>
+</body>
+</html>
