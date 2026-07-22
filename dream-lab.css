@@ -147,6 +147,11 @@ img {
 }
 
 .dream-header-nav a {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--dream-muted);
 }
 
@@ -157,7 +162,7 @@ img {
 
 .dream-header-action {
   justify-self: end;
-  min-height: 42px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   padding: 0 15px;
@@ -606,7 +611,7 @@ img {
 }
 
 .dream-field-meta small {
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   line-height: 1.5;
 }
 
@@ -621,12 +626,12 @@ img {
   width: 100%;
   margin-bottom: 2px;
   color: var(--dream-muted-soft);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
 }
 
 .dream-examples button,
 .dream-card-actions button {
-  min-height: 38px;
+  min-height: 44px;
   padding: 0 12px;
   border: 1px solid var(--dream-line);
   background: transparent;
@@ -658,8 +663,8 @@ img {
   align-items: start;
   margin-top: 26px;
   color: var(--dream-muted-soft);
-  font-size: 0.7rem;
-  line-height: 1.65;
+  font-size: 0.8rem;
+  line-height: 1.7;
 }
 
 .dream-consent input {
@@ -701,8 +706,8 @@ img {
 .dream-card-note {
   margin: 13px 0 0;
   color: var(--dream-muted-soft);
-  font-size: 0.68rem;
-  line-height: 1.55;
+  font-size: 0.76rem;
+  line-height: 1.6;
 }
 
 .dream-form-status.is-error,
@@ -1350,9 +1355,9 @@ img {
   .dream-header-action {
     grid-column: 2;
     grid-row: 1;
-    min-height: 42px;
+    min-height: 44px;
     padding: 0 10px;
-    font-size: 0.71rem;
+    font-size: 0.78rem;
   }
 
   .dream-header-nav {
@@ -1371,7 +1376,7 @@ img {
 
   .dream-header-nav a {
     flex: 0 0 auto;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
   }
 
   .dream-hero {
