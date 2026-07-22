@@ -1,0 +1,78 @@
+name: Pages quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  public-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: JavaScript syntax
+        run: |
+          node --check site.js
+          node --check feedback.js
+          node --check dream-lab.js
+      - name: Public boundary and links
+        run: |
+          node <<'NODE'
+          const assert = require("node:assert/strict");
+          const fs = require("node:fs");
+          const path = require("node:path");
+          const { execFileSync } = require("node:child_process");
+
+          const allowed = new Set([
+            ".github/workflows/pages-quality.yml",
+            "CNAME", "LICENSE", "README.md", "docs/website-release-notes.md",
+            "index.html", "styles.css", "site.js", "feedback.html", "feedback.js",
+            "privacy.html", "terms.html", "3d-printing-workshop.html", "dream-lab.css",
+            "dream-lab.js", "release.json", "favicon.ico", "assets/app-icon-preview.png",
+            "assets/app-icon.svg", "assets/favicon-16.png", "assets/favicon-32.png",
+            "assets/logo-dark.svg", "assets/logo-light.svg", "assets/symbol-mark-white.png",
+            "assets/dream-lab-hero-v1.jpg",
+          ]);
+          const tracked = execFileSync("git", ["ls-files"], { encoding: "utf8" }).trim().split("\n");
+          assert.deepEqual(tracked.filter((file) => !allowed.has(file)), [], "unexpected public files");
+
+          const publicText = tracked.filter((file) => /\.(?:html|css|js|json|svg)$/.test(file));
+          const forbidden = [
+            /\/Users\//, /\.\.\/docs\//, /confidential/i, /headboard-strip-figures/i,
+            /patent-disclosure/i, /odm-rfq/i, /权利要求|专利交底|附图编号|磁吸触点/,
+            /USDT|USDC|WalletConnect|RainbowKit|收款地址/,
+          ];
+          for (const file of publicText) {
+            const content = fs.readFileSync(file, "utf8");
+            for (const pattern of forbidden) assert.equal(pattern.test(content), false, `${file}: ${pattern}`);
+          }
+
+          for (const file of tracked.filter((name) => name.endsWith(".html"))) {
+            const html = fs.readFileSync(file, "utf8");
+            for (const match of html.matchAll(/\s(?:href|src)=["']([^"']+)["']/g)) {
+              const reference = match[1];
+              if (/^(?:#|https?:|mailto:|tel:|data:|sleeepal:)/i.test(reference)) continue;
+              const clean = reference.split(/[?#]/, 1)[0];
+              if (!clean) continue;
+              assert.equal(fs.existsSync(path.resolve(path.dirname(file), clean)), true, `${file}: ${reference}`);
+            }
+          }
+
+          const release = JSON.parse(fs.readFileSync("release.json", "utf8"));
+          assert.equal(release.publicDownload, false);
+          assert.equal("downloadPath" in release, false);
+          assert.equal("downloadUrl" in release, false);
+          console.log(`Pages quality: ok (${tracked.length} tracked files)`);
+          NODE

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>梦想成真 — SleeePal Lab</title>
+  <meta name="description" content="SleeePal Lab 公开产品从真实困扰、边界定义、保护、原型到夜间验证的方法；不公开用户隐私与未披露工程资料。" />
+  <meta name="theme-color" content="#070a12" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
+  <link rel="canonical" href="https://sleeepal.com/3d-printing-workshop.html" />
+  <meta property="og:title" content="梦想成真 — SleeePal Lab" />
+  <meta property="og:description" content="把一个夜里的念头，做成可以验证的产品。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sleeepal.com/3d-printing-workshop.html" />
+  <meta property="og:image" content="https://sleeepal.com/assets/dream-lab-hero-v1.jpg" />
+  <link rel="icon" href="./favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
+  <link rel="stylesheet" href="./dream-lab.css?v=20260722" />
+  <script src="./dream-lab.js?v=20260722" defer></script>
+</head>
+<body class="dream-page">
+  <a class="dream-skip-link" href="#main">跳到主要内容</a>
+
+  <header class="dream-header" data-dream-header>
+    <div class="dream-header-inner">
+      <a class="dream-brand" href="./index.html" aria-label="返回 SleeePal 首页">
+        <img src="./assets/logo-light.svg" alt="SleeePal" />
+        <span>LAB / 01</span>
+      </a>
+      <nav class="dream-header-nav" aria-label="梦想成真页面导航">
+        <a href="#method">方法</a>
+        <a href="#proof">SleeePal 案例</a>
+        <a href="#boundary">公开边界</a>
+      </nav>
+      <a class="dream-header-action" href="./feedback.html">提交夜间困扰</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="dream-hero" aria-labelledby="dream-title">
+      <img class="dream-hero-image" src="./assets/dream-lab-hero-v1.jpg" alt="" />
+      <div class="dream-hero-shade" aria-hidden="true"></div>
+      <div class="dream-hero-content">
+        <p class="dream-eyebrow">SleeePal Lab · Dream to product</p>
+        <h1 id="dream-title">
+          <span>把一个夜里的念头，</span>
+          <span>做成可以验证的<span class="dream-mobile-tail">产品。</span></span>
+        </h1>
+        <p class="dream-hero-lead">
+          不从功能清单开始，而从一个人真实经历的夜晚开始。先听清困扰，
+          再定义边界、保护未公开内容、做出原型，最后让证据决定下一步。
+        </p>
+        <div class="dream-actions">
+          <a class="dream-action-primary" href="#method">查看五步方法</a>
+          <a class="dream-action-secondary" href="./feedback.html">告诉我们你的困扰</a>
+        </div>
+        <ul class="dream-trust-list" aria-label="方法原则">
+          <li>本地优先</li>
+          <li>先保护，再公开</li>
+          <li>先验证，再承诺</li>
+        </ul>
+      </div>
+      <aside class="dream-proof-note" aria-label="SleeePal 项目状态">
+        <span>FIRST PROOF</span>
+        <strong>SleeePal</strong>
+        <p>从一个失眠夜晚，走到 Mac-first 本地测试版。</p>
+      </aside>
+    </section>
+
+    <section class="dream-statement dream-reveal" aria-label="产品原则">
+      <p>真正的“梦想成真”，不是把想法包装得更大。</p>
+      <blockquote>是把它缩到足够真实，直到有人愿意在今晚使用。</blockquote>
+    </section>
+
+    <section class="dream-method" id="method" aria-labelledby="method-title">
+      <div class="dream-section-intro dream-reveal">
+        <p class="dream-eyebrow">The method</p>
+        <h2 id="method-title">五步，走到第一件可信的产品。</h2>
+        <p>每一步都有一个停止条件。没有证据时不越级，没有保护时不公开。</p>
+      </div>
+
+      <ol class="dream-method-list">
+        <li class="dream-method-step dream-reveal" data-stage="01">
+          <div>
+            <span>OBSERVE</span>
+            <h3>先听清，谁在怎样的夜里被什么困扰。</h3>
+          </div>
+          <p>不急着命名产品。记录场景、触发时刻、已有替代方案，以及用户为什么仍然不满意。</p>
+          <small>完成标志：一句普通人听得懂的问题定义。</small>
+        </li>
+        <li class="dream-method-step dream-reveal" data-stage="02">
+          <div>
+            <span>DEFINE</span>
+            <h3>把宏大愿望，收成一个最小可验证闭环。</h3>
+          </div>
+          <p>明确首位用户、一次核心任务和真实失败条件。先让一晚的体验成立，再谈更多功能。</p>
+          <small>完成标志：可演示、可失败、可复盘的首版范围。</small>
+        </li>
+        <li class="dream-method-step dream-reveal" data-stage="03">
+          <div>
+            <span>PROTECT</span>
+            <h3>在展示之前，先划清公开与保密边界。</h3>
+          </div>
+          <p>公开用户价值与验证状态；未披露实现、工程资料、合作信息和用户提交继续留在受控范围。</p>
+          <small>完成标志：每份资料都有清楚的披露级别。</small>
+        </li>
+        <li class="dream-method-step dream-reveal" data-stage="04">
+          <div>
+            <span>PROTOTYPE</span>
+            <h3>让软件、硬件与使用场景分别被验证。</h3>
+          </div>
+          <p>先验证交互和每日闭环，再验证设备与摆位。每次原型只回答一个关键问题。</p>
+          <small>完成标志：真实环境中可重复运行的原型。</small>
+        </li>
+        <li class="dream-method-step dream-reveal" data-stage="05">
+          <div>
+            <span>VALIDATE</span>
+            <h3>让真实夜晚留下证据，再决定是否放大。</h3>
+          </div>
+          <p>记录可用性、失败原因、体验变化和第二天的复盘。没有稳定证据，就继续缩小问题。</p>
+          <small>完成标志：用户愿意再次使用，并能说清为什么。</small>
+        </li>
+      </ol>
+    </section>
+
+    <section class="dream-case" id="proof" aria-labelledby="proof-title">
+      <div class="dream-case-visual dream-reveal">
+        <img src="./assets/dream-lab-hero-v1.jpg" alt="深靛蓝卧室里，床边放着一本等待记录想法的笔记本" loading="lazy" />
+        <p>从一个真实夜晚开始 · 不展示未公开工程细节</p>
+      </div>
+      <div class="dream-case-copy dream-reveal">
+        <p class="dream-eyebrow">Case 01 · SleeePal</p>
+        <h2 id="proof-title">先让今晚可用，再让宁静走得更远。</h2>
+        <p class="dream-case-lead">
+          SleeePal 把“睡得更安静”拆成一条诚实的验证路径：Mac 桌面版先承接今晚场景、
+          设备检查、调节与夜报；声音与报告默认留在本机；未完成签名、公证与物理验收前，
+          官网不开放公开下载。
+        </p>
+        <dl class="dream-case-facts">
+          <div>
+            <dt>Mac-first</dt>
+            <dd>先把一晚的核心闭环做完整</dd>
+          </div>
+          <div>
+            <dt>Local-first</dt>
+            <dd>默认不上传麦克风音频</dd>
+          </div>
+          <div>
+            <dt>Evidence-first</dt>
+            <dd>用夜报与复现测试代替效果口号</dd>
+          </div>
+        </dl>
+        <div class="dream-actions">
+          <a class="dream-action-primary" href="./index.html#download">查看公开验证状态</a>
+          <a class="dream-action-secondary" href="sleeepal://tonight">打开桌面版</a>
+        </div>
+        <p class="dream-case-disclaimer">
+          SleeePal 为非药物助眠辅助工具，不构成医疗建议或诊断；近场体验会受空间、设备与摆位影响。
+        </p>
+      </div>
+    </section>
+
+    <section class="dream-boundary" id="boundary" aria-labelledby="boundary-title">
+      <div class="dream-section-intro dream-reveal">
+        <p class="dream-eyebrow">Trust boundary</p>
+        <h2 id="boundary-title">公开进展，不公开你的隐私。</h2>
+        <p>透明不是把所有文件放上网，而是让每个人知道：什么已经证实，什么仍在验证，什么不会离开受控范围。</p>
+      </div>
+      <div class="dream-boundary-grid">
+        <article class="dream-boundary-panel dream-reveal">
+          <span>可以公开</span>
+          <h3>让用户做判断的信息</h3>
+          <ul>
+            <li>产品解决的问题与适用场景</li>
+            <li>体验原则、限制和验证状态</li>
+            <li>已经确认的版本与公开进展</li>
+            <li>概念外观和可能调整的产品方向</li>
+          </ul>
+        </article>
+        <article class="dream-boundary-panel dream-boundary-panel-protected dream-reveal">
+          <span>继续保护</span>
+          <h3>不该出现在公网的信息</h3>
+          <ul>
+            <li>用户未主动分享的音频与报告</li>
+            <li>尚未披露的实现与工程资料</li>
+            <li>合作方、供应链与商务细节</li>
+            <li>未经确认的效果、时间与上市承诺</li>
+          </ul>
+        </article>
+      </div>
+      <p class="dream-boundary-note dream-reveal">
+        涉及知识产权、认证、医疗或法律边界时，应由对应专业人士复核；AI 可以帮助整理，不替代专业判断。
+      </p>
+    </section>
+
+    <section class="dream-final" id="idea" aria-labelledby="final-title">
+      <p class="dream-eyebrow">Start with one night</p>
+      <h2 id="final-title">带着一个真实夜晚回来。</h2>
+      <p>不需要先写商业计划。告诉我们发生了什么、你试过什么，以及什么结果才算真正有帮助。</p>
+      <div class="dream-actions">
+        <a class="dream-action-primary" href="./feedback.html">提交夜间困扰</a>
+        <a class="dream-action-secondary" href="./index.html">返回 SleeePal</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dream-footer">
+    <a href="./index.html" aria-label="返回 SleeePal 首页">
+      <img src="./assets/logo-light.svg" alt="SleeePal" />
+    </a>
+    <p>一个从真实夜晚长出来的本地优先产品。</p>
+    <p>© 2026 SleeePal · sleeepal.com</p>
+  </footer>
+
+  <div class="dream-progress" aria-hidden="true"><span data-dream-progress></span></div>
+</body>
+</html>

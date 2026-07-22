@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SleeePal 问题反馈 — 本地优先反馈包</title>
+  <meta name="description" content="提交 SleeePal 问题反馈包。自动整理系统、平台、版本、模块和问题描述，音频、截图和夜报默认不包含。" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
+  <link rel="icon" href="./favicon.ico?v=20260426b" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg?v=20260426b" />
+  <link rel="stylesheet" href="./styles.css?v=20260722" />
+  <script src="./feedback.js?v=20260722" defer></script>
+</head>
+<body class="feedback-page">
+  <nav class="nav feedback-nav" id="top">
+    <div class="nav-inner">
+      <a class="nav-brand" href="./index.html">
+        <img class="nav-logo" src="./assets/logo-light.svg" alt="SleeePal" />
+      </a>
+      <div class="nav-links" id="feedback-navigation" role="navigation" aria-label="反馈页导航">
+        <a href="sleeepal://report" data-app-link="feedback-report" data-fb-i18n="nav.report">打开夜报</a>
+        <a href="./index.html#download" data-fb-i18n="nav.download">下载</a>
+        <a href="./index.html#features" data-fb-i18n="nav.features">功能</a>
+        <a href="./index.html#pro" data-fb-i18n="nav.pro">Pro</a>
+        <a href="./feedback.html" class="nav-cta" data-fb-i18n="nav.feedback">问题反馈</a>
+      </div>
+      <button class="lang-toggle" type="button" data-feedback-lang-toggle>EN</button>
+      <button
+        class="mobile-nav-toggle"
+        type="button"
+        aria-controls="feedback-navigation"
+        aria-expanded="false"
+        aria-label="打开导航"
+        data-feedback-nav-toggle
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="feedback-shell">
+    <section class="feedback-hero">
+      <div class="feedback-hero-copy">
+        <div class="kicker-lux" data-fb-i18n="hero.kicker">本地优先反馈包</div>
+        <h1 data-fb-i18n-html="hero.title">把问题说清楚，<br/><em>不用来回补充上下文</em></h1>
+        <p data-fb-i18n="hero.body">
+          在另一台电脑上测试时，把系统、平台、版本、模块和现象一次整理成反馈包。音频、截图和夜报默认不包含，除非你主动附加。
+        </p>
+      </div>
+      <div class="feedback-privacy-panel">
+        <span data-fb-i18n="privacy.label">默认隐私边界</span>
+        <strong data-fb-i18n="privacy.title">只收问题上下文，不收敏感音频</strong>
+        <ul>
+          <li data-fb-i18n="privacy.item1">不自动上传麦克风音频</li>
+          <li data-fb-i18n="privacy.item2">不自动上传截图、夜报或完整日志</li>
+          <li data-fb-i18n="privacy.item3">复制/下载后由你决定发送给谁</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="feedback-workbench" aria-label="Feedback form">
+      <form class="feedback-form" data-feedback-form>
+        <div class="feedback-form-head">
+          <div>
+            <span data-fb-i18n="form.kicker">反馈内容</span>
+            <h2 data-fb-i18n="form.title">生成可复制的问题包</h2>
+          </div>
+          <button type="button" class="feedback-secondary" data-feedback-reset data-fb-i18n="form.reset">清空</button>
+        </div>
+
+        <div class="feedback-grid">
+          <label>
+            <span data-fb-i18n="field.platform">测试平台</span>
+            <select name="platform">
+              <option value="mac-arm64">Apple Silicon Mac</option>
+              <option value="mac-x64">Intel Mac</option>
+              <option value="windows-x64">Windows</option>
+              <option value="ios">iPhone / iPad</option>
+              <option value="android">Android</option>
+              <option value="website">官网</option>
+            </select>
+          </label>
+          <label>
+            <span data-fb-i18n="field.version">App / 官网版本</span>
+            <input name="version" placeholder="0.3.130 / website" />
+          </label>
+          <label>
+            <span data-fb-i18n="field.type">问题类型</span>
+            <select name="issueType">
+              <option value="bug" data-fb-i18n="type.bug">Bug / 异常</option>
+              <option value="ui" data-fb-i18n="type.ui">UI / 体验不适</option>
+              <option value="audio-route" data-fb-i18n="type.route">音频链路 / 设备</option>
+              <option value="antiphase" data-fb-i18n="type.antiphase">反相输出效果</option>
+              <option value="soundscape" data-fb-i18n="type.soundscape">助眠声景排除</option>
+              <option value="report" data-fb-i18n="type.report">夜报 / 回放</option>
+              <option value="install" data-fb-i18n="type.install">安装 / 打包</option>
+              <option value="suggestion" data-fb-i18n="type.suggestion">建议</option>
+            </select>
+          </label>
+          <label>
+            <span data-fb-i18n="field.severity">严重度</span>
+            <select name="severity">
+              <option value="blocks-testing" data-fb-i18n="severity.blocks">影响测试</option>
+              <option value="workaround" data-fb-i18n="severity.workaround">可绕过</option>
+              <option value="minor" data-fb-i18n="severity.minor">轻微</option>
+              <option value="idea" data-fb-i18n="severity.idea">建议</option>
+            </select>
+          </label>
+          <label>
+            <span data-fb-i18n="field.route">输入/输出链路</span>
+            <input name="route" placeholder="USB mic + 有线音箱 / 蓝牙音箱 / 手机 mic" />
+          </label>
+          <label>
+            <span data-fb-i18n="field.email">联系方式（可选）</span>
+            <input name="contact" placeholder="email / GitHub / 微信备注" />
+          </label>
+        </div>
+
+        <label class="feedback-message">
+          <span data-fb-i18n="field.message">发生了什么？</span>
+          <textarea name="message" rows="7" data-fb-i18n-placeholder="field.messagePlaceholder" placeholder="请写：在哪台机器上，点了什么，预期什么，实际发生了什么。"></textarea>
+        </label>
+
+        <div class="feedback-checks">
+          <label><input type="checkbox" name="hasScreenshot" /> <span data-fb-i18n="check.screenshot">我会另附截图</span></label>
+          <label><input type="checkbox" name="hasReport" /> <span data-fb-i18n="check.report">我会另附夜报/反馈 JSON</span></label>
+          <label><input type="checkbox" name="hasAudio" /> <span data-fb-i18n="check.audio">我明确选择另附音频片段</span></label>
+        </div>
+
+        <div class="feedback-public-warning" role="note">
+          <strong data-fb-i18n="public.title">GitHub Issue 会公开</strong>
+          <p data-fb-i18n="public.body">不要提交专利、未公开工程资料、健康身份信息、音频、报告标识或联系方式。需要保密时，请不要使用本页的公开分享入口。</p>
+          <label>
+            <input type="checkbox" name="publicShareApproved" />
+            <span data-fb-i18n="public.confirm">我确认公开内容不含上述敏感信息</span>
+          </label>
+        </div>
+
+        <div class="feedback-actions">
+          <button type="button" class="feedback-primary" data-feedback-copy data-fb-i18n="action.copy">复制反馈包</button>
+          <button type="button" class="feedback-secondary" data-feedback-download data-fb-i18n="action.download">下载 JSON</button>
+          <button type="button" class="feedback-secondary" data-feedback-github data-fb-i18n="action.github" disabled>打开 GitHub Issue</button>
+          <button type="button" class="feedback-secondary" data-feedback-mail data-fb-i18n="action.mail">邮件发送</button>
+        </div>
+
+        <p class="feedback-status" data-feedback-status data-fb-i18n="status.ready">填写后点击复制，反馈包会出现在右侧预览。</p>
+      </form>
+
+      <aside class="feedback-preview" aria-label="Feedback package preview">
+        <div class="feedback-preview-head">
+          <span data-fb-i18n="preview.kicker">实时预览</span>
+          <strong data-feedback-id>fb_pending</strong>
+        </div>
+        <pre data-feedback-preview>{}</pre>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

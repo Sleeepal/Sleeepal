@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SleeePal — Beta 隐私说明</title>
+  <meta name="description" content="SleeePal Beta 版本的本地处理、音频保存、导出和删除边界。" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
+  <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
+  <link rel="stylesheet" href="./styles.css?v=20260722" />
+</head>
+<body class="policy-page">
+  <nav class="policy-nav" aria-label="页面导航">
+    <a href="./index.html" class="policy-brand"><img src="./assets/logo-light.svg" alt="SleeePal" /></a>
+    <div class="policy-nav-links">
+      <a href="sleeepal://devices" data-app-link="privacy-nav">打开桌面版</a>
+      <a href="./index.html#download">验证状态</a>
+      <a href="./feedback.html">问题反馈</a>
+    </div>
+  </nav>
+
+  <main class="policy-shell">
+    <header class="policy-hero">
+      <p class="policy-kicker">LOCAL-FIRST · BETA NOTICE</p>
+      <h1>你的夜晚声音，<br />默认留在你的<strong>设备里。</strong></h1>
+      <p>这是一份面向创始人验证阶段的隐私说明，用普通语言解释当前原生桌面 Beta 会处理什么，以及暂时不会保存什么。</p>
+      <div class="policy-status">Beta 说明 · 更新于 2026-07-21</div>
+    </header>
+
+    <section class="policy-section" aria-labelledby="privacy-local">
+      <div><span>01</span><h2 id="privacy-local">本地处理</h2></div>
+      <p>实时麦克风分析、反相计算、声景排除和夜间事件判断优先在本机完成。当前版本不会自动把麦克风原始音频上传到 SleeePal 服务器。</p>
+    </section>
+
+    <section class="policy-section" aria-labelledby="privacy-files">
+      <div><span>02</span><h2 id="privacy-files">可能保存在本机的内容</h2></div>
+      <ul>
+        <li>创始人 / QA 构建可能在应用支持目录生成本地夜报、事件时间、时长和强弱等结构化记录。</li>
+        <li>音频片段只应在对应功能明确开启后保存在本机；不会因为打开反馈页而自动附加或上传。</li>
+        <li>只有你在官网反馈页主动下载或复制时，才会生成由你管理的反馈 JSON。</li>
+      </ul>
+    </section>
+
+    <section class="policy-section" aria-labelledby="privacy-control">
+      <div><span>03</span><h2 id="privacy-control">由你决定分享</h2></div>
+      <p>截图、完整日志、夜报和音频默认不会加入反馈包。复制、下载、邮件或 GitHub Issue 都需要由你主动触发；发送前请再次检查内容。</p>
+    </section>
+
+    <section class="policy-section" aria-labelledby="privacy-delete">
+      <div><span>04</span><h2 id="privacy-delete">保留与删除</h2></div>
+      <p>统一的保留期限与应用内删除入口仍在验证中。当前 QA 构建可能把报告或经你选择的片段留在本机，因此只应在受信任的系统账户中测试；你主动导出的文件需要在保存位置自行管理和删除。</p>
+    </section>
+
+    <section class="policy-section" aria-labelledby="privacy-boundary">
+      <div><span>05</span><h2 id="privacy-boundary">当前边界</h2></div>
+      <p>当前 Beta 不依赖自建账号云端。未来若增加同步、云报告或远程服务，必须在启用前说明用途、数据范围、保存期限和关闭方式。</p>
+    </section>
+
+    <div class="policy-cta">
+      <a class="btn-lux-primary" href="sleeepal://devices" data-app-link="privacy-devices">在桌面版检查设备</a>
+      <a class="btn-lux-ghost" href="./feedback.html">反馈隐私问题</a>
+      <a class="btn-lux-ghost" href="./index.html">返回 SleeePal</a>
+    </div>
+  </main>
+</body>
+</html>
