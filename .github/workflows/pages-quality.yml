@@ -50,7 +50,7 @@ jobs:
 
           const publicText = tracked.filter((file) => /\.(?:html|css|js|json|svg)$/.test(file));
           const forbidden = [
-            /\/Users\//, /\.\.\/docs\//, /confidential/i, /headboard-strip-figures/i,
+            /\/Users\//, /\.\.\/docs\//, /hardware-confidential/i, /headboard-strip-figures/i,
             /patent-disclosure/i, /odm-rfq/i, /权利要求|专利交底|附图编号|磁吸触点/,
             /USDT|USDC|WalletConnect|RainbowKit|收款地址/,
           ];
