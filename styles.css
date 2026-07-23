@@ -4805,3 +4805,327 @@ body,
     white-space: normal;
   }
 }
+
+/* SleeePal Assistant · controlled-evolution placeholder */
+
+.support-evolution-section {
+  position: relative;
+  padding: clamp(92px, 11vw, 156px) 0;
+  overflow: hidden;
+  border-block: 1px solid rgba(220, 199, 169, 0.13);
+  background:
+    radial-gradient(circle at 12% 40%, rgba(147, 119, 236, 0.08), transparent 34%),
+    #090b13;
+}
+
+.support-evolution-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(390px, 0.92fr);
+  gap: clamp(58px, 9vw, 132px);
+  align-items: end;
+}
+
+.support-evolution-kicker {
+  color: #d7aa70;
+  font-size: 0.7rem;
+  font-weight: 760;
+  letter-spacing: 0.18em;
+}
+
+.support-evolution-copy h2 {
+  max-width: 780px;
+  margin: 20px 0 0;
+  padding: 0.02em 0.12em 0.12em 0;
+  overflow: visible;
+  color: #f5eee5;
+  font-family: Iowan Old Style, Baskerville, Times New Roman, Songti SC, STSong, serif;
+  font-size: clamp(3rem, 4.7vw, 4.9rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.support-evolution-copy > p {
+  max-width: 650px;
+  margin: 28px 0 0;
+  color: rgba(245, 238, 229, 0.66);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.support-evolution-actions {
+  border-top: 1px solid rgba(245, 238, 229, 0.24);
+}
+
+.support-evolution-actions ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-evolution-actions li {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 21px 0;
+  border-bottom: 1px solid rgba(245, 238, 229, 0.12);
+}
+
+.support-evolution-actions li span {
+  color: #d7aa70;
+  font-family: Iowan Old Style, Baskerville, Times New Roman, serif;
+  font-size: 0.8rem;
+}
+
+.support-evolution-actions li strong {
+  color: rgba(245, 238, 229, 0.88);
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.support-evolution-actions > div {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+  padding-top: 26px;
+}
+
+.support-evolution-actions a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  background: #f5eee5;
+  color: #090b13;
+  font-size: 0.85rem;
+  font-weight: 740;
+  text-decoration: none;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.support-evolution-actions a:hover,
+.support-evolution-actions a:focus-visible {
+  background: #e8c89e;
+  transform: translateY(-2px);
+}
+
+.support-evolution-actions > div p {
+  margin: 0;
+  color: rgba(245, 238, 229, 0.48);
+  font-size: 0.68rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  .support-evolution-layout {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+
+  .support-evolution-copy h2 {
+    font-size: clamp(2.7rem, 10vw, 4.5rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .support-evolution-section {
+    padding: 84px 0;
+  }
+
+  .support-evolution-copy h2 {
+    font-size: clamp(2.45rem, 12vw, 3.35rem);
+  }
+
+  .support-evolution-actions > div {
+    grid-template-columns: 1fr;
+  }
+
+  .support-evolution-actions a {
+    width: 100%;
+  }
+}
+
+/* ════════════════════════════════
+   Responsive fit contract · July 2026
+   Compact desktop is a real layout mode, not a squeezed desktop canvas.
+════════════════════════════════ */
+html {
+  scroll-padding-top: 72px;
+}
+
+.support-evolution-layout > *,
+.support-evolution-actions,
+.support-evolution-actions > div,
+.support-evolution-actions li,
+.support-evolution-copy {
+  min-width: 0;
+}
+
+@media (max-width: 1120px) {
+  body[data-nav-open] {
+    overflow: hidden;
+  }
+
+  .nav {
+    z-index: 1000;
+  }
+
+  .nav-inner {
+    position: relative;
+    width: calc(100% - 32px);
+    max-width: none;
+    padding-inline: 0;
+    gap: 10px;
+  }
+
+  .nav-brand {
+    min-width: 0;
+    margin-right: auto;
+  }
+
+  .nav-logo {
+    width: clamp(154px, 18vw, 182px);
+  }
+
+  .lang-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    margin-left: 0;
+    flex: 0 0 auto;
+  }
+
+  .mobile-nav-toggle {
+    display: grid;
+    align-content: center;
+    gap: 4px;
+    flex: 0 0 auto;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    inset: 70px 16px auto;
+    z-index: 1001;
+    max-height: calc(100svh - 86px);
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    margin-left: 0;
+    padding: 12px;
+    border: 1px solid rgba(216, 184, 115, 0.24);
+    border-radius: 18px;
+    background: rgba(10, 15, 29, 0.98);
+    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.55);
+  }
+
+  .nav-links[data-open] {
+    display: flex;
+  }
+
+  .nav-links a {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    padding: 0 16px;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+
+  .nav-links .nav-cta {
+    justify-content: center;
+    margin-top: 4px;
+  }
+
+  .support-evolution-section {
+    padding: clamp(76px, 9vw, 108px) 0;
+    scroll-margin-top: 62px;
+  }
+
+  .support-evolution-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(38px, 6vw, 56px);
+    align-items: start;
+  }
+
+  .support-evolution-copy,
+  .support-evolution-actions {
+    width: min(100%, 780px);
+  }
+
+  .support-evolution-copy h2 {
+    max-width: 760px;
+    font-size: clamp(3rem, 6.5vw, 4.2rem);
+  }
+
+  .support-evolution-copy > p {
+    max-width: 720px;
+    margin-top: 22px;
+  }
+
+  .support-evolution-actions li {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 14px;
+    padding: 19px 0;
+  }
+
+  .support-evolution-actions li strong {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-inner {
+    width: calc(100% - 28px);
+  }
+
+  .nav-logo {
+    width: 154px;
+  }
+
+  .support-evolution-section {
+    padding: 72px 0;
+  }
+
+  .support-evolution-copy h2 {
+    font-size: clamp(2.45rem, 11vw, 3.35rem);
+    line-height: 1.1;
+    text-wrap: pretty;
+  }
+
+  .support-evolution-copy > p {
+    font-size: 0.96rem;
+    line-height: 1.78;
+  }
+
+  .support-evolution-actions > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .support-evolution-actions a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .support-evolution-kicker {
+    display: block;
+    max-width: 100%;
+    font-size: 0.64rem;
+    line-height: 1.55;
+    letter-spacing: 0.13em;
+  }
+
+  .support-evolution-copy h2 {
+    font-size: clamp(2.25rem, 10.7vw, 2.8rem);
+  }
+
+  .support-evolution-actions li {
+    grid-template-columns: 32px minmax(0, 1fr);
+  }
+}

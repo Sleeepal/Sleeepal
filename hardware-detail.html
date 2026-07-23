@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SleeePal Hardware Detail</title>
+  <meta name="description" content="SleeePal 硬件款式与卧室使用场景详情。" />
+  <link rel="icon" href="./favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="./hardware-sku.css" />
+</head>
+<body class="detail-page">
+  <header class="hardware-nav">
+    <a class="brand" href="./hardware-sku.html" aria-label="Back to SleeePal hardware page">
+      <img src="./assets/logo-light.svg" alt="SleeePal" />
+    </a>
+    <nav>
+      <a href="sleeepal://devices?action=calibrate" data-app-link="hardware-detail-devices">桌面设备检查</a>
+      <a href="./hardware-sku.html#strip">床头款</a>
+      <a href="./hardware-sku.html#demo">真人演示</a>
+      <a href="./hardware-sku.html#lineup">产品系列</a>
+      <a href="./hardware-sku.html#pillars">立柱/壁挂</a>
+    </nav>
+  </header>
+
+  <main class="detail-main">
+    <section class="detail-hero-page">
+      <div class="detail-text">
+        <p class="eyebrow" id="detailEyebrow">SleeePal detail</p>
+        <h1 id="detailTitle">SleeePal Hardware</h1>
+        <p class="lead" id="detailLead"></p>
+        <div class="detail-tags" id="detailTags"></div>
+      </div>
+      <figure class="detail-visual">
+        <img id="detailImage" src="./assets/headboard-strip-wide-warm.png" alt="SleeePal hardware detail" />
+      </figure>
+    </section>
+
+    <section class="detail-story">
+      <div>
+        <p class="eyebrow">Why it matters</p>
+        <h2 id="detailSubhead"></h2>
+      </div>
+      <p id="detailBody"></p>
+    </section>
+
+    <section class="detail-points">
+      <div id="detailPoints"></div>
+    </section>
+  </main>
+
+  <script>
+    const details = {
+      "sku-headboard": {
+        eyebrow: "Headboard quiet hardware",
+        title: "SleeePal Headboard Strip",
+        image: "./assets/headboard-strip-wide-warm.png",
+        lead: "床头外包静谧条，面向 1.8-2.0 米双人床、情侣/夫妻和长期卧室场景。",
+        tags: ["双人床头款", "双人床", "暖暗光", "0 蓝牙发射睡眠模式"],
+        subhead: "为双人床两侧枕区提供长期静谧支持。",
+        body: "Headboard Strip 贴合床头安装，床面保持开放，双人中间空间自然完整。多 Mic 阵列持续听见外部扰动，多反相/声景输出阵列服务两侧枕区。一键体验会先监听环境，再按场景开启反相输出、低频柔化和声景辅助；对部分稳定鼾声与持续低频做局部抵消与柔化，暖暗漫反射灯光只在背向枕区侧出现。",
+        points: ["单只可入门，双只覆盖双人床两侧枕区", "适合情侣/夫妻、长期卧室、睡眠敏感人群", "改善率用于观察呼噜干扰和持续低频的变化", "灯光背向枕区低亮度漫反射，减少直射眩光"]
+      },
+      "sku-pebble": {
+        eyebrow: "Bedside quiet hardware",
+        title: "SleeePal Pebble",
+        image: "./assets/sku-pebble.png",
+        lead: "床头小主机款，适合低门槛体验一键监听、声景辅助和夜报。",
+        tags: ["入门款", "床头摆放", "实体按键", "App 联动"],
+        subhead: "小体积床头入口。",
+        body: "Pebble 适合第一次接触 SleeePal 的用户。它帮助用户快速理解环境监听、参数调节、声景辅助和夜报，适合作为轻量入门或礼品化版本。",
+        points: ["适合小体积床头摆放", "保留一键体验、暂停、停止实体操作", "适合快速开始和查看夜报", "适合轻量入门或礼品化版本"]
+      },
+      "sku-halo": {
+        eyebrow: "Single sleeper quiet hardware",
+        title: "SleeePal Halo",
+        image: "./assets/sku-halo.png",
+        lead: "单人超薄枕边 U 型款，主打更靠近头部的高效果单人体验。",
+        tags: ["高端单人", "枕边 U 型", "深睡场景", "贴近枕区"],
+        subhead: "更贴近头部的单人静谧形态。",
+        body: "Halo 的声学几何更靠近枕区，适合独居、深睡、差旅和高效果需求。它强调包围感、舒适触感、清洁维护和夜间低打扰。",
+        points: ["适合独居、深睡、差旅和高效果需求", "内侧保持低眩光", "重点关注舒适度和清洁维护", "适合作为高端单人款"]
+      },
+      "demo-overview": {
+        eyebrow: "Human demo · Overview",
+        title: "真人演示总览",
+        image: "./assets/demo-sleep-people-quiet-zone-triptych-warm.png",
+        lead: "女士独睡、儿童房、夫妻双人床三类典型睡眠场景，分别匹配合适的暖暗光硬件形态。",
+        tags: ["真人演示", "暖暗光", "独立款式", "枕区静谧"],
+        subhead: "枕头和头部附近的小范围静谧体验。",
+        body: "这些图展示产品如何用反相声波尝试抵消部分噪音，并在枕头和头部附近形成近场静谧区。不同硬件款式分别对应不同卧室条件。",
+        points: ["女士独睡：床头款靠近枕区", "儿童守护：儿童床头守护形态", "夫妻双人：宽双人床、双枕区、中间空间开放", "灯光统一为暖暗漫反射"]
+      },
+      "demo-woman": {
+        eyebrow: "Human demo · Woman",
+        title: "女士独睡场景",
+        image: "./assets/demo-woman-protected-sleep-warm.png",
+        lead: "单人枕区静谧场景，床头款自然融入卧室。",
+        tags: ["女士独睡", "床头款", "低眩光", "暖暗光"],
+        subhead: "更像真实卧室里的长期设备。",
+        body: "设备在床头进行近场降噪，目标是在枕边形成相对静谧的小范围区域；光线朝墙面柔和漫反射。画面重点是让用户理解它可以自然地融入卧室。",
+        points: ["床头款自然融入卧室", "暖色低亮度状态光", "服务枕区小范围", "适合长期夜间使用"]
+      },
+      "demo-child": {
+        eyebrow: "Human demo · Child",
+        title: "儿童守护场景",
+        image: "./assets/demo-child-protected-sleep-warm.png",
+        lead: "儿童房使用儿童床头守护形态，强调柔和、安全和低眩光。",
+        tags: ["儿童房", "床头守护", "暖暗光", "非医疗设备"],
+        subhead: "儿童款要像安静的床头守护物。",
+        body: "儿童场景采用柔软、低亮度、可亲近的床头守护形态。暖暗漫反射光营造轻柔睡眠氛围，声景与低频柔化服务孩子头部附近的小范围空间。",
+        points: ["儿童头部附近的小范围体验", "柔和声景和低眩光", "圆润亲和外观", "适合动漫主题版本"]
+      },
+      "demo-couple": {
+        eyebrow: "Human demo · Couple",
+        title: "夫妻双人宽床场景",
+        image: "./assets/demo-couple-protected-sleep-warm-wide.png",
+        lead: "1.8-2.0 米宽双人床，两人各自拥有枕区静谧体验，中间空间保持开放。",
+        tags: ["夫妻双人", "宽双人床", "开放中区", "暖暗光"],
+        subhead: "真实家庭宽床里的双枕区体验。",
+        body: "双人场景采用 1.8-2.0 米宽床比例。产品位于床头，两侧枕区分别被照顾，中间空间保持开放。",
+        points: ["宽双人床比例", "两个枕区分别被照顾", "中间保持开放", "适合情侣/夫妻长期使用"]
+      },
+      "pillar-bedside": {
+        eyebrow: "Pillar family · Bedside",
+        title: "Bedside Gap Pillar",
+        image: "./assets/pillar-bedside-gap-sleep-safe.png",
+        lead: "床头柜缝隙细长立柱款，适合放在床头柜或床头柜旁侧缝隙。",
+        tags: ["床头柜", "缝隙安装", "枕区侧无灯", "弱小夜灯"],
+        subhead: "适合保持床头原貌的小空间卧室。",
+        body: "这类立柱适合租房、已有高价值床头、或希望保持床头柜桌面简洁的卧室。设备在床头柜、床头柜与床头之间的缝隙或独立稳定台面工作；内侧面向枕区，配置多单元喇叭/反相输出阵列和微孔麦克风阵列，灯光集中在背向枕区的一侧。",
+        points: ["床头柜与侧边缝隙友好", "左右各一只可组成双人方案", "灯光只在喇叭反向的外侧/背侧，以 1-3 流明小夜灯级别漫反射", "适合床头外包条之外的卧室条件"]
+      },
+      "wall-pod": {
+        eyebrow: "Wall family · Wired pair",
+        title: "Wall Pod",
+        image: "./assets/wall-pod-bun-wired-down-drop-sleep-safe.png",
+        lead: "壁挂半圆馒头款，固定在床头两侧墙面，节省床头柜桌面空间。",
+        tags: ["壁挂安装", "半圆馒头款", "有线双只同步", "枕区侧低眩光"],
+        subhead: "适合希望保留床头柜空间和床头外观的卧室。",
+        body: "Wall Pod 是壁挂半圆声学舱：两只固定在床头两侧墙面，内侧多反相输出阵列朝向枕区，外侧/背侧隐藏小夜灯。它同样支持一键体验三位一体增强，用于改善部分稳定鼾声和持续低频。左右两只采用有线低延迟同步，每只各自向下走线到地面或床头背后隐藏汇合。",
+        points: ["节省床头柜桌面空间", "磁吸底座或螺丝背板固定在墙面", "每只独立下垂走线，视觉更整洁", "内侧多输出阵列朝枕区，灯光打向枕头反方向", "改善率用于观察抗鼾与低频变化"]
+      },
+      "pillar-care": {
+        eyebrow: "Pillar family · Care",
+        title: "Care Rail Clip",
+        image: "./assets/pillar-care-rail-clip-sleep-safe.png",
+        lead: "养老院、护理床和陪护场景的床栏夹持式立柱款。",
+        tags: ["养老护理", "床栏夹持", "易清洁", "大按钮"],
+        subhead: "护理场景优先考虑稳定、清洁和可解释。",
+        body: "Care Rail Clip 适合标准护理床、养老院和家庭照护场景。它通过床栏或床头侧边固定，床面保持开放，枕头和床品摆放保持自然。面向人的喇叭侧保持低眩光。",
+        points: ["夹持或绑带固定", "按钮更大，状态更清晰", "灯光只在背向护理对象的一侧做弱提示", "适合夜间噪音扰民与陪护记录场景"]
+      },
+      "pillar-camp": {
+        eyebrow: "Pillar family · Travel",
+        title: "Camp Quiet Lantern",
+        image: "./assets/pillar-camp-lantern-sleep-safe.png",
+        lead: "露营、房车和临时住宿场景的便携静谧灯款。",
+        tags: ["露营", "旅行", "便携", "暖光"],
+        subhead: "安静的营地睡眠灯。",
+        body: "Camp Quiet Lantern 面向户外和临时睡眠环境，重点是近场舒适、本地有线工作，以及小夜灯级背向漫反射。",
+        points: ["放在露营桌、床边架或房车床侧", "支持 0 蓝牙发射睡眠工作模式", "枕区侧保持低眩光，反向侧可做 1-3 流明小夜灯", "适合露营、房车和临时住宿独立使用"]
+      },
+      "pillar-child": {
+        eyebrow: "Pillar family · Child",
+        title: "Child Guard Mini",
+        image: "./assets/pillar-child-guard-mini-sleep-safe.png",
+        lead: "儿童房迷你守护款，强调柔软触感、低眩光和主题化外观。",
+        tags: ["儿童房", "迷你立柱", "主题外观", "低眩光"],
+        subhead: "儿童款要亲近、柔和、让孩子安心。",
+        body: "Child Guard Mini 适合床头柜、儿童床侧边或墙边小台面。外观可发展成可切换主题，面向孩子枕头的一面保持低眩光。",
+        points: ["枕区侧低眩光", "圆润外形和软触材料", "背向枕区一侧提供弱小夜灯", "适合儿童房长期摆放"]
+      },
+      "pillar-family": {
+        eyebrow: "Pillar family · Overview",
+        title: "立柱式多场景系列",
+        image: "./assets/pillar-family-sleep-safe-warm.png",
+        lead: "立柱家族服务床头柜、床栏、露营和儿童房等特殊安装场景。",
+        tags: ["多场景", "独立款式", "枕区侧低眩光", "弱小夜灯"],
+        subhead: "面向不同卧室条件的睡眠外设款式。",
+        body: "立柱系列覆盖床头柜、养老护理、露营旅行和儿童房等安装场景。所有立柱款都将声学输出朝向枕区，灯光放在背向侧。",
+        points: ["适合床头柜、床侧、床栏或独立桌面", "灯光为背向枕区的小夜灯级漫反射", "覆盖护理、露营、儿童房等场景", "与 App 一键体验和夜报联动"]
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get("item") || "sku-headboard";
+    const data = details[key] || details["sku-headboard"];
+    document.title = `${data.title} — SleeePal Hardware Detail`;
+    document.getElementById("detailEyebrow").textContent = data.eyebrow;
+    document.getElementById("detailTitle").textContent = data.title;
+    document.getElementById("detailLead").textContent = data.lead;
+    document.getElementById("detailImage").src = data.image;
+    document.getElementById("detailImage").alt = data.title;
+    document.getElementById("detailSubhead").textContent = data.subhead;
+    document.getElementById("detailBody").textContent = data.body;
+    const tags = document.getElementById("detailTags");
+    tags.replaceChildren(...data.tags.map((tag) => {
+      const node = document.createElement("span");
+      node.textContent = tag;
+      return node;
+    }));
+    const points = document.getElementById("detailPoints");
+    points.replaceChildren(...data.points.map((point, index) => {
+      const article = document.createElement("article");
+      const number = document.createElement("span");
+      const body = document.createElement("p");
+      number.textContent = String(index + 1).padStart(2, "0");
+      body.textContent = point;
+      article.append(number, body);
+      return article;
+    }));
+  </script>
+</body>
+</html>

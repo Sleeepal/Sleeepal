@@ -6,6 +6,7 @@ const translations = {
     "nav.science": "原理",
     "nav.features": "功能",
     "nav.visual": "可视化",
+    "nav.hardware": "产品形态",
     "nav.pro": "Pro",
     "nav.feedback": "反馈",
     "nav.cta": "验证状态",
@@ -26,6 +27,14 @@ const translations = {
     "marquee.5": "MAC-FIRST LAUNCH",
     "marquee.6": "BLUETOOTH TRIAL · WIRED UPGRADE",
     "marquee.7": "夜报与场景 companion",
+    "support.kicker": "SLEEEPAL ASSISTANT · PREVIEW",
+    "support.title": "睡眠宝的问题，让产品继续成长。",
+    "support.body": "这里将承接睡眠宝使用问答、设备排障、产品定制需求和体验反馈。每条建议先被看见、归类和复核，再进入受控的产品优化轨迹。",
+    "support.item1": "使用问题与设备排障",
+    "support.item2": "围绕睡眠宝的定制需求",
+    "support.item3": "建议、问题与体验反馈",
+    "support.cta": "告诉睡眠宝",
+    "support.note": "智能客服组件接入前，先使用本地反馈入口；不会根据一条消息自动修改或发布产品。",
     "download.eyebrow": "创始人验证进行中",
     "download.title": "先完成<strong>真实夜间验证</strong>，<br/>再开放公开下载",
     "download.sub": "当前仅保留 QA 构建记录 · 尚未完成公开签名、公证与物理验收",
@@ -277,6 +286,7 @@ const translations = {
     "nav.science": "Science",
     "nav.features": "Features",
     "nav.visual": "Visuals",
+    "nav.hardware": "Product forms",
     "nav.pro": "Pro",
     "nav.feedback": "Feedback",
     "nav.cta": "Validation status",
@@ -297,6 +307,14 @@ const translations = {
     "marquee.5": "MAC-FIRST LAUNCH",
     "marquee.6": "BLUETOOTH TRIAL · WIRED UPGRADE",
     "marquee.7": "NIGHT REPORTS · COMPANION SCENARIOS",
+    "support.kicker": "SLEEEPAL ASSISTANT · PREVIEW",
+    "support.title": "Let every SleeePal question improve the product.",
+    "support.body": "This space will handle product questions, device troubleshooting, customization requests, and experience feedback. Every suggestion is reviewed and classified before it enters a controlled product-improvement track.",
+    "support.item1": "Product guidance and troubleshooting",
+    "support.item2": "SleeePal customization requests",
+    "support.item3": "Ideas, issues, and experience feedback",
+    "support.cta": "Tell SleeePal",
+    "support.note": "Until the assistant component is integrated, use the local feedback entry. One message will never change or publish the product automatically.",
     "download.eyebrow": "Founder validation in progress",
     "download.title": "Complete real-night validation first,<br/>then open the public download",
     "download.sub": "QA build record only · public signing, notarization, and physical acceptance are not complete",
@@ -775,5 +793,5 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("resize", () => {
-  if (window.innerWidth > 768) setMobileNavigation(false);
+  if (window.innerWidth > 1120) setMobileNavigation(false);
 });

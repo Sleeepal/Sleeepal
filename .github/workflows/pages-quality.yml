@@ -27,6 +27,7 @@ jobs:
           node --check site.js
           node --check feedback.js
           node --check dream-lab.js
+          node --check hardware-sku.js
       - name: Public boundary and links
         run: |
           node <<'NODE'
@@ -40,10 +41,32 @@ jobs:
             "CNAME", "LICENSE", "README.md", "docs/website-release-notes.md",
             "index.html", "styles.css", "site.js", "feedback.html", "feedback.js",
             "privacy.html", "terms.html", "3d-printing-workshop.html", "dream-lab.css",
-            "dream-lab.js", "release.json", "favicon.ico", "assets/app-icon-preview.png",
-            "assets/app-icon.svg", "assets/favicon-16.png", "assets/favicon-32.png",
-            "assets/logo-dark.svg", "assets/logo-light.svg", "assets/symbol-mark-white.png",
+            "dream-lab.js", "release.json", "favicon.ico", "hardware-sku.html",
+            "hardware-sku.css", "hardware-sku.js", "hardware-detail.html",
+            "assets/app-icon-preview.png", "assets/app-icon.svg",
+            "assets/concealed-art-frame-bedroom-v1.jpg",
+            "assets/concealed-art-frame-panorama-bar-v1.jpg",
+            "assets/concealed-inwall-linear-light-oak-v1.jpg",
+            "assets/concealed-inwall-linear-microperforated-v1.jpg",
+            "assets/concealed-inwall-linear-walnut-v1.jpg",
+            "assets/demo-child-protected-sleep-warm.png",
+            "assets/demo-couple-protected-sleep-warm-wide.png",
+            "assets/demo-sleep-people-quiet-zone-triptych-warm.png",
+            "assets/demo-woman-protected-sleep-warm.png",
+            "assets/favicon-16.png", "assets/favicon-32.png",
+            "assets/headboard-strip-wide-warm.png",
+            "assets/logo-dark.svg", "assets/logo-light.svg",
+            "assets/pillar-bedside-gap-sleep-safe.png",
+            "assets/pillar-camp-lantern-sleep-safe.png",
+            "assets/pillar-care-rail-clip-sleep-safe.png",
+            "assets/pillar-child-guard-mini-sleep-safe.png",
+            "assets/pillar-family-sleep-safe-warm.png",
+            "assets/quietcanvas-family-construction-v1.jpg",
+            "assets/quietwall-linear-core-module-v3.jpg",
+            "assets/sku-couple-strip-wide-warm.png", "assets/sku-halo.png",
+            "assets/sku-pebble.png", "assets/symbol-mark-white.png",
             "assets/dream-lab-hero-v1.jpg",
+            "assets/wall-pod-bun-wired-down-drop-sleep-safe.png",
           ]);
           const tracked = execFileSync("git", ["ls-files"], { encoding: "utf8" }).trim().split("\n");
           assert.deepEqual(tracked.filter((file) => !allowed.has(file)), [], "unexpected public files");
