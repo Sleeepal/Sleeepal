@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SleeePal — Beta 隐私说明</title>
-  <meta name="description" content="SleeePal Beta 版本的本地处理、音频保存、导出和删除边界。" />
+  <meta name="description" content="SleeePal Beta 的本地音频、梦想卡、钱包账号、可选 AI 对话、导出和删除边界。" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
   <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
@@ -24,8 +24,8 @@
     <header class="policy-hero">
       <p class="policy-kicker">LOCAL-FIRST · BETA NOTICE</p>
       <h1>你的夜晚声音，<br />默认留在你的<strong>设备里。</strong></h1>
-      <p>这是一份面向创始人验证阶段的隐私说明，用普通语言解释当前原生桌面 Beta 会处理什么，以及暂时不会保存什么。</p>
-      <div class="policy-status">Beta 说明 · 更新于 2026-07-21</div>
+      <p>这是一份面向创始人验证阶段的隐私说明，用普通语言解释桌面 Beta 与“美梦成真”网页会处理什么、什么默认留在本机，以及什么时候才会发送到远程服务。</p>
+      <div class="policy-status">Beta 说明 · 更新于 2026-07-23</div>
     </header>
 
     <section class="policy-section" aria-labelledby="privacy-local">
@@ -47,14 +47,31 @@
       <p>截图、完整日志、夜报和音频默认不会加入反馈包。复制、下载、邮件或 GitHub Issue 都需要由你主动触发；发送前请再次检查内容。</p>
     </section>
 
+    <section class="policy-section" aria-labelledby="privacy-dreams">
+      <div><span>04</span><h2 id="privacy-dreams">梦想卡与钱包账号</h2></div>
+      <ul>
+        <li>梦想草稿和本机对话默认保存在当前浏览器；连接钱包本身不会上传内容。</li>
+        <li>钱包登录只验证你对地址的控制权，不读取余额、NFT、交易记录、助记词或私钥，也不要求链上交易。</li>
+        <li>你可以主动签名绑定第二个恢复钱包；它会指向同一个内部用户和同一组梦想。用恢复钱包登录并重新签名后，可以把它设为主钱包，再移除失联旧钱包并撤销旧会话。已属于另一账号的钱包不会被自动合并，主钱包和当前会话身份也不能被误删。</li>
+        <li>只有你在合并预览中确认后，当前梦卡的目标、阶段、成功标准和边界才会保存到 SleeePal 账号数据库；本机对话不会随梦卡自动上传。</li>
+      </ul>
+    </section>
+
+    <section class="policy-section" aria-labelledby="privacy-ai">
+      <div><span>05</span><h2 id="privacy-ai">可选 AI 对话</h2></div>
+      <p>AI 模式必须单独开启。每次发送会把当前账号梦卡、这条新消息和最近 8 条账号 AI 对话经 SleeePal 服务端发送给 OpenAI；浏览器中的本机历史不会自动加入。账号数据库会保存你主动发送的账号对话、模型回复、同意记录、梦卡建议、授权决定、你生成的 Markdown 或 HTML 产物版本和必要的运行审计。</p>
+      <p>模型请求显式设置 <code>store:false</code>，用于关闭 Responses API 的应用状态存储；这不等同于 OpenAI 组织级“零数据保留（ZDR）”。请不要在早期 Beta 中提交密码、私钥、助记词、支付凭据、未脱敏的健康资料或其他不应交给远程模型的秘密。</p>
+    </section>
+
     <section class="policy-section" aria-labelledby="privacy-delete">
-      <div><span>04</span><h2 id="privacy-delete">保留与删除</h2></div>
-      <p>统一的保留期限与应用内删除入口仍在验证中。当前 QA 构建可能把报告或经你选择的片段留在本机，因此只应在受信任的系统账户中测试；你主动导出的文件需要在保存位置自行管理和删除。</p>
+      <div><span>06</span><h2 id="privacy-delete">保留与删除</h2></div>
+      <p>浏览器梦想可以逐个删除或导出。“美梦成真”账号管理中也提供完整 JSON 备份，包含账号梦卡、AI 对话、建议、授权、任务证据和 Markdown/HTML 产物正文；备份文件由你自行保管。梦想行动台下载后把勾选与笔记默认留在打开它的浏览器，也可由你导出独立进度 JSON；这些下载后的本机数据不会自动回传账号。彻底删除账号需要再次勾选不可恢复提示并输入确认短语，完成后会删除服务器中的钱包身份、会话和全部账号内容。本机浏览器里的梦想与已下载文件不会随服务器账号一起删除，仍需由你单独清理。</p>
+      <p>桌面 QA 构建可能把报告或经你选择的片段留在本机；这些本机文件不属于网页账号删除范围。公开 Beta 上线前仍需确定统一保留期限、生产备份生命周期和运营侧删除响应流程。</p>
     </section>
 
     <section class="policy-section" aria-labelledby="privacy-boundary">
-      <div><span>05</span><h2 id="privacy-boundary">当前边界</h2></div>
-      <p>当前 Beta 不依赖自建账号云端。未来若增加同步、云报告或远程服务，必须在启用前说明用途、数据范围、保存期限和关闭方式。</p>
+      <div><span>07</span><h2 id="privacy-boundary">当前边界</h2></div>
+      <p>桌面音频 Beta 仍以本地处理为主；“美梦成真”的钱包账号与 AI 服务处于独立早期验证阶段，线上可能尚未配置或暂时不可用。AI 当前没有工具和执行器，梦卡建议不会自动生效，授权卡也不会触发发布、发送、购买、删除或连接外部服务。</p>
     </section>
 
     <div class="policy-cta">
