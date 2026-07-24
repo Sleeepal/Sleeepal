@@ -42,6 +42,14 @@ const pageProgress = document.querySelector("[data-dream-progress]");
 const trajectory = document.querySelector("[data-trajectory]");
 const trajectoryProgress = document.querySelector("[data-trajectory-progress]");
 const workbench = document.querySelector("[data-dream-workbench]");
+const mobileWorkspaceNav = document.querySelector("[data-mobile-workspace-nav]");
+const mobileWorkspaceTabs = [...document.querySelectorAll("[data-mobile-workspace-tab]")];
+const mobileWorkspacePanels = new Map(
+  [...document.querySelectorAll("[data-mobile-workspace-panel]")].map((panel) => [
+    panel.getAttribute("data-mobile-workspace-panel"),
+    panel,
+  ]),
+);
 const dreamList = document.querySelector("[data-dream-list]");
 const dreamListEmpty = document.querySelector("[data-dream-list-empty]");
 const newDreamButton = document.querySelector("[data-dream-new]");
@@ -83,6 +91,7 @@ const syncList = document.querySelector("[data-sync-list]");
 const syncStatus = document.querySelector("[data-sync-status]");
 const chatKicker = document.querySelector("[data-chat-kicker]");
 const chatTitle = document.querySelector("[data-chat-title]");
+const chatWish = document.querySelector("[data-chat-wish]");
 const chatStatus = document.querySelector("[data-chat-status]");
 const messageList = document.querySelector("[data-dream-message-list]");
 const messageForm = document.querySelector("[data-dream-message-form]");
@@ -157,6 +166,7 @@ let walletLinkInProgress = false;
 let aiActionBusy = false;
 let artifactActionBusy = false;
 let artifactPreviewPayload = null;
+let mobileWorkspaceView = "dreams";
 const aiEnabledDreamIds = new Set();
 const loadedConversationDreamIds = new Set();
 const loadedArtifactDreamIds = new Set();
@@ -324,6 +334,42 @@ function normalizeArtifact(value) {
   };
 }
 
+function normalizePendingAiTurn(value) {
+  if (!value || typeof value !== "object") return null;
+  const content = normalizeText(value.content);
+  const consent = value.consent;
+  if (
+    !UUID_PATTERN.test(value.clientRequestId)
+    || !content
+    || content.length > 1200
+    || !Number.isSafeInteger(value.expectedRevision)
+    || value.expectedRevision <= 0
+    || consent?.accepted !== true
+    || consent?.scope !== "openai_dream_assistant_v1"
+  ) return null;
+  return {
+    clientRequestId: value.clientRequestId,
+    content,
+    expectedRevision: value.expectedRevision,
+    consent: {
+      accepted: true,
+      scope: "openai_dream_assistant_v1",
+    },
+    runId: UUID_PATTERN.test(value.runId) ? value.runId : null,
+    state: ["ready", "retryable", "uncertain", "running"].includes(value.state)
+      ? value.state
+      : "uncertain",
+    attempt: Number.isSafeInteger(value.attempt) && value.attempt > 0 ? value.attempt : null,
+    retryAfterSeconds: Number.isSafeInteger(value.retryAfterSeconds)
+      && value.retryAfterSeconds > 0
+      ? value.retryAfterSeconds
+      : null,
+    errorCode: normalizeText(value.errorCode) || null,
+    createdAt: value.createdAt || new Date().toISOString(),
+    updatedAt: value.updatedAt || new Date().toISOString(),
+  };
+}
+
 function normalizeDream(value) {
   if (!value || typeof value !== "object") return null;
   const wish = normalizeText(value.wish);
@@ -367,6 +413,7 @@ function normalizeDream(value) {
       localChanged: Boolean(value.sync.localChanged),
     }
     : null;
+  const pendingAiTurn = normalizePendingAiTurn(value.pendingAiTurn);
 
   return {
     version: STORE_VERSION,
@@ -385,6 +432,10 @@ function normalizeDream(value) {
     artifacts: Array.isArray(value.artifacts)
       ? value.artifacts.map(normalizeArtifact).filter(Boolean)
       : [],
+    pendingAiTurn: sync
+      && pendingAiTurn?.expectedRevision === sync.revision
+      ? pendingAiTurn
+      : null,
     syncClientId,
     sync,
     createdAt,
@@ -519,6 +570,63 @@ function updateExampleSelection() {
   });
 }
 
+function isCompactWorkspace() {
+  if (typeof globalThis.matchMedia === "function") {
+    return globalThis.matchMedia("(max-width: 820px)").matches;
+  }
+  return globalThis.innerWidth <= 820;
+}
+
+function syncMobileWorkspaceMode() {
+  if (!workbench || !mobileWorkspaceTabs.length) return;
+  const compact = isCompactWorkspace();
+  workbench.classList.toggle("is-mobile-compact", compact);
+  workbench.dataset.mobileWorkspaceView = mobileWorkspaceView;
+
+  mobileWorkspaceTabs.forEach((tab) => {
+    const view = tab.getAttribute("data-mobile-workspace-tab");
+    const selected = view === mobileWorkspaceView;
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+  });
+
+  mobileWorkspacePanels.forEach((panel, view) => {
+    const tab = mobileWorkspaceTabs.find(
+      (candidate) => candidate.getAttribute("data-mobile-workspace-tab") === view,
+    );
+    if (compact) {
+      panel.setAttribute("role", "tabpanel");
+      if (tab?.id) panel.setAttribute("aria-labelledby", tab.id);
+      panel.setAttribute("aria-hidden", String(view !== mobileWorkspaceView));
+    } else {
+      panel.removeAttribute("role");
+      panel.removeAttribute("aria-labelledby");
+      panel.removeAttribute("aria-hidden");
+    }
+  });
+}
+
+function setMobileWorkspaceView(view, { focusTab = false } = {}) {
+  if (!mobileWorkspacePanels.has(view)) return;
+  mobileWorkspaceView = view;
+  syncMobileWorkspaceMode();
+  if (!focusTab || !isCompactWorkspace()) return;
+  mobileWorkspaceTabs
+    .find((tab) => tab.getAttribute("data-mobile-workspace-tab") === view)
+    ?.focus();
+}
+
+function labelDreamElement(node, dream, prefix = "梦想") {
+  if (!node) return;
+  if (!dream) {
+    node.removeAttribute("title");
+    node.removeAttribute("aria-label");
+    return;
+  }
+  node.title = dream.wish;
+  node.setAttribute("aria-label", `${prefix}：${dream.wish}`);
+}
+
 function clearNode(node) {
   while (node?.firstChild) node.removeChild(node.firstChild);
 }
@@ -628,12 +736,14 @@ function renderDreamList() {
     button.type = "button";
     button.className = "dream-list-item";
     button.dataset.dreamId = dream.id;
+    button.title = dream.wish;
     if (!isCreating && activeDream?.id === dream.id) button.setAttribute("aria-current", "true");
     if (dream.status === "archived") button.classList.add("is-archived");
 
     const heading = document.createElement("span");
     heading.className = "dream-list-item-heading";
-    appendText(heading, "strong", dream.title);
+    const wish = appendText(heading, "strong", dream.wish);
+    wish.title = dream.wish;
     appendText(heading, "small", timeLabel(dream.updatedAt));
 
     const progress = getProgress(dream);
@@ -641,6 +751,10 @@ function renderDreamList() {
     meta.className = "dream-list-item-meta";
     appendText(meta, "span", statusLabel(dream.status));
     appendText(meta, "span", `${progress.completed}/${progress.total}`);
+    button.setAttribute(
+      "aria-label",
+      `打开梦想：${dream.wish}。${statusLabel(dream.status)}，进度 ${progress.completed}/${progress.total}`,
+    );
 
     const track = document.createElement("span");
     track.className = "dream-list-progress";
@@ -785,6 +899,7 @@ function renderCard(dream) {
   card.hidden = false;
   inspectorEmpty.hidden = true;
   if (cardTitle) cardTitle.textContent = dream.title;
+  labelDreamElement(cardTitle, dream, "梦想卡");
   if (cardWish) cardWish.textContent = dream.wish;
   if (cardArtifact) cardArtifact.textContent = dream.artifactLabel;
   if (cardSuccess) cardSuccess.textContent = dream.successCriterion;
@@ -843,19 +958,33 @@ function renderCard(dream) {
 
 function renderChat() {
   if (isCreating || editingDreamId || !activeDream) {
+    const editingDream = editingDreamId ? getDreamById(editingDreamId) : null;
     if (chatKicker) chatKicker.textContent = "美梦助手 · 本地原型";
     if (chatTitle) chatTitle.textContent = editingDreamId ? "修改梦想卡" : "先说一个你真正牵挂的愿望";
+    labelDreamElement(chatTitle, editingDream, editingDream ? "正在修改梦想" : "美梦助手");
+    if (chatWish) {
+      chatWish.hidden = !editingDream;
+      chatWish.textContent = editingDream?.wish || "";
+      if (editingDream) chatWish.title = editingDream.wish;
+      else chatWish.removeAttribute("title");
+    }
     if (chatStatus) {
       chatStatus.textContent = editingDreamId
         ? "修改后需要重新确认，已有对话会继续保留。"
         : "我会先理解，再整理成一张可以确认的梦卡。";
     }
-    renderMessages(editingDreamId ? getDreamById(editingDreamId) : null);
+    renderMessages(editingDream);
     return;
   }
 
   if (chatKicker) chatKicker.textContent = `美梦助手 · ${statusLabel(activeDream.status)}`;
   if (chatTitle) chatTitle.textContent = activeDream.title;
+  labelDreamElement(chatTitle, activeDream, "当前梦想");
+  if (chatWish) {
+    chatWish.hidden = false;
+    chatWish.textContent = activeDream.wish;
+    chatWish.title = activeDream.wish;
+  }
   if (chatStatus) {
     const progress = getProgress(activeDream);
     chatStatus.textContent = `${progress.completed}/${progress.total} 个阶段完成 · 最近更新 ${timeLabel(activeDream.updatedAt)}`;
@@ -886,27 +1015,85 @@ function aiModeEnabled(dream = activeDream) {
   return Boolean(dream && aiEnabledDreamIds.has(dream.id));
 }
 
+function pendingAiTurnFor(dream = activeDream) {
+  return dream?.pendingAiTurn || null;
+}
+
+function savePendingAiTurn(dreamId, pendingAiTurn) {
+  return updateDreamFromAccount(dreamId, (dream) => ({
+    ...dream,
+    pendingAiTurn,
+  }));
+}
+
+function clearPendingAiTurn(dreamId) {
+  const dream = getDreamById(dreamId);
+  if (!dream?.pendingAiTurn) return true;
+  return savePendingAiTurn(dreamId, null);
+}
+
+function pendingAiStatusMessage(pending) {
+  if (!pending) return "";
+  if (pending.state === "running") {
+    const wait = pending.retryAfterSeconds
+      ? `服务端建议约 ${pending.retryAfterSeconds} 秒后再查看。`
+      : "不会自动轮询。";
+    return `同一 AI 回合仍在处理中。${wait}点击“查看同一回合”只查询一次状态。`;
+  }
+  if (pending.state === "uncertain" && pending.runId) {
+    return "上次连接中断，回合状态尚未确认。点击“查看同一回合”只查询一次，不会重复提交。";
+  }
+  return "上次 AI 回合没有明确完成。内容和请求编号已保存在本机；点击“重试同一回合”会原样重发。";
+}
+
 function renderAiControls() {
   const enabled = aiModeEnabled();
+  const pending = pendingAiTurnFor();
   if (aiModeButton) {
     aiModeButton.setAttribute("aria-pressed", String(enabled));
     aiModeButton.textContent = enabled ? "关闭 AI，改为本机记录" : "使用 AI 助手";
     aiModeButton.disabled = aiActionBusy;
   }
   if (messageSubmit) {
-    messageSubmit.textContent = enabled ? "发送给 AI" : "记录";
+    messageSubmit.textContent = aiActionBusy
+      ? "正在确认…"
+      : pending?.runId && ["running", "uncertain"].includes(pending.state)
+        ? "查看同一回合"
+        : pending
+          ? "重试同一回合"
+          : enabled
+            ? "发送给 AI"
+            : "记录";
     messageSubmit.disabled = aiActionBusy;
   }
-  if (messageInput) messageInput.disabled = aiActionBusy;
+  if (messageInput) {
+    messageInput.disabled = aiActionBusy;
+    if (
+      pending
+      && messageInput.dataset.pendingAiTurnId !== pending.clientRequestId
+    ) {
+      messageInput.value = pending.content;
+      messageInput.dataset.pendingAiTurnId = pending.clientRequestId;
+      messageInput.dataset.pendingAiDreamId = activeDream?.id || "";
+    } else if (!pending && messageInput.dataset.pendingAiTurnId) {
+      messageInput.value = "";
+      delete messageInput.dataset.pendingAiTurnId;
+      delete messageInput.dataset.pendingAiDreamId;
+    }
+  }
   if (aiBadge) {
-    aiBadge.textContent = enabled
+    aiBadge.textContent = pending
+      ? "AI 回合待恢复"
+      : enabled
       ? "AI 已开启"
       : dreamApiHealth?.aiConfigured
         ? "AI 可选"
         : "本机模式";
   }
   if (!messageStatus || !activeDream || isCreating || editingDreamId) return;
-  if (enabled) {
+  if (pending) {
+    setMessage(messageStatus, pendingAiStatusMessage(pending), pending.state !== "running");
+  } else if (enabled) {
     setMessage(
       messageStatus,
       "发送当前账号梦卡、这条消息和最近 8 条账号 AI 对话；本机历史不上传，建议与外部动作仍需确认。",
@@ -928,7 +1115,10 @@ function renderWorkspace() {
   if (form) form.hidden = !isCreating && !editingDreamId;
   if (messageForm) messageForm.hidden = isCreating || Boolean(editingDreamId) || !activeDream;
   renderAiControls();
-  workbench?.classList.toggle("has-active-dream", Boolean(activeDream && !isCreating));
+  workbench?.classList.toggle(
+    "has-active-dream",
+    Boolean(activeDream && !isCreating && !editingDreamId),
+  );
 }
 
 function resetForm() {
@@ -969,6 +1159,10 @@ function selectDream(id) {
   editingDreamId = null;
   persistWorkspace();
   renderWorkspace();
+  setMobileWorkspaceView("chat");
+  if (isCompactWorkspace()) {
+    globalThis.requestAnimationFrame(() => messageInput?.focus({ preventScroll: true }));
+  }
   void loadAccountConversation(dream);
   void loadAccountArtifacts(dream);
 }
@@ -982,6 +1176,7 @@ function enterEditMode() {
   if (submitLabel) submitLabel.textContent = "保存并重新确认";
   setMessage(formStatus, "修改会保留原有对话，并让梦卡重新进入待确认状态。");
   renderWorkspace();
+  setMobileWorkspaceView("chat");
   form?.scrollIntoView({ behavior: "smooth", block: "center" });
   globalThis.setTimeout(() => wishInput?.focus({ preventScroll: true }), 200);
 }
@@ -1027,6 +1222,7 @@ function buildDream(existing = null) {
     milestones: createMilestones("draft"),
     messages,
     artifacts: existing?.artifacts ? [...existing.artifacts] : [],
+    pendingAiTurn: null,
     syncClientId: existing?.syncClientId
       || (UUID_PATTERN.test(dreamId) ? dreamId : createSyncId()),
     sync: existing?.sync
@@ -2164,6 +2360,153 @@ async function requestAiMode() {
   openAiDialog();
 }
 
+function applyAiTurnResult(dreamId, serverId, pending, result) {
+  const now = new Date().toISOString();
+  const nextUserMessage = result.userMessage || {
+    id: `account:${pending.clientRequestId}`,
+    role: "user",
+    content: pending.content,
+    createdAt: now,
+    source: "account-user",
+  };
+  nextUserMessage.source = "account-user";
+  const nextAssistantMessage = result.message?.id
+    ? {
+      ...result.message,
+      source: "openai",
+      suggestion: result.suggestion || null,
+      actionProposals: result.actionProposals || [],
+    }
+    : null;
+  const current = getDreamById(dreamId);
+  if (current) {
+    const knownIds = new Set(current.messages.map((message) => message.id));
+    updateDreamFromAccount(dreamId, (dream) => ({
+      ...dream,
+      pendingAiTurn: null,
+      messages: [
+        ...dream.messages,
+        ...(!knownIds.has(nextUserMessage.id) ? [nextUserMessage] : []),
+        ...(
+          nextAssistantMessage?.id && !knownIds.has(nextAssistantMessage.id)
+            ? [nextAssistantMessage]
+            : []
+        ),
+      ],
+      updatedAt: result.message?.createdAt || now,
+    }));
+  }
+  if (messageInput?.dataset.pendingAiTurnId === pending.clientRequestId) {
+    messageInput.value = "";
+    delete messageInput.dataset.pendingAiTurnId;
+    delete messageInput.dataset.pendingAiDreamId;
+  }
+  loadedConversationDreamIds.delete(`${authenticatedAccount.userId}:${serverId}`);
+  return result.suggestion || result.actionProposals?.length
+    ? "AI 已回应。梦卡建议和授权卡都在对话中，只有你确认后才会改变状态。"
+    : result.run?.status === "refused"
+      ? "AI 已明确拒绝这次请求；同一回合已经结束，没有执行任何外部动作。"
+      : "AI 已回应；同一回合已经结束，没有修改梦卡或执行外部动作。";
+}
+
+function updatePendingAiTurnAfterError(dreamId, pending, error) {
+  const runId = UUID_PATTERN.test(error?.details?.runId)
+    ? error.details.runId
+    : pending.runId;
+  const running = error?.code === "ai_run_in_progress";
+  const uncertain = Boolean(runId) && [
+    "ai_run_finalize_uncertain",
+    "ai_run_superseded",
+    "ai_run_unavailable",
+  ].includes(error?.code);
+  const retryable = error?.details?.retryable === true
+    || error?.code === "ai_run_retryable";
+  const next = {
+    ...pending,
+    runId,
+    state: running ? "running" : uncertain ? "uncertain" : retryable ? "retryable" : "uncertain",
+    attempt: Number.isSafeInteger(error?.details?.attempt)
+      ? error.details.attempt
+      : pending.attempt,
+    retryAfterSeconds: Number.isSafeInteger(error?.details?.retryAfterSeconds)
+      ? error.details.retryAfterSeconds
+      : null,
+    errorCode: error?.code || "request_uncertain",
+    updatedAt: new Date().toISOString(),
+  };
+  savePendingAiTurn(dreamId, next);
+  return next;
+}
+
+async function inspectPendingAiTurn(dreamId, serverId, pending) {
+  if (!pending.runId || aiActionBusy) return;
+  aiActionBusy = true;
+  renderAiControls();
+  let finalMessage = "";
+  let finalError = false;
+  try {
+    const result = await dreamApiRequest(
+      `/v1/dreams/${serverId}/runs/${encodeURIComponent(pending.runId)}`,
+    );
+    const status = result.run?.status;
+    if (["completed", "refused", "succeeded"].includes(status)) {
+      finalMessage = applyAiTurnResult(dreamId, serverId, pending, result);
+    } else if (status === "failed") {
+      savePendingAiTurn(dreamId, {
+        ...pending,
+        state: "retryable",
+        attempt: result.run?.attempt || pending.attempt,
+        retryAfterSeconds: null,
+        errorCode: result.run?.errorCode || "ai_run_failed",
+        updatedAt: new Date().toISOString(),
+      });
+      finalMessage = "已确认同一 AI 回合失败。点击“重试同一回合”会复用原内容和请求编号。";
+      finalError = true;
+    } else if (status === "running") {
+      const state = result.run?.retryable ? "retryable" : "running";
+      savePendingAiTurn(dreamId, {
+        ...pending,
+        state,
+        attempt: result.run?.attempt || pending.attempt,
+        retryAfterSeconds: result.run?.retryAfterSeconds || null,
+        errorCode: null,
+        updatedAt: new Date().toISOString(),
+      });
+      finalMessage = state === "retryable"
+        ? "同一 AI 回合已超过正常处理窗口。点击“重试同一回合”可安全认领下一次 attempt。"
+        : pendingAiStatusMessage(getDreamById(dreamId)?.pendingAiTurn);
+      finalError = state === "retryable";
+    } else {
+      savePendingAiTurn(dreamId, {
+        ...pending,
+        state: "retryable",
+        errorCode: "ai_run_status_unknown",
+        updatedAt: new Date().toISOString(),
+      });
+      finalMessage = "服务端返回了未知状态。已保留原请求；可以重试同一回合。";
+      finalError = true;
+    }
+  } catch (error) {
+    if (error?.status === 401) {
+      aiEnabledDreamIds.delete(dreamId);
+      authenticatedAccount = null;
+      linkedIdentities = [];
+    }
+    savePendingAiTurn(dreamId, {
+      ...pending,
+      state: "retryable",
+      errorCode: error?.code || "run_lookup_failed",
+      updatedAt: new Date().toISOString(),
+    });
+    finalMessage = `${walletErrorMessage(error)} 原请求仍保留；可以重试同一回合。`;
+    finalError = true;
+  } finally {
+    aiActionBusy = false;
+    renderWorkspace();
+    setMessage(messageStatus, finalMessage, finalError);
+  }
+}
+
 async function sendAiMessage(content) {
   if (
     !activeDream
@@ -2178,82 +2521,92 @@ async function sendAiMessage(content) {
 
   const dreamId = activeDream.id;
   const serverId = activeDream.sync.serverId;
-  const clientRequestId = createSyncId();
-  if (!clientRequestId) {
-    setMessage(messageStatus, "当前浏览器无法建立安全请求编号；内容没有发送。", true);
+  const expectedRevision = activeDream.sync.revision;
+  let pending = pendingAiTurnFor();
+  if (
+    pending
+    && (pending.content !== content || pending.expectedRevision !== expectedRevision)
+  ) {
+    clearPendingAiTurn(dreamId);
+    pending = null;
+  }
+  if (!pending) {
+    const clientRequestId = createSyncId();
+    if (!clientRequestId) {
+      setMessage(messageStatus, "当前浏览器无法建立安全请求编号；内容没有发送。", true);
+      return;
+    }
+    const now = new Date().toISOString();
+    pending = {
+      clientRequestId,
+      content,
+      expectedRevision,
+      consent: {
+        accepted: true,
+        scope: "openai_dream_assistant_v1",
+      },
+      runId: null,
+      state: "ready",
+      attempt: null,
+      retryAfterSeconds: null,
+      errorCode: null,
+      createdAt: now,
+      updatedAt: now,
+    };
+    if (!savePendingAiTurn(dreamId, pending)) {
+      setMessage(messageStatus, "浏览器无法保存安全重试信息；内容没有发送。", true);
+      return;
+    }
+  }
+
+  if (pending.runId && ["running", "uncertain"].includes(pending.state)) {
+    await inspectPendingAiTurn(dreamId, serverId, pending);
     return;
   }
+
   aiActionBusy = true;
   renderAiControls();
-  setMessage(messageStatus, "AI 正在理解这条消息；当前没有工具，也不会执行外部动作。");
+  let finalMessage = "";
+  let finalError = false;
+  setMessage(
+    messageStatus,
+    pending.state === "ready"
+      ? "AI 正在理解这条消息；请求编号已保存在本机。"
+      : "正在重试同一回合；内容、梦卡修订、同意范围与请求编号保持不变。",
+  );
   try {
     const result = await dreamApiRequest(`/v1/dreams/${serverId}/turns`, {
       method: "POST",
       body: JSON.stringify({
-        content,
-        clientRequestId,
-        expectedRevision: activeDream.sync.revision,
-        consent: {
-          accepted: true,
-          scope: "openai_dream_assistant_v1",
-        },
+        content: pending.content,
+        clientRequestId: pending.clientRequestId,
+        expectedRevision: pending.expectedRevision,
+        consent: pending.consent,
       }),
     });
-    const now = new Date().toISOString();
-    const nextUserMessage = result.userMessage || {
-      id: `account:${clientRequestId}`,
-      role: "user",
-      content,
-      createdAt: now,
-      source: "account-user",
-    };
-    nextUserMessage.source = "account-user";
-    const nextAssistantMessage = {
-      ...result.message,
-      source: "openai",
-      suggestion: result.suggestion || null,
-      actionProposals: result.actionProposals || [],
-    };
-    const current = getDreamById(dreamId);
-    if (current) {
-      const knownIds = new Set(current.messages.map((message) => message.id));
-      updateDreamFromAccount(dreamId, (dream) => ({
-        ...dream,
-        messages: [
-          ...dream.messages,
-          ...(!knownIds.has(nextUserMessage.id) ? [nextUserMessage] : []),
-          ...(
-            nextAssistantMessage?.id && !knownIds.has(nextAssistantMessage.id)
-              ? [nextAssistantMessage]
-              : []
-          ),
-        ],
-        updatedAt: result.message?.createdAt || now,
-      }));
-    }
-    if (messageInput) messageInput.value = "";
-    loadedConversationDreamIds.delete(`${authenticatedAccount.userId}:${serverId}`);
-    renderWorkspace();
-    setMessage(
-      messageStatus,
-      result.suggestion || result.actionProposals?.length
-        ? "AI 已回应。梦卡建议和授权卡都在对话中，只有你确认后才会改变状态。"
-        : "AI 已回应；没有修改梦卡，也没有执行任何外部动作。",
-    );
+    finalMessage = applyAiTurnResult(dreamId, serverId, pending, result);
   } catch (error) {
+    if (["revision_conflict", "ai_idempotency_conflict"].includes(error?.code)) {
+      clearPendingAiTurn(dreamId);
+      delete messageInput?.dataset.pendingAiTurnId;
+      delete messageInput?.dataset.pendingAiDreamId;
+      finalMessage = `${walletErrorMessage(error)} 旧回合已清理，请确认最新梦卡后重新发送。`;
+    } else {
+      const next = updatePendingAiTurnAfterError(dreamId, pending, error);
+      finalMessage = next.state === "running"
+        ? pendingAiStatusMessage(next)
+        : `${walletErrorMessage(error)} ${pendingAiStatusMessage(next)}`;
+    }
+    finalError = true;
     if (error?.status === 401) {
       aiEnabledDreamIds.delete(dreamId);
       authenticatedAccount = null;
       linkedIdentities = [];
     }
-    setMessage(
-      messageStatus,
-      `${walletErrorMessage(error)} 内容不会由本机规则冒充 AI 回答。`,
-      true,
-    );
   } finally {
     aiActionBusy = false;
     renderWorkspace();
+    setMessage(messageStatus, finalMessage, finalError);
   }
 }
 
@@ -2660,6 +3013,7 @@ async function deleteCloudAccount() {
       ...dream,
       sync: null,
       artifacts: [],
+      pendingAiTurn: null,
     }));
     persistWorkspace();
     accountActionBusy = false;
@@ -2760,6 +3114,17 @@ wishInput?.addEventListener("input", () => {
   updateExampleSelection();
 });
 
+messageInput?.addEventListener("input", () => {
+  const pending = pendingAiTurnFor();
+  if (!activeDream || !pending) return;
+  if (normalizeText(messageInput.value) === pending.content) return;
+  clearPendingAiTurn(activeDream.id);
+  delete messageInput.dataset.pendingAiTurnId;
+  delete messageInput.dataset.pendingAiDreamId;
+  renderAiControls();
+  setMessage(messageStatus, "内容已修改。旧请求编号已丢弃；再次发送会创建一个新的 AI 回合。");
+});
+
 artifactInput?.addEventListener("change", updateExampleSelection);
 
 exampleButtons.forEach((button) => {
@@ -2806,6 +3171,7 @@ form?.addEventListener("submit", (event) => {
     if (submitButton) submitButton.disabled = false;
     isGenerating = false;
     renderWorkspace();
+    setMobileWorkspaceView("progress", { focusTab: true });
     setMessage(
       cardStatus,
       saved ? "梦卡已经生成并保存到这个浏览器。" : "梦卡已经生成，但浏览器未允许本地保存。",
@@ -2825,6 +3191,17 @@ messageForm?.addEventListener("submit", async (event) => {
 
   if (aiModeEnabled()) {
     await sendAiMessage(content);
+    return;
+  }
+
+  const pending = pendingAiTurnFor();
+  if (pending && content === pending.content) {
+    setMessage(
+      messageStatus,
+      "这是一个待恢复的 AI 回合。请先点击“使用 AI 助手”，再重试同一回合；不会记录成本机对话。",
+      true,
+    );
+    aiModeButton?.focus();
     return;
   }
 
@@ -2848,7 +3225,29 @@ messageForm?.addEventListener("submit", async (event) => {
   setMessage(messageStatus, "已保存到当前梦想的本地对话。");
 });
 
-newDreamButton?.addEventListener("click", enterCreateMode);
+newDreamButton?.addEventListener("click", () => {
+  enterCreateMode();
+  setMobileWorkspaceView("chat");
+});
+
+mobileWorkspaceTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => {
+    setMobileWorkspaceView(tab.getAttribute("data-mobile-workspace-tab"), { focusTab: true });
+  });
+  tab.addEventListener("keydown", (event) => {
+    let nextIndex = null;
+    if (event.key === "ArrowRight") nextIndex = (index + 1) % mobileWorkspaceTabs.length;
+    if (event.key === "ArrowLeft") {
+      nextIndex = (index - 1 + mobileWorkspaceTabs.length) % mobileWorkspaceTabs.length;
+    }
+    if (event.key === "Home") nextIndex = 0;
+    if (event.key === "End") nextIndex = mobileWorkspaceTabs.length - 1;
+    if (nextIndex === null) return;
+    event.preventDefault();
+    const nextTab = mobileWorkspaceTabs[nextIndex];
+    setMobileWorkspaceView(nextTab.getAttribute("data-mobile-workspace-tab"), { focusTab: true });
+  });
+});
 
 walletPreviewButton?.addEventListener("click", () => {
   if (authenticatedAccount) {
@@ -3053,22 +3452,29 @@ deleteButton?.addEventListener("click", () => {
     resetForm();
   }
   renderWorkspace();
+  setMobileWorkspaceView(activeDream ? "chat" : "dreams", { focusTab: true });
   setMessage(accountStatus, "当前梦想已从这个浏览器永久删除。");
 });
 
 globalThis.addEventListener("scroll", updateScrollState, { passive: true });
 globalThis.addEventListener("resize", updateScrollState);
+globalThis.addEventListener("resize", syncMobileWorkspaceMode);
 
 workspaceStore = readWorkspaceStore();
 if (workspaceStore.dreams.length) {
   activeDream = getDreamById(workspaceStore.activeDreamId) || workspaceStore.dreams[0];
   workspaceStore.activeDreamId = activeDream.id;
   isCreating = false;
+  mobileWorkspaceView = "chat";
   persistWorkspace();
 } else {
   isCreating = true;
+  mobileWorkspaceView = "dreams";
 }
 
+workbench?.classList.add("is-mobile-enhanced");
+if (mobileWorkspaceNav) mobileWorkspaceNav.hidden = false;
+syncMobileWorkspaceMode();
 initializeReveals();
 updateWishMeter();
 updateScrollState();

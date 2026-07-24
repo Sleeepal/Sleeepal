@@ -16,8 +16,8 @@
   <meta property="og:image" content="https://sleeepal.com/assets/dream-lab-hero-v1.jpg" />
   <link rel="icon" href="./favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
-  <link rel="stylesheet" href="./dream-lab.css?v=20260723-ai-beta" />
-  <script src="./dream-lab.js?v=20260723-ai-beta" defer></script>
+  <link rel="stylesheet" href="./dream-lab.css?v=20260724-mobile-recovery" />
+  <script src="./dream-lab.js?v=20260724-mobile-recovery" defer></script>
 </head>
 <body class="dream-page">
   <a class="dream-skip-link" href="#main">跳到主要内容</a>
@@ -90,7 +90,43 @@
       </div>
 
       <div class="dream-workbench dream-reveal" data-dream-workbench>
-        <aside class="dream-rail" aria-label="我的梦想">
+        <nav class="dream-mobile-workspace-nav" aria-label="移动端梦想工作区" data-mobile-workspace-nav>
+          <div role="tablist" aria-label="梦想工作区视图">
+            <button
+              id="dream-mobile-tab-dreams"
+              type="button"
+              role="tab"
+              aria-controls="dream-mobile-panel-dreams"
+              aria-selected="true"
+              data-mobile-workspace-tab="dreams"
+            >梦想</button>
+            <button
+              id="dream-mobile-tab-chat"
+              type="button"
+              role="tab"
+              aria-controls="dream-mobile-panel-chat"
+              aria-selected="false"
+              tabindex="-1"
+              data-mobile-workspace-tab="chat"
+            >对话</button>
+            <button
+              id="dream-mobile-tab-progress"
+              type="button"
+              role="tab"
+              aria-controls="dream-mobile-panel-progress"
+              aria-selected="false"
+              tabindex="-1"
+              data-mobile-workspace-tab="progress"
+            >进度</button>
+          </div>
+        </nav>
+
+        <aside
+          class="dream-rail"
+          id="dream-mobile-panel-dreams"
+          aria-label="我的梦想"
+          data-mobile-workspace-panel="dreams"
+        >
           <div class="dream-rail-heading">
             <div>
               <span>MY DREAMS</span>
@@ -114,11 +150,17 @@
           <button class="dream-export-all" type="button" data-dream-export-all disabled>导出全部梦想</button>
         </aside>
 
-        <section class="dream-chat" aria-labelledby="dream-chat-title">
+        <section
+          class="dream-chat"
+          id="dream-mobile-panel-chat"
+          aria-labelledby="dream-chat-title"
+          data-mobile-workspace-panel="chat"
+        >
           <header class="dream-chat-heading">
             <div>
               <span data-chat-kicker>美梦助手 · 本地原型</span>
               <h3 id="dream-chat-title" data-chat-title>先说一个你真正牵挂的愿望</h3>
+              <p class="dream-chat-wish" data-chat-wish hidden></p>
               <p data-chat-status>我会先理解，再整理成一张可以确认的梦卡。</p>
             </div>
             <span class="dream-local-badge" data-ai-badge>本机模式</span>
@@ -211,7 +253,12 @@
           </form>
         </section>
 
-        <aside class="dream-inspector" aria-label="当前梦想的进度与梦卡">
+        <aside
+          class="dream-inspector"
+          id="dream-mobile-panel-progress"
+          aria-label="当前梦想的进度与梦卡"
+          data-mobile-workspace-panel="progress"
+        >
           <div class="dream-inspector-empty" data-dream-inspector-empty>
             <span>PROGRESS</span>
             <strong>梦卡会出现在这里</strong>
