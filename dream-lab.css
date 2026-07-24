@@ -4466,3 +4466,218 @@ img {
     font-size: 0.86rem;
   }
 }
+
+/* 2026-07-24 · Explicit AI prototype consent and compact artifact actions */
+
+.dream-artifacts-heading {
+  display: grid;
+  gap: 12px;
+}
+
+.dream-artifact-create-actions {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.dream-artifact-create-actions button {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 7px 8px;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.dream-artifact-create-actions button:not(.is-secondary) {
+  border-color: rgba(213, 166, 109, 0.72);
+  background: rgba(213, 166, 109, 0.16);
+  color: var(--dream-gold-soft);
+}
+
+.dream-prototype-dialog {
+  width: min(680px, calc(100% - 24px));
+  max-height: calc(100svh - 24px);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid rgba(213, 166, 109, 0.34);
+  background: #0b0f18;
+  color: var(--dream-cream);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.62);
+}
+
+.dream-prototype-dialog::backdrop {
+  background: rgba(2, 4, 9, 0.82);
+  backdrop-filter: blur(10px);
+}
+
+.dream-prototype-shell {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.dream-prototype-shell > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.dream-prototype-shell > header span {
+  color: var(--dream-gold);
+  font-size: 0.68rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
+}
+
+.dream-prototype-shell > header h2 {
+  margin: 7px 0 0;
+  font-size: clamp(1.2rem, 4vw, 1.72rem);
+  line-height: 1.18;
+}
+
+.dream-prototype-shell > header > button {
+  flex: 0 0 44px;
+  width: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--dream-line-strong);
+  background: transparent;
+  color: var(--dream-cream);
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+.dream-prototype-scope {
+  padding: 16px;
+  border: 1px solid var(--dream-line);
+  background: rgba(255, 255, 255, 0.022);
+}
+
+.dream-prototype-scope h3 {
+  margin: 0 0 12px;
+  color: var(--dream-gold-soft);
+  font-size: 0.82rem;
+}
+
+.dream-prototype-scope ul {
+  display: grid;
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dream-prototype-scope li {
+  display: grid;
+  gap: 3px;
+}
+
+.dream-prototype-scope strong,
+.dream-prototype-scope span {
+  overflow-wrap: anywhere;
+}
+
+.dream-prototype-scope strong {
+  color: rgba(246, 238, 228, 0.92);
+  font-size: 0.76rem;
+}
+
+.dream-prototype-scope span {
+  color: var(--dream-muted);
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.dream-prototype-state-note {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--dream-line);
+  color: var(--dream-muted-soft);
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+.dream-prototype-consent {
+  display: flex;
+  min-height: 44px;
+  align-items: flex-start;
+  gap: 10px;
+  color: rgba(246, 238, 228, 0.86);
+  cursor: pointer;
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.dream-prototype-consent input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
+  accent-color: var(--dream-gold);
+}
+
+.dream-prototype-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.dream-prototype-actions button {
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--dream-line-strong);
+  background: transparent;
+  color: var(--dream-cream);
+  cursor: pointer;
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.dream-prototype-actions .dream-prototype-primary {
+  border-color: rgba(213, 166, 109, 0.72);
+  background: rgba(213, 166, 109, 0.16);
+  color: var(--dream-gold-soft);
+}
+
+.dream-prototype-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.dream-prototype-status {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--dream-muted-soft);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.dream-prototype-status.is-error {
+  color: var(--dream-danger);
+}
+
+@media (max-width: 620px) {
+  .dream-artifact-create-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dream-artifact-create-actions button {
+    min-height: 44px;
+    padding-inline: 5px;
+    font-size: 0.68rem;
+  }
+
+  .dream-prototype-shell {
+    gap: 15px;
+    padding: 18px 16px;
+  }
+
+  .dream-prototype-actions {
+    grid-template-columns: 1fr;
+  }
+}

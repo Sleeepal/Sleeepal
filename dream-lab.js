@@ -133,6 +133,7 @@ const cardNextStep = document.querySelector("[data-card-next-step]");
 const cardStatus = document.querySelector("[data-dream-card-status]");
 const artifactGenerateButton = document.querySelector("[data-artifact-generate]");
 const artifactBoardButton = document.querySelector("[data-artifact-board]");
+const artifactPrototypeButton = document.querySelector("[data-artifact-prototype]");
 const artifactList = document.querySelector("[data-artifact-list]");
 const artifactStatus = document.querySelector("[data-artifact-status]");
 const artifactPreviewDialog = document.querySelector("[data-artifact-preview-dialog]");
@@ -155,6 +156,12 @@ const progressLatestSummary = document.querySelector("[data-progress-latest-summ
 const progressLatestSource = document.querySelector("[data-progress-latest-source]");
 const progressContinueButton = document.querySelector("[data-progress-continue]");
 const progressFeedbackStatus = document.querySelector("[data-progress-status]");
+const prototypeDialog = document.querySelector("[data-prototype-dialog]");
+const prototypeCloseButton = document.querySelector("[data-prototype-close]");
+const prototypeCancelButton = document.querySelector("[data-prototype-cancel]");
+const prototypeConfirmButton = document.querySelector("[data-prototype-confirm]");
+const prototypeConsent = document.querySelector("[data-prototype-consent]");
+const prototypeStatus = document.querySelector("[data-prototype-status]");
 const confirmButton = document.querySelector("[data-dream-confirm]");
 const editButton = document.querySelector("[data-dream-edit]");
 const pauseButton = document.querySelector("[data-dream-pause]");
@@ -388,6 +395,32 @@ function normalizePendingAiTurn(value) {
   };
 }
 
+function normalizePendingPrototypeGeneration(value) {
+  if (!value || typeof value !== "object") return null;
+  if (
+    !UUID_PATTERN.test(value.clientRequestId)
+    || !UUID_PATTERN.test(value.serverId)
+    || !Number.isSafeInteger(value.expectedRevision)
+    || value.expectedRevision <= 0
+    || value.consent?.accepted !== true
+    || value.consent?.scope !== "openai_dream_prototype_v1"
+  ) return null;
+  return {
+    clientRequestId: value.clientRequestId,
+    serverId: value.serverId,
+    expectedRevision: value.expectedRevision,
+    confirmed: true,
+    consent: {
+      accepted: true,
+      scope: "openai_dream_prototype_v1",
+    },
+    state: ["ready", "retryable"].includes(value.state) ? value.state : "retryable",
+    errorCode: normalizeText(value.errorCode) || null,
+    createdAt: value.createdAt || new Date().toISOString(),
+    updatedAt: value.updatedAt || new Date().toISOString(),
+  };
+}
+
 function normalizeDream(value) {
   if (!value || typeof value !== "object") return null;
   const wish = normalizeText(value.wish);
@@ -432,6 +465,9 @@ function normalizeDream(value) {
     }
     : null;
   const pendingAiTurn = normalizePendingAiTurn(value.pendingAiTurn);
+  const pendingPrototypeGeneration = normalizePendingPrototypeGeneration(
+    value.pendingPrototypeGeneration,
+  );
 
   return {
     version: STORE_VERSION,
@@ -453,6 +489,11 @@ function normalizeDream(value) {
     pendingAiTurn: sync
       && pendingAiTurn?.expectedRevision === sync.revision
       ? pendingAiTurn
+      : null,
+    pendingPrototypeGeneration: sync
+      && pendingPrototypeGeneration?.serverId === sync.serverId
+      && pendingPrototypeGeneration?.expectedRevision === sync.revision
+      ? pendingPrototypeGeneration
       : null,
     syncClientId,
     sync,
@@ -842,7 +883,12 @@ function artifactSizeLabel(bytes) {
 }
 
 function renderArtifacts(dream) {
-  if (!artifactList || !artifactGenerateButton || !artifactBoardButton) return;
+  if (
+    !artifactList
+    || !artifactGenerateButton
+    || !artifactBoardButton
+    || !artifactPrototypeButton
+  ) return;
   clearNode(artifactList);
   const artifacts = [...(dream?.artifacts || [])]
     .sort((a, b) => (
@@ -860,12 +906,17 @@ function renderArtifacts(dream) {
     );
     const actions = document.createElement("div");
     actions.className = "dream-artifact-item-actions";
-    if (artifact.kind === "action_board") {
+    if (["action_board", "interactive_prototype"].includes(artifact.kind)) {
       const previewButton = appendText(actions, "button", "打开");
       previewButton.type = "button";
       previewButton.addEventListener("click", () => previewAccountArtifact(artifact));
     }
-    const downloadButton = appendText(actions, "button", "下载");
+    const downloadLabel = artifact.kind === "interactive_prototype"
+      ? "下载原型"
+      : artifact.kind === "action_board"
+        ? "下载行动台"
+        : "下载任务书";
+    const downloadButton = appendText(actions, "button", downloadLabel);
     downloadButton.type = "button";
     downloadButton.addEventListener("click", () => downloadAccountArtifact(artifact));
     row.append(actions);
@@ -874,6 +925,13 @@ function renderArtifacts(dream) {
 
   artifactGenerateButton.disabled = artifactActionBusy;
   artifactBoardButton.disabled = artifactActionBusy;
+  const canGeneratePrototype = Boolean(
+    authenticatedAccount
+    && dream?.sync?.serverId
+    && !dream.sync.localChanged
+    && dream.status === "confirmed",
+  );
+  artifactPrototypeButton.disabled = artifactActionBusy || !canGeneratePrototype;
   const briefCount = artifacts.filter((artifact) => artifact.kind === "project_brief").length;
   const boardCount = artifacts.filter((artifact) => artifact.kind === "action_board").length;
   artifactGenerateButton.textContent = artifactActionBusy
@@ -886,6 +944,11 @@ function renderArtifacts(dream) {
     : boardCount
       ? "行动台新版本"
       : "生成可用行动台";
+  artifactPrototypeButton.textContent = artifactActionBusy
+    ? "正在生成…"
+    : dream?.pendingPrototypeGeneration
+      ? "安全重试原型"
+      : "生成可运行原型";
 
   if (!dream) return;
   if (!authenticatedAccount) {
@@ -899,10 +962,10 @@ function renderArtifacts(dream) {
   } else if (artifacts.length) {
     setMessage(
       artifactStatus,
-      `已保留 ${artifacts.length} 份产物；行动台可直接打开，所有版本都能独立下载。`,
+      `已保留 ${artifacts.length} 份产物；原型与行动台可隔离打开，所有版本都能独立下载。`,
     );
   } else {
-    setMessage(artifactStatus, "尚未生成。建议先创建可直接使用的离线梦想行动台。");
+    setMessage(artifactStatus, "尚未生成。建议先生成可运行原型；行动台和任务书可随后作为辅助。");
   }
 }
 
@@ -1616,6 +1679,7 @@ function buildDream(existing = null) {
     messages,
     artifacts: existing?.artifacts ? [...existing.artifacts] : [],
     pendingAiTurn: null,
+    pendingPrototypeGeneration: null,
     syncClientId: existing?.syncClientId
       || (UUID_PATTERN.test(dreamId) ? dreamId : createSyncId()),
     sync: existing?.sync
@@ -2216,7 +2280,10 @@ async function adoptAccountConflictVersion() {
   setConflictBusy(true);
   setMessage(conflictStatus, "正在把账号梦卡应用到本机；服务器不会被修改。");
   const saved = updateDreamFromAccount(localDreamId, (dream) => (
-    applyRemoteDreamCard(dream, remoteDream)
+    {
+      ...applyRemoteDreamCard(dream, remoteDream),
+      pendingPrototypeGeneration: null,
+    }
   ));
   accountActionBusy = false;
   if (!saved) {
@@ -2268,6 +2335,7 @@ async function keepBothConflictVersions() {
     ...current,
     messages: accountSideMessages,
     artifacts: [],
+    pendingPrototypeGeneration: null,
   }, remoteDream));
   const originalIndex = workspaceStore.dreams.findIndex((dream) => dream.id === localDreamId);
   if (!adoptedAccountVersion || originalIndex < 0) {
@@ -2416,6 +2484,12 @@ function applyRemoteDreamCard(localDream, remoteDream) {
   const constraints = Array.isArray(remoteDream.constraints)
     ? remoteDream.constraints.map(normalizeText).filter(Boolean)
     : [];
+  const serverId = remoteDream.id || localDream.sync?.serverId;
+  const revision = Number.isSafeInteger(remoteDream.revision)
+    ? remoteDream.revision
+    : localDream.sync?.revision || 1;
+  const syncIdentityChanged = localDream.sync?.serverId !== serverId
+    || localDream.sync?.revision !== revision;
   return {
     ...localDream,
     title: normalizeText(remoteDream.title) || localDream.title,
@@ -2425,11 +2499,12 @@ function applyRemoteDreamCard(localDream, remoteDream) {
     boundary: constraints.join("；") || localDream.boundary,
     status: VALID_STATUSES.has(remoteDream.status) ? remoteDream.status : localDream.status,
     milestones: milestonesForRemoteStage(localDream, remoteDream.currentStage),
+    pendingPrototypeGeneration: syncIdentityChanged
+      ? null
+      : localDream.pendingPrototypeGeneration,
     sync: {
-      serverId: remoteDream.id || localDream.sync?.serverId,
-      revision: Number.isSafeInteger(remoteDream.revision)
-        ? remoteDream.revision
-        : localDream.sync?.revision || 1,
+      serverId,
+      revision,
       syncedAt: remoteDream.updatedAt || new Date().toISOString(),
       localChanged: false,
     },
@@ -2610,6 +2685,230 @@ async function generateDreamActionBoard() {
   return generateAccountArtifact("action_board");
 }
 
+function savePendingPrototypeGeneration(dreamId, pendingPrototypeGeneration) {
+  return updateDreamFromAccount(dreamId, (dream) => ({
+    ...dream,
+    pendingPrototypeGeneration,
+  }));
+}
+
+function clearPendingPrototypeGeneration(dreamId) {
+  const dream = getDreamById(dreamId);
+  if (!dream?.pendingPrototypeGeneration) return true;
+  return savePendingPrototypeGeneration(dreamId, null);
+}
+
+function prototypeResponseState(result) {
+  if (result?.run?.status === "refused") return "refused";
+  if (result?.run?.status === "completed" && result?.artifact?.id) return "completed";
+  if (result?.run?.status === "completed") return "incomplete";
+  return "unexpected";
+}
+
+function openPrototypeDialog() {
+  if (!prototypeDialog || !activeDream) return;
+  if (prototypeConsent) prototypeConsent.checked = false;
+  if (prototypeConfirmButton) {
+    prototypeConfirmButton.disabled = true;
+    prototypeConfirmButton.textContent = activeDream.pendingPrototypeGeneration
+      ? "安全重试同一请求"
+      : "确认并生成原型";
+  }
+  setMessage(
+    prototypeStatus,
+    activeDream.pendingPrototypeGeneration
+      ? "上次请求没有明确完成。确认后会复用同一请求编号和同一梦卡修订。"
+      : "尚未发送。勾选确认前不会调用 OpenAI 或生成文件。",
+  );
+  if (typeof prototypeDialog.showModal === "function") {
+    if (!prototypeDialog.open) prototypeDialog.showModal();
+  } else {
+    prototypeDialog.setAttribute("open", "");
+  }
+}
+
+function closePrototypeDialog() {
+  if (!prototypeDialog || artifactActionBusy) return;
+  if (typeof prototypeDialog.close === "function") prototypeDialog.close();
+  else prototypeDialog.removeAttribute("open");
+}
+
+function requestPrototypeGeneration() {
+  if (!activeDream) return;
+  if (!authenticatedAccount) {
+    setMessage(artifactStatus, "先连接钱包账号；本机梦想不会被上传或改变。", true);
+    walletPreviewButton?.focus();
+    return;
+  }
+  if (!activeDream.sync?.serverId || activeDream.sync.localChanged) {
+    setMessage(
+      artifactStatus,
+      activeDream.sync?.localChanged
+        ? "本机与账号梦卡不同；处理版本差异后再生成原型。"
+        : "先在合并预览中确认把梦卡保存到账号。",
+      true,
+    );
+    return;
+  }
+  if (activeDream.status !== "confirmed") {
+    setMessage(artifactStatus, "先确认梦卡并进入轨迹，再生成可运行原型。", true);
+    return;
+  }
+  if (dreamApiHealth && !dreamApiHealth.aiConfigured) {
+    setMessage(
+      artifactStatus,
+      "AI 原型服务尚未配置；没有发送梦卡，也不会假装已经生成，本机数据仍完整保留。",
+      true,
+    );
+    return;
+  }
+  openPrototypeDialog();
+}
+
+async function generateInteractivePrototype() {
+  if (
+    !activeDream
+    || !authenticatedAccount
+    || !activeDream.sync?.serverId
+    || activeDream.sync.localChanged
+    || activeDream.status !== "confirmed"
+    || !prototypeConsent?.checked
+    || artifactActionBusy
+  ) return;
+
+  const dreamId = activeDream.id;
+  const serverId = activeDream.sync.serverId;
+  const expectedRevision = activeDream.sync.revision;
+  let pending = activeDream.pendingPrototypeGeneration;
+  if (pending && pending.expectedRevision !== expectedRevision) {
+    clearPendingPrototypeGeneration(dreamId);
+    pending = null;
+  }
+  if (!pending) {
+    const clientRequestId = createSyncId();
+    if (!clientRequestId) {
+      setMessage(prototypeStatus, "当前浏览器无法建立安全请求编号；没有发送梦卡。", true);
+      return;
+    }
+    const now = new Date().toISOString();
+    pending = {
+      clientRequestId,
+      serverId,
+      expectedRevision,
+      confirmed: true,
+      consent: {
+        accepted: true,
+        scope: "openai_dream_prototype_v1",
+      },
+      state: "ready",
+      errorCode: null,
+      createdAt: now,
+      updatedAt: now,
+    };
+    if (!savePendingPrototypeGeneration(dreamId, pending)) {
+      setMessage(prototypeStatus, "浏览器无法保存安全重试编号；没有发送梦卡。", true);
+      return;
+    }
+  }
+
+  artifactActionBusy = true;
+  if (prototypeConfirmButton) prototypeConfirmButton.disabled = true;
+  renderArtifacts(getDreamById(dreamId));
+  setMessage(
+    prototypeStatus,
+    pending.state === "ready"
+      ? "正在生成可运行原型；当前只有一个真实请求状态，不显示虚假百分比。"
+      : "正在安全重试同一原型请求；请求编号与梦卡修订保持不变。",
+  );
+  let finalMessage = "";
+  let finalError = false;
+  let generated = false;
+  let terminal = false;
+  try {
+    const result = await dreamApiRequest(`/v1/dreams/${serverId}/artifacts/prototype`, {
+      method: "POST",
+      body: JSON.stringify({
+        clientRequestId: pending.clientRequestId,
+        expectedRevision: pending.expectedRevision,
+        confirmed: true,
+        consent: pending.consent,
+      }),
+    });
+    const responseState = prototypeResponseState(result);
+    if (responseState === "refused") {
+      clearPendingPrototypeGeneration(dreamId);
+      finalMessage = "模型没有生成这份原型；请求已经结束，没有保存产物或执行外部动作。可以调整梦卡后重新发起。";
+      terminal = true;
+      return;
+    }
+    if (responseState === "incomplete") {
+      clearPendingPrototypeGeneration(dreamId);
+      loadedArtifactDreamIds.delete(`${authenticatedAccount.userId}:${serverId}`);
+      finalMessage = "原型请求已结束，但返回状态不完整。请刷新账号产物列表；当前不会重复调用模型。";
+      finalError = true;
+      terminal = true;
+      return;
+    }
+    if (responseState !== "completed") {
+      throw new Error("原型服务没有返回可确认的完成状态。");
+    }
+    updateDreamFromAccount(dreamId, (dream) => ({
+      ...dream,
+      pendingPrototypeGeneration: null,
+      artifacts: [
+        result.artifact,
+        ...(dream.artifacts || []).filter((item) => item.id !== result.artifact.id),
+      ],
+    }));
+    loadedArtifactDreamIds.delete(`${authenticatedAccount.userId}:${serverId}`);
+    finalMessage = `可运行原型 v${result.artifact.version} 已生成；没有发布或执行外部动作。`;
+    generated = true;
+  } catch (error) {
+    const terminalError = [
+      "revision_conflict",
+      "prototype_idempotency_conflict",
+      "prototype_run_superseded",
+      "dream_not_found",
+      "dream_not_ready",
+      "prototype_confirmation_required",
+      "prototype_consent_required",
+      "clientRequestId_invalid",
+      "revision_required",
+    ].includes(error?.code);
+    if (terminalError) {
+      clearPendingPrototypeGeneration(dreamId);
+      finalMessage = `${walletErrorMessage(error)} 旧请求已清理；请确认当前梦卡后重新发起。`;
+    } else {
+      savePendingPrototypeGeneration(dreamId, {
+        ...pending,
+        state: "retryable",
+        errorCode: error?.code || "prototype_request_failed",
+        updatedAt: new Date().toISOString(),
+      });
+      finalMessage = `${walletErrorMessage(error)} 同一请求编号已保留，可安全重试。`;
+    }
+    finalError = true;
+    if (error?.status === 401) {
+      authenticatedAccount = null;
+      linkedIdentities = [];
+    }
+  } finally {
+    artifactActionBusy = false;
+    renderWorkspace();
+    if (generated || terminal) {
+      closePrototypeDialog();
+      setMessage(artifactStatus, finalMessage, finalError);
+    } else {
+      if (prototypeConfirmButton) {
+        prototypeConfirmButton.disabled = !prototypeConsent?.checked;
+        prototypeConfirmButton.textContent = "安全重试同一请求";
+      }
+      setMessage(prototypeStatus, finalMessage, finalError);
+      setMessage(artifactStatus, finalMessage, finalError);
+    }
+  }
+}
+
 function artifactDownloadPayload(result, fallbackVersion = 1) {
   const content = typeof result.content === "string" ? result.content : "";
   if (!content) throw new Error("产物内容为空，暂时无法使用。");
@@ -2665,6 +2964,9 @@ async function downloadAccountArtifact(artifact) {
 function resetArtifactPreviewContent() {
   artifactPreviewFrame?.removeAttribute("src");
   artifactPreviewPayload = null;
+  if (artifactPreviewDownloadButton) {
+    artifactPreviewDownloadButton.textContent = "下载当前产物";
+  }
 }
 
 function closeArtifactPreview() {
@@ -2680,7 +2982,7 @@ function closeArtifactPreview() {
 async function previewAccountArtifact(artifact) {
   if (
     !activeDream?.sync?.serverId
-    || artifact.kind !== "action_board"
+    || !["action_board", "interactive_prototype"].includes(artifact.kind)
     || artifactActionBusy
   ) return;
   let completionMessage = "";
@@ -2696,9 +2998,18 @@ async function previewAccountArtifact(artifact) {
     if (!payload.mimeType.toLowerCase().startsWith("text/html")) {
       throw new Error("这份产物不是可预览的 HTML 文件。");
     }
-    artifactPreviewPayload = payload;
+    artifactPreviewPayload = {
+      ...payload,
+      kind: artifact.kind,
+      name: artifact.name,
+    };
     if (artifactPreviewTitle) {
       artifactPreviewTitle.textContent = `${artifact.name} · v${artifact.version}`;
+    }
+    if (artifactPreviewDownloadButton) {
+      artifactPreviewDownloadButton.textContent = artifact.kind === "interactive_prototype"
+        ? "下载这份原型"
+        : "下载这份行动台";
     }
     if (artifactPreviewFrame) {
       artifactPreviewFrame.src = [
@@ -2711,7 +3022,9 @@ async function previewAccountArtifact(artifact) {
     }
     setMessage(
       artifactPreviewStatus,
-      "当前是隔离预览；预览页不会联网。下载后打开可获得完整的离线使用与进度导出体验。",
+      artifact.kind === "interactive_prototype"
+        ? "隔离预览不保存状态。下载后使用并可在本机导出状态 JSON；状态只导出、不导入，系统不自动附加账号或服务标识，你填写的内容会随状态导出。"
+        : "隔离预览不保存状态。下载后使用并导出进度 JSON，再回到这里检查并明确确认导入。",
     );
     if (typeof artifactPreviewDialog?.showModal === "function") {
       if (!artifactPreviewDialog.open) artifactPreviewDialog.showModal();
@@ -3174,12 +3487,15 @@ function renderSyncPreview(remoteDreams) {
         || dream.sync.revision !== remote.revision
         || dream.sync.localChanged === matches
       ) {
+        const syncIdentityChanged = dream.sync?.serverId !== remote.id
+          || dream.sync?.revision !== remote.revision;
         dream.sync = {
           serverId: remote.id,
           revision: remote.revision,
           syncedAt: remote.updatedAt,
           localChanged: !matches,
         };
+        if (syncIdentityChanged) dream.pendingPrototypeGeneration = null;
         mappingChanged = true;
       }
     }
@@ -3427,6 +3743,7 @@ async function deleteCloudAccount() {
       sync: null,
       artifacts: [],
       pendingAiTurn: null,
+      pendingPrototypeGeneration: null,
     }));
     loadedProgressDreamIds.clear();
     latestProgressByDreamId.clear();
@@ -3699,6 +4016,22 @@ aiDialog?.addEventListener("click", (event) => {
 });
 artifactGenerateButton?.addEventListener("click", generateProjectBrief);
 artifactBoardButton?.addEventListener("click", generateDreamActionBoard);
+artifactPrototypeButton?.addEventListener("click", requestPrototypeGeneration);
+prototypeConsent?.addEventListener("change", () => {
+  if (prototypeConfirmButton) {
+    prototypeConfirmButton.disabled = artifactActionBusy || !prototypeConsent.checked;
+  }
+});
+prototypeConfirmButton?.addEventListener("click", generateInteractivePrototype);
+prototypeCloseButton?.addEventListener("click", closePrototypeDialog);
+prototypeCancelButton?.addEventListener("click", closePrototypeDialog);
+prototypeDialog?.addEventListener("click", (event) => {
+  if (event.target === prototypeDialog) closePrototypeDialog();
+});
+prototypeDialog?.addEventListener("cancel", (event) => {
+  if (!artifactActionBusy) return;
+  event.preventDefault();
+});
 artifactPreviewCloseButton?.addEventListener("click", closeArtifactPreview);
 artifactPreviewDownloadButton?.addEventListener("click", () => {
   if (!artifactPreviewPayload) return;
@@ -3805,6 +4138,7 @@ pauseButton?.addEventListener("click", () => {
   updateActiveDream((dream) => ({
     ...dream,
     status: nextStatus,
+    pendingPrototypeGeneration: null,
     updatedAt: new Date().toISOString(),
   }));
   renderWorkspace();
@@ -3822,6 +4156,7 @@ archiveButton?.addEventListener("click", () => {
           ? "draft"
           : "archived",
       statusBeforeArchive: restoring ? null : dream.status,
+      pendingPrototypeGeneration: null,
       updatedAt: new Date().toISOString(),
     };
   });

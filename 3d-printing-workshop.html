@@ -16,8 +16,8 @@
   <meta property="og:image" content="https://sleeepal.com/assets/dream-lab-hero-v1.jpg" />
   <link rel="icon" href="./favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
-  <link rel="stylesheet" href="./dream-lab.css?v=20260724-progress-return-1" />
-  <script src="./dream-lab.js?v=20260724-progress-return-1" defer></script>
+  <link rel="stylesheet" href="./dream-lab.css?v=20260724-interactive-prototype-1" />
+  <script src="./dream-lab.js?v=20260724-interactive-prototype-1" defer></script>
 </head>
 <body class="dream-page">
   <a class="dream-skip-link" href="#main">跳到主要内容</a>
@@ -319,13 +319,14 @@
                   <h4 id="dream-artifacts-title">真实产物</h4>
                 </div>
                 <div class="dream-artifact-create-actions">
-                  <button type="button" data-artifact-board>生成可用行动台</button>
+                  <button type="button" data-artifact-prototype disabled>生成可运行原型</button>
+                  <button type="button" class="is-secondary" data-artifact-board>生成可用行动台</button>
                   <button type="button" class="is-secondary" data-artifact-generate>生成施工任务书</button>
                 </div>
               </div>
               <p>
-                “梦想行动台”是可离线打开、勾选进度和记录反馈的单文件工具；
-                “施工任务书”记录输入修订与校验值，可直接交给后续 Agents。
+                “可运行原型”由 AI 生成结构化规格，再由受控模板制作成离线应用；
+                行动台和施工任务书作为反馈与交接辅助。
               </p>
               <div class="dream-artifact-list" data-artifact-list></div>
               <p class="dream-artifact-status" data-artifact-status aria-live="polite">
@@ -565,7 +566,7 @@
         <div>
           <span>SAFE PREVIEW</span>
           <h2 id="dream-artifact-preview-title" data-artifact-preview-title>梦想行动台</h2>
-          <p>预览处于隔离沙箱且不能联网；下载 HTML 后可作为独立离线文件继续使用。</p>
+          <p>预览处于隔离沙箱且不能联网；下载后可作为独立离线文件继续使用。</p>
         </div>
         <button type="button" data-artifact-preview-close aria-label="关闭行动台预览">×</button>
       </header>
@@ -576,7 +577,7 @@
       ></iframe>
       <footer>
         <p data-artifact-preview-status aria-live="polite">正在准备安全预览…</p>
-        <button type="button" data-artifact-preview-download>下载这份行动台</button>
+        <button type="button" data-artifact-preview-download>下载当前产物</button>
       </footer>
     </div>
   </dialog>
@@ -778,6 +779,42 @@
         <button type="button" data-ai-cancel>继续使用本机模式</button>
       </div>
       <p class="dream-ai-dialog-status" data-ai-dialog-status aria-live="polite"></p>
+    </div>
+  </dialog>
+
+  <dialog class="dream-prototype-dialog" data-prototype-dialog aria-labelledby="dream-prototype-title">
+    <div class="dream-prototype-shell">
+      <header>
+        <div>
+          <span>AI PROTOTYPE · EXPLICIT CONSENT</span>
+          <h2 id="dream-prototype-title">生成可运行原型，<br />先确认这一次边界。</h2>
+        </div>
+        <button type="button" aria-label="关闭原型生成确认" data-prototype-close>×</button>
+      </header>
+
+      <section class="dream-prototype-scope">
+        <h3>确认后会发生</h3>
+        <ul>
+          <li><strong>发送已确认的账号梦卡</strong><span>目标、成功标准、边界与当前修订会发送给 OpenAI；另附不含钱包地址的散列安全标识，用于滥用防护。</span></li>
+          <li><strong>OpenAI 请求使用 <code>store:false</code></strong><span>不提供任何外部工具，也不允许模型发布或执行动作。</span></li>
+          <li><strong>模型只生成结构化规格</strong><span>服务端再用受控模板渲染成可以离线打开的应用。</span></li>
+          <li><strong>不会自动发布或运行外部操作</strong><span>生成结果只进入当前账号的产物版本链，由你预览或下载。</span></li>
+        </ul>
+        <p class="dream-prototype-state-note">
+          原型状态 JSON 只在下载后的应用中本地导出，不在这里导入；系统不会自动附加账号、钱包、梦想、产物或模型服务标识，你在原型中填写的内容会随状态一同导出。
+        </p>
+      </section>
+
+      <label class="dream-prototype-consent" for="dream-prototype-consent">
+        <input id="dream-prototype-consent" type="checkbox" data-prototype-consent />
+        <span>我已看懂本次数据范围，同意生成当前梦想的离线可运行原型。</span>
+      </label>
+
+      <div class="dream-prototype-actions">
+        <button type="button" class="dream-prototype-primary" data-prototype-confirm disabled>确认并生成原型</button>
+        <button type="button" data-prototype-cancel>暂不生成</button>
+      </div>
+      <p class="dream-prototype-status" data-prototype-status aria-live="polite"></p>
     </div>
   </dialog>
 
