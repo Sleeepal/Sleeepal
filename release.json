@@ -1,7 +1,7 @@
 {
   "version": "0.3.133",
   "buildTime": "2026-06-06 01:12 CEST",
-  "buildNote": "Night report · Tonight focus · Bluetooth experience · Wired adjustment",
+  "buildNote": "Work quiet space · Mobile rest and sleep · Local audio processing",
   "appSize": "97M",
   "arch": "darwin-arm64",
   "publicDownload": false,
@@ -10,16 +10,16 @@
   "notarized": false,
   "progressUrl": "https://github.com/HiClawBot/Sleeepal",
   "downloadSub": {
-    "zh": "Mac 版正在完成签名、公证与实机检查",
-    "en": "The Mac version is completing signing, notarization, and device checks"
+    "zh": "工作场景选择 Mac / Windows；休息与睡眠场景选择 iPhone / Android",
+    "en": "Choose Mac / Windows for work, and iPhone / Android for rest and sleep"
   },
   "downloadButton": {
-    "zh": "查看最新进展",
-    "en": "View the latest progress"
+    "zh": "选择电脑版本",
+    "en": "Choose your desktop"
   },
   "sysreq": {
-    "zh": "支持 macOS 13+ 与 Apple Silicon · 公开下载暂未开放",
-    "en": "macOS 13+ and Apple Silicon · public download is not open yet"
+    "zh": "macOS 与 Windows x64 · 了解电脑版本计划",
+    "en": "macOS and Windows x64 · explore the desktop roadmap"
   },
   "releaseLabel": {
     "zh": "当前版本",
@@ -31,14 +31,14 @@
   },
   "progress": {
     "zh": [
-      "夜报呈现昨夜重点、事件片段与前后变化。",
-      "蓝牙方便快速体验；有线设备延迟更低、整夜表现更稳定。",
-      "今晚重点、设备调节与次日回顾已经可以连贯使用。"
+      "笔记本电脑端面向工作与专注，支持本地声音分析与近场调节。",
+      "手机端面向休息与睡眠，负责枕边感知、声景选择与连接设备控制。",
+      "居家专用硬件把更稳定的采集与输出带到床头近场。"
     ],
     "en": [
-      "Night reports show key periods, event clips, and changes from the previous night.",
-      "Bluetooth is easy to try; wired devices offer lower latency and steadier overnight performance.",
-      "Tonight's focus, device adjustment, and next-day review now work as one flow."
+      "The laptop experience is designed for work and focus, with local sound analysis and near-field tuning.",
+      "The phone experience is designed for rest and sleep, handling bedside sensing, soundscapes, and connected-device control.",
+      "Dedicated home hardware brings steadier sensing and output to the bedside near field."
     ]
   },
   "alternateDownloads": []

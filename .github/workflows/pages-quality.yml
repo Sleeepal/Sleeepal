@@ -39,7 +39,8 @@ jobs:
           const allowed = new Set([
             ".github/workflows/pages-quality.yml",
             "CNAME", "LICENSE", "README.md", "docs/website-release-notes.md",
-            "index.html", "styles.css", "site.js", "feedback.html", "feedback.js",
+            "index.html", "styles.css", "site.js", "desktop.html", "desktop.js",
+            "feedback.html", "feedback.js",
             "privacy.html", "terms.html", "3d-printing-workshop.html", "dream-lab.css",
             "dream-lab.js", "release.json", "favicon.ico", "hardware-sku.html",
             "hardware-sku.css", "hardware-sku.js", "hardware-detail.html",
@@ -56,6 +57,8 @@ jobs:
             "assets/favicon-16.png", "assets/favicon-32.png",
             "assets/headboard-strip-wide-warm.png",
             "assets/logo-dark.svg", "assets/logo-light.svg",
+            "assets/laptop-nearfield-layers-v1.jpg",
+            "assets/mobile-rest-quiet-space-v1.jpg",
             "assets/pillar-bedside-gap-sleep-safe.png",
             "assets/pillar-camp-lantern-sleep-safe.png",
             "assets/pillar-care-rail-clip-sleep-safe.png",

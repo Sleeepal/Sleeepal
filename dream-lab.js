@@ -1390,7 +1390,7 @@ async function loadLinkedIdentities() {
     setMessage(
       identityStatus,
       result.identities.length > 1
-        ? `已绑定 ${result.identities.length} 个钱包；任一钱包验证后都会进入同一个内部用户。`
+        ? `已绑定 ${result.identities.length} 个钱包；任一钱包验证后都会进入同一个睡眠宝账号。`
         : "当前只有主钱包。建议增加一个恢复钱包，避免单一登录入口。",
     );
   } catch (error) {
@@ -1549,7 +1549,7 @@ async function linkRecoveryWallet() {
     renderLinkedIdentities(result);
     setMessage(
       identityStatus,
-      "恢复钱包已绑定。你可以退出后用它重新登录，梦想仍属于同一个内部用户。",
+      "恢复钱包已绑定。你可以退出后用它重新登录，梦想仍属于同一个睡眠宝账号。",
     );
   } catch (error) {
     setMessage(identityStatus, walletErrorMessage(error), true);

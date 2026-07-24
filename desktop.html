@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>在电脑桌面端打开 · SleeePal 睡眠宝</title>
+  <meta name="description" content="选择 SleeePal macOS 或 Windows 桌面版，完成安装、麦克风与扬声器检查，并体验以笔记本电脑为中心的近场静谧空间。" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
+  <link rel="icon" href="./favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
+  <link rel="stylesheet" href="./styles.css?v=20260724-desktop1" />
+  <script src="./desktop.js?v=20260724-desktop1" defer></script>
+</head>
+<body class="desktop-page">
+  <nav class="desktop-nav">
+    <a href="./index.html" aria-label="返回 SleeePal 官网">
+      <img src="./assets/logo-light.svg" alt="SleeePal" />
+    </a>
+    <div>
+      <a href="#laptop-space">笔记本静谧空间</a>
+      <a href="#install">安装</a>
+      <a href="#device-check">设备检查</a>
+      <a class="desktop-nav-primary" href="sleeepal://tonight" data-open-app>已经安装，直接打开</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="desktop-portal-hero">
+      <div class="desktop-hero-copy">
+        <span class="desktop-eyebrow">MACOS + WINDOWS · LOCAL AUDIO</span>
+        <h1>在电脑桌面端打开</h1>
+        <p>
+          下载安装后，睡眠宝会检查电脑的麦克风与扬声器。笔记本自带设备可以直接使用；
+          只有未检测到设备时，才需要接入 USB、蓝牙或有线外设。
+        </p>
+        <div class="desktop-hero-actions">
+          <a href="#install">选择电脑版本</a>
+          <a href="sleeepal://tuning" data-open-app>已经安装，打开睡眠宝</a>
+        </div>
+        <p class="desktop-open-note" data-open-note hidden>
+          如果没有打开应用，请先在下方选择系统并完成安装。
+        </p>
+        <ul class="desktop-hero-facts">
+          <li><strong>内置 Mic</strong><span>自动优先采用系统默认输入</span></li>
+          <li><strong>内置扬声器</strong><span>无需额外接线即可先体验</span></li>
+          <li><strong>有线外设</strong><span>需要更低延迟时再连接</span></li>
+        </ul>
+      </div>
+
+      <div class="desktop-hero-visual" id="laptop-space">
+        <img
+          src="./assets/laptop-nearfield-layers-v1.jpg"
+          alt="笔记本电脑扬声器朝向用户，在电脑与耳朵之间形成三层递减的近场静谧空间"
+          width="1672"
+          height="941"
+        />
+        <svg class="desktop-field-overlay" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="desktopFieldOuter" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#6d5df6" stop-opacity="0.22"/>
+              <stop offset="100%" stop-color="#6d5df6" stop-opacity="0.04"/>
+            </linearGradient>
+            <linearGradient id="desktopFieldMiddle" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.28"/>
+              <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.07"/>
+            </linearGradient>
+            <linearGradient id="desktopFieldInner" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#5ee6c5" stop-opacity="0.32"/>
+              <stop offset="100%" stop-color="#5ee6c5" stop-opacity="0.1"/>
+            </linearGradient>
+          </defs>
+          <path class="desktop-field-bubble dfl-bubble-outer" d="M548 833 C700 580 820 260 1000 -60 Q1500 -20 1710 500 C1310 620 900 760 548 833 Z" fill="url(#desktopFieldOuter)"/>
+          <path class="desktop-field-bubble dfl-bubble-middle" d="M548 833 C700 600 790 330 943 112 Q1310 110 1515 520 C1150 625 810 765 548 833 Z" fill="url(#desktopFieldMiddle)"/>
+          <path class="desktop-field-bubble dfl-bubble-inner" d="M548 833 C680 645 760 430 887 300 Q1090 300 1260 585 C960 665 760 775 548 833 Z" fill="url(#desktopFieldInner)"/>
+          <path class="desktop-bubble-glint dfl-glint-outer" d="M1018 -30 Q1490 0 1680 480" fill="none"/>
+          <path class="desktop-bubble-glint dfl-glint-middle" d="M962 137 Q1295 130 1490 500" fill="none"/>
+          <path class="desktop-bubble-glint dfl-glint-inner" d="M905 322 Q1080 310 1237 568" fill="none"/>
+          <path d="M548 833 Q863 504 1192 280" fill="none" stroke="#f8fafc" stroke-opacity="0.3" stroke-width="2" stroke-dasharray="9 12"/>
+        </svg>
+        <div class="desktop-field-layer dfl-outer"><span>03</span><b>外缘 · 约 5%</b><small>作用很弱</small></div>
+        <div class="desktop-field-layer dfl-middle"><span>02</span><b>办公 · 10%～20%</b><small>听感较柔和</small></div>
+        <div class="desktop-field-layer dfl-inner"><span>01</span><b>午睡 · 15%～30%</b><small>靠近时更明显</small></div>
+        <div class="desktop-field-origin">扬声器输出反相声波</div>
+        <div class="desktop-field-ear">耳朵 / 近场控制点</div>
+        <p>数据仅供参考，以实际测试为准。</p>
+      </div>
+    </section>
+
+    <section class="desktop-field-explainer">
+      <div>
+        <span>01 · 靠近电脑</span>
+        <strong>午睡或趴休 · 参考 15%～30%</strong>
+        <p>耳朵更靠近面向用户的扬声器，传播距离最短，是笔记本内置设备最值得优先实测的区域。</p>
+      </div>
+      <div>
+        <span>02 · 日常坐姿</span>
+        <strong>看屏幕办公 · 参考 10%～20%</strong>
+        <p>正常办公距离仍可尝试削弱部分持续低频，适合办公室、咖啡厅和交通途中。</p>
+      </div>
+      <div>
+        <span>03 · 外层边界</span>
+        <strong>距离较远 · 参考约 5%</strong>
+        <p>作用继续递减，体感可能不明显；这层主要明确个人静谧空间不是整间房静音。</p>
+      </div>
+    </section>
+
+    <section class="desktop-install-section" id="install">
+      <header>
+        <span class="desktop-eyebrow">选择电脑版本</span>
+        <h2>下载安装，再让设备检查替你判断</h2>
+        <p>不要求用户先懂音频设备。安装后先采用系统默认输入与输出，再给出是否需要外设的明确提示。</p>
+      </header>
+
+      <div class="platform-selector" role="tablist" aria-label="选择电脑系统">
+        <button type="button" role="tab" data-platform-tab="mac" aria-controls="platform-mac">
+          <span></span>
+          <strong>macOS</strong>
+          <small>Apple Silicon / Intel</small>
+        </button>
+        <button type="button" role="tab" data-platform-tab="windows" aria-controls="platform-windows">
+          <span>⊞</span>
+          <strong>Windows</strong>
+          <small>Windows 10 / 11 · x64</small>
+        </button>
+      </div>
+
+      <article class="platform-panel" id="platform-mac" role="tabpanel" data-platform-panel="mac">
+        <div class="platform-panel-head">
+          <div>
+            <span class="platform-status">MAC 测试流程</span>
+            <h3>SleeePal for macOS</h3>
+            <p>Mac 版继续进行签名、公证和实机检查。已经安装测试版的用户可以直接打开。</p>
+          </div>
+          <div class="platform-panel-actions">
+            <a href="https://github.com/Sleeepal/Sleeepal/actions" target="_blank" rel="noreferrer">查看 Mac 测试进展</a>
+            <a class="is-secondary" href="sleeepal://tonight" data-open-app>打开已安装版本</a>
+          </div>
+        </div>
+        <ol class="install-steps">
+          <li><span>01</span><div><strong>下载 DMG</strong><p>只使用 SleeePal 官方测试任务提供的包。</p></div></li>
+          <li><span>02</span><div><strong>拖入“应用程序”</strong><p>首次打开时按系统提示确认测试来源。</p></div></li>
+          <li><span>03</span><div><strong>允许麦克风</strong><p>在“系统设置 → 隐私与安全性 → 麦克风”中允许。</p></div></li>
+          <li><span>04</span><div><strong>刷新设备</strong><p>MacBook 内置 Mic 与扬声器识别后，无需外设。</p></div></li>
+        </ol>
+      </article>
+
+      <article class="platform-panel" id="platform-windows" role="tabpanel" data-platform-panel="windows" hidden>
+        <div class="platform-panel-head">
+          <div>
+            <span class="platform-status is-windows">WINDOWS X64 内测</span>
+            <h3>SleeePal for Windows</h3>
+            <p>Windows 版会在独立 Windows 主机构建并运行无界面自检。测试包暂未签名，不作为公开正式版。</p>
+          </div>
+          <div class="platform-panel-actions">
+            <a href="https://github.com/Sleeepal/Sleeepal/actions" target="_blank" rel="noreferrer">获取 Windows 内测包</a>
+            <a class="is-secondary" href="sleeepal://tonight" data-open-app>打开已安装版本</a>
+          </div>
+        </div>
+        <ol class="install-steps">
+          <li><span>01</span><div><strong>下载 QA ZIP</strong><p>在最新测试任务中下载 <code>sleeepal-windows-x64-qa</code>。</p></div></li>
+          <li><span>02</span><div><strong>完整解压</strong><p>不要在压缩包预览窗口里直接运行安装程序。</p></div></li>
+          <li><span>03</span><div><strong>双击 Install-SleeePal.cmd</strong><p>安装到当前用户目录，不需要管理员权限。</p></div></li>
+          <li><span>04</span><div><strong>允许麦克风并刷新</strong><p>Windows 笔记本的 Microphone Array 与 Speakers 会优先自动选中。</p></div></li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="desktop-device-section" id="device-check">
+      <div class="desktop-device-copy">
+        <span class="desktop-eyebrow">第一次打开</span>
+        <h2>先检查 Mic 和音箱，再开始降噪</h2>
+        <p>
+          睡眠宝不会因为“已经安装”就假装降噪生效。只有系统真的识别到输入与输出，
+          才会启动实时波形和反相声波。
+        </p>
+      </div>
+      <div class="desktop-device-flow">
+        <article>
+          <span>MIC</span>
+          <h3>电脑有内置麦克风</h3>
+          <p>自动选中系统默认 Mic，无需插入额外设备。</p>
+          <strong>已识别 → 直接继续</strong>
+        </article>
+        <i aria-hidden="true">→</i>
+        <article>
+          <span>OUT</span>
+          <h3>电脑有内置扬声器</h3>
+          <p>先体验笔记本近场静谧；想降低延迟时再接有线音箱。</p>
+          <strong>已识别 → 无需连接外设</strong>
+        </article>
+        <i aria-hidden="true">→</i>
+        <article>
+          <span>CHECK</span>
+          <h3>未识别时才提示接入</h3>
+          <p>接入 USB / 有线 / 蓝牙设备后，点击“刷新设备”。</p>
+          <strong>缺少设备 → 明确提示</strong>
+        </article>
+      </div>
+    </section>
+
+    <p class="desktop-data-note">数据仅供参考，以实际测试为准。</p>
+  </main>
+
+  <footer class="desktop-footer">
+    <a href="./index.html">返回 SleeePal 官网</a>
+    <span>声音默认本地处理 · 不承诺完全静音 · 非医疗设备</span>
+  </footer>
+</body>
+</html>
