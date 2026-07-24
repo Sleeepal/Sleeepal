@@ -13,8 +13,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png?v=20260426b" />
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16.png?v=20260426b" />
   <link rel="apple-touch-icon" href="./assets/app-icon-preview.png?v=20260426b" />
-  <link rel="stylesheet" href="./styles.css?v=20260723-responsive1" />
-  <script src="./site.js?v=20260723-responsive1" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=20260724-phase1" />
+  <script src="./site.js?v=20260724-phase1" defer></script>
 </head>
 <body>
 
@@ -733,10 +733,10 @@
 
         <article class="feat-lux-card">
           <div class="flc-num">03</div>
-          <h3 data-i18n="features.3.title">三路实时可视化</h3>
-          <p data-i18n-html="features.3.body">同屏实时显示三条波形：环境噪音 / 反相声波输出 / 抵消后残余估算。让你<em>看见</em> SleeePal 正在做什么，而不是只凭感觉判断。</p>
+          <h3 data-i18n="features.3.title">相位叠加可视化</h3>
+          <p data-i18n-html="features.3.body">把环境噪音与反相声波放在同一时间轴和零位基准上，再单独显示缩小后的残余波形。让你<em>看见</em>波峰与波谷如何叠加，而不是只看三条互不关联的线。</p>
           <div class="flc-tags">
-            <span data-i18n="features.3.tag1">实时频谱</span><span data-i18n="features.3.tag2">三路波形</span><span data-i18n="features.3.tag3">效果估算</span>
+            <span data-i18n="features.3.tag1">同一时间轴</span><span data-i18n="features.3.tag2">零位基准</span><span data-i18n="features.3.tag3">残余估算</span>
           </div>
         </article>
 
@@ -786,108 +786,117 @@
         <a class="app-inline-link" href="sleeepal://tuning" data-app-link="tuning" data-i18n="visual.openApp">在桌面版打开调节</a>
       </div>
 
-      <!-- Big visualization panel -->
-        <div class="viz-lux-panel">
-          <div class="vlp-header">
-            <div class="vlp-status">
-              <span class="vlp-dot"></span>
-              <span data-i18n="visual.status">演示状态 · 接入真实设备后显示观测值</span>
-            </div>
-            <div class="vlp-tabs">
-              <button class="vlp-tab active" data-i18n="visual.tab1">频谱</button>
-              <button class="vlp-tab" data-i18n="visual.tab2">波形</button>
-              <button class="vlp-tab" data-i18n="visual.tab3">趋势</button>
-            </div>
+      <div class="viz-lux-panel">
+        <div class="vlp-header">
+          <div class="vlp-status">
+            <span class="vlp-dot"></span>
+            <span data-i18n="visual.status">原理示意 · 接入真实设备后显示观测值</span>
           </div>
-
-        <div class="vlp-tracks">
-          <div class="vlp-track">
-            <div class="vlp-track-header">
-              <div class="vlpt-left">
-                <span class="vlpt-color" style="background:#e07b9f"></span>
-                <span class="vlpt-name" data-i18n="visual.track1">环境噪音输入</span>
-              </div>
-              <div class="vlpt-right">
-                <span data-i18n="visual.track1.meta1">主频待测</span>
-                <span data-i18n="visual.track1.meta2">强度待测</span>
-              </div>
-            </div>
-            <div class="vlp-wave-area">
-              <svg viewBox="0 0 800 72" preserveAspectRatio="none" class="vlp-wave-svg">
-                <defs>
-                  <linearGradient id="ng" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#e07b9f" stop-opacity="0.7"/>
-                    <stop offset="100%" stop-color="#e07b9f" stop-opacity="0.05"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0,36 C25,14 40,54 60,28 C80,4 100,56 120,30 C140,6 160,52 180,26 C200,2 220,58 240,30 C260,4 280,54 300,28 C320,4 340,56 360,30 C380,6 400,52 420,26 C440,2 460,58 480,30 C500,4 520,54 540,28 C560,4 580,56 600,30 C620,6 640,52 660,26 C680,2 700,58 720,30 C740,6 760,52 780,28 L800,36 L800,72 L0,72 Z"
-                  fill="url(#ng)" class="va-noise"/>
-                <path d="M0,36 C25,14 40,54 60,28 C80,4 100,56 120,30 C140,6 160,52 180,26 C200,2 220,58 240,30 C260,4 280,54 300,28 C320,4 340,56 360,30 C380,6 400,52 420,26 C440,2 460,58 480,30 C500,4 520,54 540,28 C560,4 580,56 600,30 C620,6 640,52 660,26 C680,2 700,58 720,30 C740,6 760,52 780,28 L800,36"
-                  fill="none" stroke="#e07b9f" stroke-width="2" class="va-noise"/>
-              </svg>
-            </div>
-          </div>
-
-          <div class="vlp-track">
-            <div class="vlp-track-header">
-              <div class="vlpt-left">
-                <span class="vlpt-color" style="background:#9e8fca"></span>
-                <span class="vlpt-name" data-i18n="visual.track2">反相输出信号</span>
-              </div>
-              <div class="vlpt-right">
-                <span data-i18n="visual.track2.meta1">延迟待测</span>
-                <span data-i18n="visual.track2.meta2">输出待测</span>
-              </div>
-            </div>
-            <div class="vlp-wave-area">
-              <svg viewBox="0 0 800 72" preserveAspectRatio="none" class="vlp-wave-svg">
-                <defs>
-                  <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#9e8fca" stop-opacity="0.7"/>
-                    <stop offset="100%" stop-color="#9e8fca" stop-opacity="0.05"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0,36 C25,58 40,18 60,44 C80,68 100,16 120,42 C140,66 160,20 180,46 C200,70 220,14 240,42 C260,68 280,18 300,44 C320,68 340,16 360,42 C380,66 400,20 420,46 C440,70 460,14 480,42 C500,68 520,18 540,44 C560,68 580,16 600,42 C620,66 640,20 660,46 C680,70 700,14 720,42 C740,66 760,20 780,44 L800,36 L800,72 L0,72 Z"
-                  fill="url(#ag)" class="va-anti"/>
-                <path d="M0,36 C25,58 40,18 60,44 C80,68 100,16 120,42 C140,66 160,20 180,46 C200,70 220,14 240,42 C260,68 280,18 300,44 C320,68 340,16 360,42 C380,66 400,20 420,46 C440,70 460,14 480,42 C500,68 520,18 540,44 C560,68 580,16 600,42 C620,66 640,20 660,46 C680,70 700,14 720,42 C740,66 760,20 780,44 L800,36"
-                  fill="none" stroke="#9e8fca" stroke-width="2" class="va-anti"/>
-              </svg>
-            </div>
-          </div>
-
-          <div class="vlp-track vlp-result-track">
-            <div class="vlp-track-header">
-              <div class="vlpt-left">
-                <span class="vlpt-color" style="background:#c9a96e"></span>
-                <span class="vlpt-name" data-i18n-html="visual.track3">抵消后残余 <small>（估算）</small></span>
-              </div>
-              <div class="vlpt-right result-gold-text">
-                <span data-i18n="visual.track3.meta1">启动后观察变化</span>
-                <span data-i18n="visual.track3.meta2">仅为链路内估算</span>
-              </div>
-            </div>
-            <div class="vlp-wave-area vlp-wave-result">
-              <svg viewBox="0 0 800 72" preserveAspectRatio="none" class="vlp-wave-svg">
-                <defs>
-                  <linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.4"/>
-                    <stop offset="100%" stop-color="#c9a96e" stop-opacity="0.02"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0,36 C200,35.5 400,36.5 600,36 C700,35.8 750,36.2 800,36 L800,72 L0,72 Z"
-                  fill="url(#rg)"/>
-                <path d="M0,36 C200,35.5 400,36.5 600,36 C700,35.8 750,36.2 800,36"
-                  fill="none" stroke="#c9a96e" stroke-width="2"/>
-              </svg>
-            </div>
+          <div class="vlp-guides" aria-label="图示共同基准">
+            <span data-i18n="visual.guide.time">同一时间轴</span>
+            <span data-i18n="visual.guide.zero">0 线 = 参考基准</span>
           </div>
         </div>
 
+        <div class="vlp-explainer">
+          <div class="vlp-equation" aria-label="环境噪音波加反相声波等于抵消后残余">
+            <span class="vlp-equation-term is-noise"><i aria-hidden="true"></i><strong data-i18n="visual.equation.noise">环境噪音波</strong></span>
+            <b aria-hidden="true">+</b>
+            <span class="vlp-equation-term is-anti"><i aria-hidden="true"></i><strong data-i18n="visual.equation.anti">反相声波</strong></span>
+            <b aria-hidden="true">=</b>
+            <span class="vlp-equation-term is-residual"><i aria-hidden="true"></i><strong data-i18n="visual.equation.result">抵消后残余</strong></span>
+          </div>
+
+          <figure class="phase-overlay-figure">
+            <figcaption class="vlp-figure-head">
+              <div>
+                <span data-i18n="visual.phase.kicker">01 · 相位叠加</span>
+                <h3 data-i18n="visual.phase.title">噪音波峰与反相波谷，在同一基准线上镜像叠加。</h3>
+              </div>
+              <small data-i18n="visual.phase.time">时间 →</small>
+            </figcaption>
+
+            <div class="phase-wave-canvas">
+              <svg viewBox="0 0 1000 260" preserveAspectRatio="none" role="img" aria-labelledby="phase-wave-title phase-wave-desc">
+                <title id="phase-wave-title">噪音波与反相声波叠加示意</title>
+                <desc id="phase-wave-desc">粉色噪音波和紫色反相声波共享同一条零位参考基准，噪音波峰对应反相波谷。</desc>
+                <defs>
+                  <linearGradient id="phaseNoiseFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#e07b9f" stop-opacity="0.24"/>
+                    <stop offset="100%" stop-color="#e07b9f" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="phaseAntiFill" x1="0" y1="1" x2="0" y2="0">
+                    <stop offset="0%" stop-color="#8b75ff" stop-opacity="0.24"/>
+                    <stop offset="100%" stop-color="#8b75ff" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <g class="phase-grid" aria-hidden="true">
+                  <line x1="0" y1="60" x2="1000" y2="60"/>
+                  <line x1="0" y1="200" x2="1000" y2="200"/>
+                  <line x1="100" y1="22" x2="100" y2="238"/>
+                  <line x1="300" y1="22" x2="300" y2="238"/>
+                  <line x1="500" y1="22" x2="500" y2="238"/>
+                  <line x1="700" y1="22" x2="700" y2="238"/>
+                  <line x1="900" y1="22" x2="900" y2="238"/>
+                </g>
+                <path class="phase-fill phase-fill-noise" d="M0 130 C25 60 75 60 100 130 S175 200 200 130 S275 60 300 130 S375 200 400 130 S475 60 500 130 S575 200 600 130 S675 60 700 130 S775 200 800 130 S875 60 900 130 S975 200 1000 130 L1000 130 L0 130 Z"/>
+                <path class="phase-fill phase-fill-anti" d="M0 130 C25 200 75 200 100 130 S175 60 200 130 S275 200 300 130 S375 60 400 130 S475 200 500 130 S575 60 600 130 S675 200 700 130 S775 60 800 130 S875 200 900 130 S975 60 1000 130 L1000 130 L0 130 Z"/>
+                <line class="wave-zero-line" x1="0" y1="130" x2="1000" y2="130"/>
+                <path class="phase-wave-path noise-wave-path" d="M0 130 C25 60 75 60 100 130 S175 200 200 130 S275 60 300 130 S375 200 400 130 S475 60 500 130 S575 200 600 130 S675 60 700 130 S775 200 800 130 S875 60 900 130 S975 200 1000 130"/>
+                <path class="phase-wave-path anti-wave-path" d="M0 130 C25 200 75 200 100 130 S175 60 200 130 S275 200 300 130 S375 60 400 130 S475 200 500 130 S575 60 600 130 S675 200 700 130 S775 60 800 130 S875 200 900 130 S975 60 1000 130"/>
+                <line class="phase-pair-guide" x1="250" y1="60" x2="250" y2="200"/>
+                <circle class="phase-pair-dot noise-dot" cx="250" cy="60" r="7"/>
+                <circle class="phase-pair-dot anti-dot" cx="250" cy="200" r="7"/>
+              </svg>
+              <span class="phase-wave-label phase-label-peak" data-i18n="visual.phase.peak">噪音波峰 +A</span>
+              <span class="phase-wave-label phase-label-zero" data-i18n="visual.phase.zero">0 · 参考基准</span>
+              <span class="phase-wave-label phase-label-trough" data-i18n="visual.phase.trough">反相波谷 −A</span>
+            </div>
+
+            <div class="phase-reading-guide">
+              <span><i class="is-noise" aria-hidden="true"></i><strong data-i18n="visual.legend.noise">粉色：环境噪音</strong></span>
+              <span><i class="is-anti" aria-hidden="true"></i><strong data-i18n="visual.legend.anti">紫色：反相声波</strong></span>
+              <p data-i18n="visual.phase.rule">同一时刻，+A 与 −A 相加；相位越对齐，残余幅度越小。</p>
+            </div>
+          </figure>
+
+          <div class="phase-sum-arrow" aria-hidden="true">
+            <span>↓</span>
+            <small data-i18n="visual.sum">同一时刻叠加</small>
+          </div>
+
+          <figure class="residual-wave-figure">
+            <figcaption class="vlp-figure-head">
+              <div>
+                <span data-i18n="visual.result.kicker">02 · 抵消后残余</span>
+                <h3 data-i18n="visual.result.title">波峰被压低，但真实空间不会被画成一条“完全消音”的直线。</h3>
+              </div>
+              <small data-i18n="visual.result.meta">链路内估算 · 以枕位实测为准</small>
+            </figcaption>
+
+            <div class="residual-wave-canvas">
+              <svg viewBox="0 0 1000 180" preserveAspectRatio="none" role="img" aria-labelledby="residual-wave-title residual-wave-desc">
+                <title id="residual-wave-title">抵消后残余波形示意</title>
+                <desc id="residual-wave-desc">灰色直线是零位参考基准，薄荷色残余波形仍围绕基准轻微起伏，幅度小于原噪音。</desc>
+                <rect class="residual-original-band" x="0" y="30" width="1000" height="120" rx="10"/>
+                <line class="residual-envelope" x1="0" y1="30" x2="1000" y2="30"/>
+                <line class="residual-envelope" x1="0" y1="150" x2="1000" y2="150"/>
+                <line class="wave-zero-line" x1="0" y1="90" x2="1000" y2="90"/>
+                <path class="residual-wave-fill" d="M0 90 C25 78 75 78 100 90 S175 102 200 90 S275 78 300 90 S375 102 400 90 S475 78 500 90 S575 102 600 90 S675 78 700 90 S775 102 800 90 S875 78 900 90 S975 102 1000 90 L1000 90 L0 90 Z"/>
+                <path class="residual-wave-path" d="M0 90 C25 78 75 78 100 90 S175 102 200 90 S275 78 300 90 S375 102 400 90 S475 78 500 90 S575 102 600 90 S675 78 700 90 S775 102 800 90 S875 78 900 90 S975 102 1000 90"/>
+              </svg>
+              <span class="residual-range-label" data-i18n="visual.result.range">原噪音幅度范围</span>
+              <span class="phase-wave-label residual-zero-label" data-i18n="visual.phase.zero">0 · 参考基准</span>
+              <span class="residual-wave-label" data-i18n="visual.result.wave">缩小后的残余波峰</span>
+            </div>
+          </figure>
+        </div>
+
         <div class="vlp-footer">
-          <span class="vlp-disclaimer" data-i18n="visual.disclaimer">⚠ 理论效果为信号模拟估算，实际效果受空间、设备类型及摆位距离影响</span>
+          <span class="vlp-disclaimer" data-i18n="visual.disclaimer">⚠ 图中按理想相位关系解释原理；真实改善受延迟、空间反射、设备和摆位影响，必须以枕位实测为准。</span>
           <div class="vlp-badge">
-            <span>🛡</span>
-            <span data-i18n="visual.badge">正在降噪</span>
+            <span aria-hidden="true">∿</span>
+            <span data-i18n="visual.badge">相位叠加示意</span>
           </div>
         </div>
       </div>
