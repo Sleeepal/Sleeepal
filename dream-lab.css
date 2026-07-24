@@ -4110,3 +4110,183 @@ img {
     min-height: 44px;
   }
 }
+
+/* 2026-07-24 · Accessible single-task mobile dream workspace */
+
+.dream-mobile-workspace-nav {
+  display: none;
+}
+
+.dream-list-item-heading strong {
+  display: -webkit-box;
+  overflow: hidden;
+  line-height: 1.42;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.dream-chat-wish {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 700px;
+  color: rgba(246, 238, 228, 0.82) !important;
+  font-size: 0.82rem !important;
+  line-height: 1.55 !important;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.dream-rail-heading button,
+.dream-local-identity button,
+.dream-export-all,
+.dream-inspector .dream-card-actions button,
+.dream-composer .dream-composer-mode > button,
+.dream-ai-card-actions button,
+.dream-artifact-create-actions button,
+.dream-artifact-item-actions button,
+.dream-artifact-preview-shell > header button,
+.dream-artifact-preview-shell > footer button,
+.dream-account-shell > header > button,
+.dream-ai-shell > header > button,
+.dream-linked-wallets-heading button,
+.dream-linked-wallets li button,
+.dream-sync-preview li .dream-sync-conflict-open {
+  min-height: 44px;
+}
+
+.dream-account-shell > header > button,
+.dream-ai-shell > header > button,
+.dream-artifact-preview-shell > header button {
+  flex-basis: 44px;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+}
+
+.dream-workbench small,
+.dream-workbench button,
+.dream-chat-heading p,
+.dream-local-identity > span,
+.dream-local-identity small,
+.dream-list-item-meta,
+.dream-message > span,
+.dream-message time,
+.dream-composer > label,
+.dream-composer p,
+.dream-card-progress span,
+.dream-card-progress p,
+.dream-artifacts > p,
+.dream-artifact-status {
+  font-size: 0.75rem;
+}
+
+.dream-rail-heading span,
+.dream-inspector-empty > span,
+.dream-chat-heading span:first-child,
+.dream-local-badge,
+.dream-artifacts-heading span,
+.dream-card-details dt,
+.dream-card-route small,
+.dream-card-note,
+.dream-form-status {
+  font-size: 0.75rem !important;
+}
+
+.dream-message p {
+  font-size: 0.875rem;
+}
+
+@media (max-width: 820px) {
+  .dream-workbench.is-mobile-enhanced > .dream-mobile-workspace-nav {
+    position: sticky;
+    z-index: 12;
+    top: 102px;
+    display: block;
+    padding: 8px;
+    border-bottom: 1px solid var(--dream-line);
+    background: rgba(7, 10, 18, 0.96);
+    backdrop-filter: blur(18px);
+  }
+
+  .dream-mobile-workspace-nav > div {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 4px;
+    border: 1px solid var(--dream-line);
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .dream-mobile-workspace-nav button {
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--dream-muted);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 720;
+  }
+
+  .dream-mobile-workspace-nav button[aria-selected="true"] {
+    border-color: rgba(213, 166, 109, 0.52);
+    background: rgba(213, 166, 109, 0.12);
+    color: var(--dream-gold-soft);
+  }
+
+  .dream-mobile-workspace-nav button:hover,
+  .dream-mobile-workspace-nav button:focus-visible {
+    border-color: var(--dream-gold);
+    color: var(--dream-cream);
+  }
+
+  .dream-workbench.is-mobile-enhanced[data-mobile-workspace-view="dreams"] > .dream-chat,
+  .dream-workbench.is-mobile-enhanced[data-mobile-workspace-view="dreams"] > .dream-inspector,
+  .dream-workbench.is-mobile-enhanced[data-mobile-workspace-view="chat"] > .dream-rail,
+  .dream-workbench.is-mobile-enhanced[data-mobile-workspace-view="chat"] > .dream-inspector,
+  .dream-workbench.is-mobile-enhanced[data-mobile-workspace-view="progress"] > .dream-rail,
+  .dream-workbench.is-mobile-enhanced[data-mobile-workspace-view="progress"] > .dream-chat {
+    display: none;
+  }
+
+  .dream-workbench.is-mobile-enhanced.has-active-dream[data-mobile-workspace-view="chat"] > .dream-chat {
+    height: calc(100svh - 158px);
+    min-height: 440px;
+    max-height: 720px;
+    overflow: hidden;
+  }
+
+  .dream-workbench.is-mobile-enhanced.has-active-dream .dream-message-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    padding-bottom: 34px;
+    scroll-padding-bottom: 34px;
+  }
+
+  .dream-workbench.is-mobile-enhanced.has-active-dream .dream-composer {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    margin-top: 0;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+    box-shadow: 0 -18px 36px rgba(3, 5, 10, 0.34);
+  }
+
+  .dream-workbench button,
+  .dream-workbench select,
+  .dream-workbench input:not([type="checkbox"]) {
+    min-height: 44px;
+  }
+
+  .dream-list-item-heading strong {
+    font-size: 0.86rem;
+  }
+}
