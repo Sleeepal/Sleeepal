@@ -1,7 +1,7 @@
 {
   "version": "0.3.133",
   "buildTime": "2026-06-06 01:12 CEST",
-  "buildNote": "Night report · Focus loop · Bluetooth trial · Wired calibration",
+  "buildNote": "Night report · Tonight focus · Bluetooth experience · Wired adjustment",
   "appSize": "97M",
   "arch": "darwin-arm64",
   "publicDownload": false,
@@ -10,35 +10,35 @@
   "notarized": false,
   "progressUrl": "https://github.com/HiClawBot/Sleeepal",
   "downloadSub": {
-    "zh": "v0.3.133 QA 构建记录 · 尚未完成公开签名、公证与物理验收",
-    "en": "v0.3.133 QA build record · public signing, notarization, and physical acceptance are incomplete"
+    "zh": "Mac 版正在完成签名、公证与实机检查",
+    "en": "The Mac version is completing signing, notarization, and device checks"
   },
   "downloadButton": {
-    "zh": "查看 v0.3.133 验证进展",
-    "en": "View v0.3.133 validation progress"
+    "zh": "查看最新进展",
+    "en": "View the latest progress"
   },
   "sysreq": {
-    "zh": "macOS 13+ · Apple Silicon 主测 · 公开下载尚未开放",
-    "en": "macOS 13+ · Apple Silicon primary · public download not open"
+    "zh": "支持 macOS 13+ 与 Apple Silicon · 公开下载暂未开放",
+    "en": "macOS 13+ and Apple Silicon · public download is not open yet"
   },
   "releaseLabel": {
-    "zh": "QA 构建记录",
-    "en": "QA build record"
+    "zh": "当前版本",
+    "en": "Current version"
   },
   "packagedLabel": {
-    "zh": "打包时间",
-    "en": "Packaged"
+    "zh": "更新时间",
+    "en": "Updated"
   },
   "progress": {
     "zh": [
-      "完整夜报：支持 severity、bucket、clip 预览与昨夜对比。",
-      "低门槛上手：先支持手机直出和蓝牙体验，再引导到有线路径。",
-      "增强链路：有线校准、今晚重点跟进、次日 follow-up 已接通。"
+      "夜报呈现昨夜重点、事件片段与前后变化。",
+      "蓝牙方便快速体验；有线设备延迟更低、整夜表现更稳定。",
+      "今晚重点、设备调节与次日回顾已经可以连贯使用。"
     ],
     "en": [
-      "Full night reports with severity, buckets, clip previews, and next-night follow-up.",
-      "Lower-friction onboarding with phone speaker and bluetooth trial before a wired upgrade.",
-      "Enhanced path now includes wired calibration, tonight focus, and follow-up loops."
+      "Night reports show key periods, event clips, and changes from the previous night.",
+      "Bluetooth is easy to try; wired devices offer lower latency and steadier overnight performance.",
+      "Tonight's focus, device adjustment, and next-day review now work as one flow."
     ]
   },
   "alternateDownloads": []
