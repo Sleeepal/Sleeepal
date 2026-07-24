@@ -1380,7 +1380,23 @@ async function dreamApiRequest(path, options = {}) {
   return data;
 }
 
+function dreamApiOriginEligible(location = globalThis.location) {
+  const hostname = String(location?.hostname || "").toLowerCase();
+  const port = String(location?.port || "");
+  if (hostname === "dream.sleeepal.com") return true;
+  return port === "8787" && new Set([
+    "dream.localhost",
+    "localhost",
+    "127.0.0.1",
+  ]).has(hostname);
+}
+
 async function ensureDreamApi(force = false) {
+  if (!dreamApiOriginEligible()) {
+    dreamApiAvailable = false;
+    dreamApiHealth = null;
+    return false;
+  }
   if (dreamApiAvailable === true) return true;
   if (dreamApiAvailable === false && !force) return false;
   try {
