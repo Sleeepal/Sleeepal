@@ -16,8 +16,8 @@
   <meta property="og:image" content="https://sleeepal.com/assets/dream-lab-hero-v1.jpg" />
   <link rel="icon" href="./favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
-  <link rel="stylesheet" href="./dream-lab.css?v=20260724-mobile-recovery-2" />
-  <script src="./dream-lab.js?v=20260724-mobile-recovery-2" defer></script>
+  <link rel="stylesheet" href="./dream-lab.css?v=20260724-progress-return-1" />
+  <script src="./dream-lab.js?v=20260724-progress-return-1" defer></script>
 </head>
 <body class="dream-page">
   <a class="dream-skip-link" href="#main">跳到主要内容</a>
@@ -331,6 +331,58 @@
               <p class="dream-artifact-status" data-artifact-status aria-live="polite">
                 当前没有账号产物。本机梦卡仍可随时导出。
               </p>
+
+              <section class="dream-progress-feedback" aria-labelledby="dream-progress-feedback-title">
+                <div class="dream-progress-feedback-heading">
+                  <div>
+                    <span>REAL-WORLD FEEDBACK</span>
+                    <h5 id="dream-progress-feedback-title">导入行动台反馈</h5>
+                  </div>
+                </div>
+                <p>
+                  选择行动台导出的 JSON。文件先在浏览器中校验和预览；只有你明确确认后才会上传到当前账号梦想。
+                </p>
+                <label class="dream-progress-file" for="dream-progress-file">
+                  <span>选择行动台进度 JSON</span>
+                  <input
+                    id="dream-progress-file"
+                    type="file"
+                    accept="application/json,.json"
+                    data-progress-file
+                  />
+                  <small>最大 32 KB；必须匹配当前梦想的一份行动台版本。</small>
+                </label>
+
+                <section class="dream-progress-preview" data-progress-preview hidden aria-labelledby="dream-progress-preview-title">
+                  <div>
+                    <span>本机预览 · 尚未上传</span>
+                    <h6 id="dream-progress-preview-title" data-progress-preview-title>行动台反馈</h6>
+                  </div>
+                  <dl>
+                    <div><dt>完成情况</dt><dd data-progress-preview-completed>0 / 0</dd></div>
+                    <div><dt>现实反馈</dt><dd data-progress-preview-notes>未填写</dd></div>
+                    <div><dt>额外行动</dt><dd data-progress-preview-custom>无</dd></div>
+                    <div><dt>文件时间</dt><dd data-progress-preview-time>—</dd></div>
+                  </dl>
+                  <div class="dream-progress-preview-actions">
+                    <button type="button" data-progress-confirm>确认上传这份反馈</button>
+                    <button type="button" class="is-secondary" data-progress-clear>换一份文件</button>
+                  </div>
+                </section>
+
+                <section class="dream-progress-latest" data-progress-latest hidden aria-labelledby="dream-progress-latest-title">
+                  <div>
+                    <span>LATEST RETURN</span>
+                    <h6 id="dream-progress-latest-title">最新回流记录</h6>
+                  </div>
+                  <p data-progress-latest-summary></p>
+                  <small data-progress-latest-source></small>
+                  <button type="button" data-progress-continue>带着这份反馈继续优化</button>
+                </section>
+                <p class="dream-progress-feedback-status" data-progress-status aria-live="polite">
+                  尚未选择文件。
+                </p>
+              </section>
             </section>
 
             <div class="dream-card-actions">

@@ -141,6 +141,20 @@ const artifactPreviewFrame = document.querySelector("[data-artifact-preview-fram
 const artifactPreviewCloseButton = document.querySelector("[data-artifact-preview-close]");
 const artifactPreviewDownloadButton = document.querySelector("[data-artifact-preview-download]");
 const artifactPreviewStatus = document.querySelector("[data-artifact-preview-status]");
+const progressFileInput = document.querySelector("[data-progress-file]");
+const progressPreview = document.querySelector("[data-progress-preview]");
+const progressPreviewTitle = document.querySelector("[data-progress-preview-title]");
+const progressPreviewCompleted = document.querySelector("[data-progress-preview-completed]");
+const progressPreviewNotes = document.querySelector("[data-progress-preview-notes]");
+const progressPreviewCustom = document.querySelector("[data-progress-preview-custom]");
+const progressPreviewTime = document.querySelector("[data-progress-preview-time]");
+const progressConfirmButton = document.querySelector("[data-progress-confirm]");
+const progressClearButton = document.querySelector("[data-progress-clear]");
+const progressLatest = document.querySelector("[data-progress-latest]");
+const progressLatestSummary = document.querySelector("[data-progress-latest-summary]");
+const progressLatestSource = document.querySelector("[data-progress-latest-source]");
+const progressContinueButton = document.querySelector("[data-progress-continue]");
+const progressFeedbackStatus = document.querySelector("[data-progress-status]");
 const confirmButton = document.querySelector("[data-dream-confirm]");
 const editButton = document.querySelector("[data-dream-edit]");
 const pauseButton = document.querySelector("[data-dream-pause]");
@@ -166,10 +180,14 @@ let walletLinkInProgress = false;
 let aiActionBusy = false;
 let artifactActionBusy = false;
 let artifactPreviewPayload = null;
+let progressFeedbackBusy = false;
+let pendingProgressImport = null;
 let mobileWorkspaceView = "dreams";
 const aiEnabledDreamIds = new Set();
 const loadedConversationDreamIds = new Set();
 const loadedArtifactDreamIds = new Set();
+const loadedProgressDreamIds = new Set();
+const latestProgressByDreamId = new Map();
 
 function clamp(value, minimum = 0, maximum = 1) {
   return Math.min(maximum, Math.max(minimum, value));
@@ -888,6 +906,374 @@ function renderArtifacts(dream) {
   }
 }
 
+function actionBoardForVersion(dream, version) {
+  return (dream?.artifacts || []).find((artifact) => (
+    artifact.kind === "action_board" && artifact.version === version
+  )) || null;
+}
+
+function normalizeActionProgress(value, dream, requireArtifactMatch = true) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error("文件内容必须是一个 JSON 对象。");
+  }
+  const allowedFields = new Set([
+    "schema",
+    "version",
+    "dreamId",
+    "artifactVersion",
+    "checks",
+    "notes",
+    "custom",
+    "savedAt",
+  ]);
+  if (Object.keys(value).some((field) => !allowedFields.has(field))) {
+    throw new Error("文件包含行动台进度以外的字段，未上传任何内容。");
+  }
+  if (value.schema !== "sleeepal.action-progress" || value.version !== 1) {
+    throw new Error("这不是 SleeePal 行动台进度 v1 文件。");
+  }
+  if (!dream?.sync?.serverId || value.dreamId !== dream.sync.serverId) {
+    throw new Error("文件属于另一个梦想，未上传任何内容。");
+  }
+  if (!Number.isSafeInteger(value.artifactVersion) || value.artifactVersion <= 0) {
+    throw new Error("文件缺少有效的行动台版本。");
+  }
+  const artifact = actionBoardForVersion(dream, value.artifactVersion);
+  if (requireArtifactMatch && !artifact) {
+    throw new Error(`账号中没有行动台 v${value.artifactVersion}，无法确认文件来源。`);
+  }
+  if (
+    !Array.isArray(value.custom)
+    || value.custom.length > 20
+    || value.custom.some((item) => typeof item !== "string" || item.length > 120)
+  ) {
+    throw new Error("额外行动最多 20 条，每条最多 120 个字符。");
+  }
+  if (
+    !Array.isArray(value.checks)
+    || value.checks.length > 25
+    || value.checks.length !== 5 + value.custom.length
+    || value.checks.some((item) => typeof item !== "boolean")
+  ) {
+    throw new Error("完成状态必须对应 5 个基础行动和全部额外行动，最多 25 项。");
+  }
+  if (typeof value.notes !== "string" || value.notes.length > 4_000) {
+    throw new Error("现实反馈必须是 4000 字以内的文本。");
+  }
+  if (
+    typeof value.savedAt !== "string"
+    || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/u.test(value.savedAt)
+  ) {
+    throw new Error("文件保存时间必须是有效的 ISO 时间。");
+  }
+  const savedAt = new Date(value.savedAt);
+  if (Number.isNaN(savedAt.getTime())) {
+    throw new Error("文件保存时间无效。");
+  }
+  const progress = {
+    schema: "sleeepal.action-progress",
+    version: 1,
+    dreamId: value.dreamId,
+    artifactVersion: value.artifactVersion,
+    checks: [...value.checks],
+    notes: value.notes,
+    custom: [...value.custom],
+    savedAt: savedAt.toISOString(),
+  };
+  if (new TextEncoder().encode(JSON.stringify(progress)).byteLength > 32_768) {
+    throw new Error("行动台进度超过安全大小限制，未上传任何内容。");
+  }
+  return { ...progress, artifact };
+}
+
+function progressCompletion(progress) {
+  const total = progress?.checks?.length || 0;
+  const completed = progress?.checks?.filter(Boolean).length || 0;
+  return { completed, total };
+}
+
+function progressRecordFromResponse(result, dream) {
+  const candidates = [
+    result?.latest,
+    result?.record,
+    result?.progressRecord,
+    ...(
+      Array.isArray(result?.records)
+        ? result.records
+        : Array.isArray(result?.progress)
+          ? result.progress
+          : Array.isArray(result?.imports)
+            ? result.imports
+            : [result?.progress]
+    ),
+  ].filter(Boolean);
+  for (const candidate of candidates) {
+    const source = candidate.progress && typeof candidate.progress === "object"
+      ? candidate.progress
+      : candidate;
+    const payload = {
+      schema: source.schema,
+      version: source.version,
+      dreamId: source.dreamId,
+      artifactVersion: source.artifactVersion ?? source.artifact?.version,
+      checks: source.checks,
+      notes: source.notes,
+      custom: source.custom,
+      savedAt: source.savedAt,
+    };
+    try {
+      const progress = normalizeActionProgress(payload, dream, false);
+      return {
+        id: candidate.id || null,
+        progress,
+        artifactVersion: progress.artifactVersion,
+        receivedAt: candidate.importedAt
+          || candidate.createdAt
+          || candidate.receivedAt
+          || candidate.updatedAt
+          || progress.savedAt,
+      };
+    } catch (error) {
+      // Ignore malformed server records without affecting the local dream.
+    }
+  }
+  return null;
+}
+
+function clearProgressImport(resetInput = true) {
+  pendingProgressImport = null;
+  if (resetInput && progressFileInput) progressFileInput.value = "";
+}
+
+function renderProgressFeedback(dream) {
+  if (!progressFileInput || !progressPreview || !progressLatest) return;
+  const actionBoards = (dream?.artifacts || []).filter((artifact) => artifact.kind === "action_board");
+  const pending = pendingProgressImport?.dreamId === dream?.id
+    ? pendingProgressImport
+    : null;
+  const latest = dream ? latestProgressByDreamId.get(dream.id) : null;
+  const unavailable = progressFeedbackBusy
+    || !authenticatedAccount
+    || !dream?.sync?.serverId
+    || actionBoards.length === 0;
+  progressFileInput.disabled = unavailable;
+  if (progressConfirmButton) progressConfirmButton.disabled = progressFeedbackBusy || !pending;
+  if (progressClearButton) progressClearButton.disabled = progressFeedbackBusy;
+  if (progressContinueButton) progressContinueButton.disabled = progressFeedbackBusy || !latest;
+
+  progressPreview.hidden = !pending;
+  if (pending) {
+    const { completed, total } = progressCompletion(pending.progress);
+    if (progressPreviewTitle) {
+      progressPreviewTitle.textContent = `行动台 v${pending.progress.artifactVersion} 反馈`;
+    }
+    if (progressPreviewCompleted) progressPreviewCompleted.textContent = `${completed} / ${total}`;
+    if (progressPreviewNotes) progressPreviewNotes.textContent = pending.progress.notes.trim() || "未填写";
+    if (progressPreviewCustom) {
+      progressPreviewCustom.textContent = pending.progress.custom.length
+        ? pending.progress.custom.join("；")
+        : "无";
+    }
+    if (progressPreviewTime) {
+      progressPreviewTime.textContent = new Date(pending.progress.savedAt).toLocaleString("zh-CN");
+    }
+  }
+
+  progressLatest.hidden = !latest;
+  if (latest) {
+    const { completed, total } = progressCompletion(latest.progress);
+    if (progressLatestSummary) {
+      progressLatestSummary.textContent = `完成 ${completed}/${total} · ${
+        latest.progress.notes.trim() || "未填写现实反馈"
+      }`;
+    }
+    if (progressLatestSource) {
+      progressLatestSource.textContent = `来源：梦想行动台 v${latest.artifactVersion} · 文件时间 ${
+        new Date(latest.progress.savedAt).toLocaleString("zh-CN")
+      }`;
+    }
+  }
+
+  if (!dream) {
+    setMessage(progressFeedbackStatus, "先选择一个梦想。", true);
+  } else if (!authenticatedAccount) {
+    setMessage(progressFeedbackStatus, "连接钱包账号后才能回流行动台反馈；本机梦想不受影响。");
+  } else if (!dream.sync?.serverId) {
+    setMessage(progressFeedbackStatus, "先确认把当前梦卡保存到账号；文件尚未读取或上传。");
+  } else if (!actionBoards.length) {
+    setMessage(progressFeedbackStatus, "当前账号梦想还没有行动台；先生成并下载一份行动台。");
+  } else if (!pending && !latest) {
+    setMessage(progressFeedbackStatus, "选择 JSON 后会先在浏览器中预览，不会自动上传。");
+  }
+}
+
+function progressConversationDraft(record) {
+  const { completed, total } = progressCompletion(record.progress);
+  const custom = record.progress.custom.length
+    ? record.progress.custom.join("；")
+    : "无";
+  const source = [
+    `我从梦想行动台 v${record.artifactVersion} 带回一轮现实反馈：`,
+    `完成情况：${completed}/${total}`,
+    `现实反馈：${normalizeText(record.progress.notes) || "未填写"}`,
+    `额外行动：${custom}`,
+    `文件保存时间：${new Date(record.progress.savedAt).toLocaleString("zh-CN")}`,
+    "请和我一起确认下一轮最值得优化的重点。",
+  ].join("\n");
+  const characters = Array.from(source);
+  return characters.length <= 1200
+    ? source
+    : `${characters.slice(0, 1199).join("")}…`;
+}
+
+async function loadDreamProgress(dream = activeDream, force = false) {
+  if (!authenticatedAccount || !dream?.sync?.serverId) return;
+  const key = `${authenticatedAccount.userId}:${dream.sync.serverId}`;
+  if (!force && loadedProgressDreamIds.has(key)) return;
+  try {
+    const result = await dreamApiRequest(`/v1/dreams/${dream.sync.serverId}/progress`);
+    loadedProgressDreamIds.add(key);
+    const record = progressRecordFromResponse(result, dream);
+    if (record) latestProgressByDreamId.set(dream.id, record);
+    if (activeDream?.id === dream.id) {
+      renderProgressFeedback(activeDream);
+      setMessage(
+        progressFeedbackStatus,
+        record
+          ? `已读取行动台 v${record.artifactVersion} 的最新回流记录。`
+          : "账号中还没有行动台反馈记录。",
+      );
+    }
+  } catch (error) {
+    if (activeDream?.id === dream.id) {
+      setMessage(
+        progressFeedbackStatus,
+        `${walletErrorMessage(error)} 本机梦想和已选文件没有丢失。`,
+        true,
+      );
+    }
+  }
+}
+
+async function handleProgressFileSelection() {
+  const file = progressFileInput?.files?.[0];
+  clearProgressImport(false);
+  renderProgressFeedback(activeDream);
+  if (!file || !activeDream) {
+    return;
+  }
+  if (file.size > 32 * 1024) {
+    progressFileInput.value = "";
+    setMessage(progressFeedbackStatus, "文件超过 32 KB，未读取或上传任何内容。", true);
+    return;
+  }
+  if (file.type && !["application/json", "text/json"].includes(file.type)) {
+    progressFileInput.value = "";
+    setMessage(progressFeedbackStatus, "请选择行动台导出的 JSON 文件。", true);
+    return;
+  }
+  try {
+    const raw = JSON.parse(await file.text());
+    const normalized = normalizeActionProgress(raw, activeDream, true);
+    const clientRequestId = createSyncId();
+    if (!clientRequestId) throw new Error("当前浏览器无法建立安全上传编号。");
+    const { artifact, ...progress } = normalized;
+    pendingProgressImport = {
+      dreamId: activeDream.id,
+      serverId: activeDream.sync.serverId,
+      artifactId: artifact.id,
+      clientRequestId,
+      progress,
+      filename: file.name,
+    };
+    renderProgressFeedback(activeDream);
+    setMessage(
+      progressFeedbackStatus,
+      "文件已在本机通过校验。请检查预览；只有点击“确认上传这份反馈”才会发送。",
+    );
+  } catch (error) {
+    progressFileInput.value = "";
+    setMessage(
+      progressFeedbackStatus,
+      error?.message || "文件无法读取；没有上传任何内容。",
+      true,
+    );
+  }
+}
+
+async function uploadProgressFeedback() {
+  const pending = pendingProgressImport;
+  if (
+    !pending
+    || !activeDream
+    || pending.dreamId !== activeDream.id
+    || pending.serverId !== activeDream.sync?.serverId
+    || !authenticatedAccount
+    || progressFeedbackBusy
+  ) {
+    setMessage(progressFeedbackStatus, "当前无法确认上传；本机梦想和已选文件保持不变。", true);
+    return;
+  }
+  progressFeedbackBusy = true;
+  renderProgressFeedback(activeDream);
+  setMessage(progressFeedbackStatus, "正在上传你明确确认的行动台反馈…");
+  try {
+    const result = await dreamApiRequest(
+      `/v1/dreams/${pending.serverId}/artifacts/${encodeURIComponent(pending.artifactId)}/progress`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          clientRequestId: pending.clientRequestId,
+          progress: pending.progress,
+        }),
+      },
+    );
+    const record = progressRecordFromResponse(result, activeDream) || {
+      id: result?.id || null,
+      progress: pending.progress,
+      artifactVersion: pending.progress.artifactVersion,
+      receivedAt: result?.createdAt || new Date().toISOString(),
+    };
+    latestProgressByDreamId.set(activeDream.id, record);
+    loadedProgressDreamIds.add(`${authenticatedAccount.userId}:${pending.serverId}`);
+    clearProgressImport(true);
+    progressFeedbackBusy = false;
+    renderProgressFeedback(activeDream);
+    setMessage(
+      progressFeedbackStatus,
+      `行动台 v${record.artifactVersion} 的反馈已回流。不会自动修改梦卡或发送 AI 消息。`,
+    );
+  } catch (error) {
+    progressFeedbackBusy = false;
+    renderProgressFeedback(activeDream);
+    setMessage(
+      progressFeedbackStatus,
+      `${walletErrorMessage(error)} 已选文件和同一上传编号仍保留，可安全重试。`,
+      true,
+    );
+  }
+}
+
+function continueWithProgressFeedback() {
+  if (!activeDream || !messageInput) return;
+  const record = latestProgressByDreamId.get(activeDream.id);
+  if (!record) {
+    setMessage(progressFeedbackStatus, "当前没有可带入对话的回流记录。", true);
+    return;
+  }
+  messageInput.value = progressConversationDraft(record);
+  messageInput.dispatchEvent(new Event("input", { bubbles: true }));
+  setMobileWorkspaceView("chat", { focusTab: false });
+  globalThis.requestAnimationFrame(() => {
+    messageInput.focus({ preventScroll: true });
+    messageInput.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+  setMessage(
+    messageStatus,
+    "行动台反馈摘要已填入，可继续编辑；尚未发送，AI 模式和梦卡都没有改变。",
+  );
+}
+
 function renderCard(dream) {
   if (!card || !inspectorEmpty) return;
   if (!dream || isCreating) {
@@ -1111,6 +1497,7 @@ function renderWorkspace() {
   renderDreamList();
   renderChat();
   renderCard(activeDream);
+  renderProgressFeedback(activeDream);
 
   if (form) form.hidden = !isCreating && !editingDreamId;
   if (messageForm) messageForm.hidden = isCreating || Boolean(editingDreamId) || !activeDream;
@@ -1153,6 +1540,9 @@ function enterCreateMode() {
 function selectDream(id) {
   const dream = getDreamById(id);
   if (!dream) return;
+  if (pendingProgressImport && pendingProgressImport.dreamId !== id) {
+    clearProgressImport(true);
+  }
   workspaceStore.activeDreamId = id;
   activeDream = dream;
   isCreating = false;
@@ -1164,7 +1554,10 @@ function selectDream(id) {
     globalThis.requestAnimationFrame(() => messageInput?.focus({ preventScroll: true }));
   }
   void loadAccountConversation(dream);
-  void loadAccountArtifacts(dream);
+  void (async () => {
+    await loadAccountArtifacts(dream);
+    await loadDreamProgress(getDreamById(dream.id) || dream);
+  })();
 }
 
 function enterEditMode() {
@@ -2927,6 +3320,7 @@ async function syncPendingDreams() {
   if (activeDream?.sync?.serverId) {
     await loadAccountConversation(activeDream, true);
     await loadAccountArtifacts(activeDream, true);
+    await loadDreamProgress(activeDream, true);
   }
   setMessage(
     syncStatus,
@@ -2951,6 +3345,9 @@ async function logoutWalletAccount() {
     aiEnabledDreamIds.clear();
     loadedConversationDreamIds.clear();
     loadedArtifactDreamIds.clear();
+    loadedProgressDreamIds.clear();
+    latestProgressByDreamId.clear();
+    clearProgressImport(true);
     closeAccountDialog();
     renderWorkspace();
     setMessage(accountStatus, "已退出钱包账号；本机梦想仍保留在这个浏览器。");
@@ -3031,6 +3428,9 @@ async function deleteCloudAccount() {
       artifacts: [],
       pendingAiTurn: null,
     }));
+    loadedProgressDreamIds.clear();
+    latestProgressByDreamId.clear();
+    clearProgressImport(true);
     persistWorkspace();
     accountActionBusy = false;
     closeAccountDeleteDialog();
@@ -3060,6 +3460,7 @@ async function restoreWalletSession() {
     if (activeDream?.sync?.serverId) {
       await loadAccountConversation(activeDream);
       await loadAccountArtifacts(activeDream);
+      await loadDreamProgress(activeDream);
     }
   } catch (error) {
     if (error?.status !== 401) {
@@ -3081,6 +3482,9 @@ async function invalidateWalletSession(message) {
   aiEnabledDreamIds.clear();
   loadedConversationDreamIds.clear();
   loadedArtifactDreamIds.clear();
+  loadedProgressDreamIds.clear();
+  latestProgressByDreamId.clear();
+  clearProgressImport(true);
   closeAccountDialog();
   renderWorkspace();
   setMessage(accountStatus, message, true);
@@ -3308,6 +3712,15 @@ artifactPreviewDialog?.addEventListener("click", (event) => {
   if (event.target === artifactPreviewDialog) closeArtifactPreview();
 });
 artifactPreviewDialog?.addEventListener("close", resetArtifactPreviewContent);
+progressFileInput?.addEventListener("change", handleProgressFileSelection);
+progressConfirmButton?.addEventListener("click", uploadProgressFeedback);
+progressClearButton?.addEventListener("click", () => {
+  clearProgressImport(true);
+  renderProgressFeedback(activeDream);
+  setMessage(progressFeedbackStatus, "已清除本机预览；没有上传任何内容。");
+  progressFileInput?.focus();
+});
+progressContinueButton?.addEventListener("click", continueWithProgressFeedback);
 
 accountCloseButton?.addEventListener("click", closeAccountDialog);
 accountDialog?.addEventListener("click", (event) => {
@@ -3454,6 +3867,8 @@ deleteButton?.addEventListener("click", () => {
   }
 
   const deletedId = activeDream.id;
+  latestProgressByDreamId.delete(deletedId);
+  if (pendingProgressImport?.dreamId === deletedId) clearProgressImport(true);
   workspaceStore.dreams = workspaceStore.dreams.filter((dream) => dream.id !== deletedId);
   workspaceStore.activeDreamId = workspaceStore.dreams[0]?.id || null;
   persistWorkspace();
