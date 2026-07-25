@@ -127,8 +127,22 @@ jobs:
           }
           const homepage = fs.readFileSync("index.html", "utf8");
           const hardware = fs.readFileSync("hardware-sku.html", "utf8");
+          const downloads = fs.readFileSync("desktop.html", "utf8");
+          const homepageStyles = fs.readFileSync("styles.css", "utf8");
           assert.doesNotMatch(homepage, /hardware-sku\.html#concealed|>产品形态</, "homepage still opens the concealed section or uses the old label");
           assert.match(homepage, /href="\.\/hardware-sku\.html"[^>]*>智能硬件<\/a>/, "smart-hardware homepage entry missing");
-          assert.match(hardware, /aria-label="智能硬件二级类目"[\s\S]*?href="#add-on"[\s\S]*?>01 · 加装款<[\s\S]*?href="#concealed"[\s\S]*?>02 · 隐形款</, "hardware subcategories missing");
+          assert.match(hardware, /<nav aria-label="智能硬件页面导航">[\s\S]*?<a href="#people-demo">使用场景<\/a>[\s\S]*?href="#external">外置式<\/a>[\s\S]*?href="#concealed">隐形款<\/a>/, "hardware navigation order is incorrect");
+          assert.match(hardware, /aria-label="智能硬件二级类目"[\s\S]*?href="#external"[\s\S]*?>01 · 外置式<[\s\S]*?href="#concealed"[\s\S]*?>02 · 隐形款</, "hardware subcategories missing");
+          assert.doesNotMatch(hardware, /id="(?:one-tap|legacy-software-experience)"/, "software experience remains in smart hardware");
+          assert.doesNotMatch(homepage, /data-auto-download/, "homepage still bypasses explicit version selection");
+          assert.match(homepage, /class="btn-lux-primary" href="\.\/desktop\.html"/, "homepage Start does not open downloads");
+          assert.match(downloads, /canonical[^>]+sleeepal\.com\/desktop\.html/, "download page canonical URL is incorrect");
+          assert.match(downloads, /script-src 'self'; connect-src 'self'/, "download page cannot load release metadata safely");
+          for (const platform of ["macos", "windows", "ios", "android"]) {
+            assert.equal((downloads.match(new RegExp(`data-package-platform="${platform}"`, "g")) || []).length, 1, `${platform}: download row missing or duplicated`);
+          }
+          assert.equal((homepage.match(/data-i18n="scene\.details"/g) || []).length, 12, "homepage scenes need visible detail actions");
+          assert.match(homepageStyles, /scenario-story-order > #mobile-quiet\s*\{\s*order:\s*1/, "sleep scenes are not first");
+          assert.match(homepageStyles, /scenario-story-order > #laptop-quiet\s*\{\s*order:\s*3/, "laptop scene is not after sleep scenes");
           console.log(`Pages quality: ok (${tracked.length} tracked files)`);
           NODE

@@ -3,37 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>开始体验 · SleeePal 睡眠宝</title>
-  <meta name="description" content="SleeePal 电脑版本已并入官网统一的开始体验入口，由官网识别当前设备并显示可用状态。" />
+  <title>软件下载 · SleeePal 睡眠宝</title>
+  <meta name="description" content="选择 SleeePal 的 Mac、Windows、iOS 或 Android 版本；安装包通过公开验收后在此提供。" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
-  <link rel="canonical" href="https://sleeepal.com/" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
+  <link rel="canonical" href="https://sleeepal.com/desktop.html" />
   <link rel="icon" href="./favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
-  <link rel="stylesheet" href="./styles.css?v=20260725-desktop-compatibility" />
+  <link rel="stylesheet" href="./styles.css?v=20260725-sleep-first2" />
+  <script src="./site.js?v=20260725-sleep-first2" defer></script>
 </head>
-<body class="desktop-page">
-  <nav class="desktop-nav">
+<body class="desktop-page" data-page="downloads">
+  <nav class="desktop-nav" aria-label="软件下载页面导航">
     <a href="./index.html" aria-label="返回 SleeePal 官网">
       <img src="./assets/logo-light.svg" alt="SleeePal" />
     </a>
+    <div>
+      <span class="desktop-nav-current">软件下载</span>
+      <a href="./index.html">返回官网</a>
+      <button class="lang-toggle" type="button" data-lang-toggle>EN</button>
+    </div>
   </nav>
+
   <main>
-    <section class="desktop-portal-hero">
+    <section class="desktop-portal-hero download-portal-hero">
       <div class="desktop-hero-copy">
-        <span class="desktop-eyebrow">ONE START · AUTO MATCH</span>
-        <h1>电脑版本，已经回到官网首屏。</h1>
-        <p>官网会识别当前设备，并在安装包通过签名、公证与公开验收后直接提供对应版本。</p>
-        <div class="desktop-hero-actions">
-          <a href="./index.html">返回官网，开始体验</a>
+        <span class="desktop-eyebrow">SLEEEPAL · DOWNLOADS</span>
+        <h1>选择你的版本，<br/>再开始体验。</h1>
+        <p>睡眠场景优先使用手机；工作场景使用笔记本电脑。官网会识别当前设备，但不会替你直接下载，请确认系统版本后再安装。</p>
+        <p class="download-detected-note" data-detected-platform aria-live="polite">正在识别当前设备…</p>
+        <ul class="desktop-hero-facts">
+          <li><strong>手机</strong><span>用于休息、入睡与枕边陪伴</span></li>
+          <li><strong>电脑</strong><span>用于办公、专注与移动工作</span></li>
+          <li><strong>安装前</strong><span>根据提示允许麦克风与扬声器；笔记本内置设备无需外接</span></li>
+        </ul>
+      </div>
+
+      <div class="download-platform-panel" aria-label="SleeePal 各平台版本">
+        <div class="download-platform-head">
+          <span>AVAILABLE PLATFORMS</span>
+          <strong>选择系统版本</strong>
         </div>
-        <p class="desktop-open-note">这条兼容入口保留给旧书签与历史链接，不再提供独立的下载选择页。</p>
+        <div class="platform-package-list">
+          <div class="platform-package-row" data-package-platform="macos">
+            <strong>macOS</strong>
+            <span data-package-status="macos">Mac 公开安装包准备中</span>
+            <a data-package-link="macos" hidden>安装</a>
+          </div>
+          <div class="platform-package-row" data-package-platform="windows">
+            <strong>Windows</strong>
+            <span data-package-status="windows">Windows 公开安装包准备中</span>
+            <a data-package-link="windows" hidden>安装</a>
+          </div>
+          <div class="platform-package-row" data-package-platform="ios">
+            <strong>iOS</strong>
+            <span data-package-status="ios">iOS 安装包准备中</span>
+            <a data-package-link="ios" hidden>安装</a>
+          </div>
+          <div class="platform-package-row" data-package-platform="android">
+            <strong>Android</strong>
+            <span data-package-status="android">Android 安装包准备中</span>
+            <a data-package-link="android" hidden>安装</a>
+          </div>
+        </div>
+        <p class="download-platform-boundary">只有通过签名、公证与公开验收的安装包才会显示下载按钮；准备中的版本不会跳转到 GitHub 或未签名文件。</p>
       </div>
     </section>
   </main>
+
   <footer class="desktop-footer">
     <a href="./index.html">SleeePal 官网</a>
-    <span>公开下载未开放时，不会跳转到 GitHub 或未签名安装包。</span>
+    <span>先聆听环境噪声、再智能建模、然后输出反向声波，实现抵消噪音。</span>
   </footer>
 </body>
 </html>

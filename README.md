@@ -19,7 +19,7 @@ This branch contains only the allowlisted files published at [sleeepal.com](http
 
 - No public app download is exposed before signing, notarization, and physical acceptance; the homepage stays in place instead of redirecting to GitHub.
 - The only GitHub entry is kept in the homepage footer.
-- The former `/desktop.html` URL remains as a lightweight compatibility page and routes visitors back to the homepage entry.
+- `/desktop.html` is the explicit software transition page for Mac, Windows, iOS, and Android; it detects the current device but waits for the visitor to confirm a version.
 - Feedback does not upload audio, screenshots, reports, or logs automatically.
 - GitHub Issues are public and stay disabled until the visitor confirms the content contains no sensitive information.
 - Undisclosed implementation, engineering, supplier, and user-submitted material is not published here.

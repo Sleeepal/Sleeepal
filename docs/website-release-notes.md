@@ -4,8 +4,8 @@
 
 ### One clear experience entry
 
-- Reduced the homepage to one primary “开始体验” action and replaced the desktop chooser portal with a lightweight compatibility page for old links.
-- Added automatic Mac, Windows, iOS, and Android matching with direct approved-asset routing.
+- Reduced the homepage to one primary “开始体验” action and added a four-platform transition page that shows Mac, Windows, iOS, and Android availability without automatic downloads.
+- Added device detection on the version page while keeping every download behind an explicit platform confirmation.
 - Kept all public downloads fail-closed until signing and notarization requirements are satisfied.
 - Reduced the top navigation and kept the only GitHub link in the footer.
 
@@ -14,7 +14,8 @@
 - Removed scripted and smooth page scrolling from public interactions.
 - Added independent opacity reveals for sections without moving the page after functional button clicks.
 - Hardened desktop and mobile layouts against horizontal overflow, clipped headings, and wrapped hardware navigation.
-- Renamed the homepage entry to “智能硬件”, removed the deep link that opened midway through the concealed section, and added “加装款 / 隐形款” as first-screen hardware subcategories.
+- Renamed the homepage entry to “智能硬件”, removed the deep link that opened midway through the concealed section, and added “外置式 / 隐形款” as first-screen hardware subcategories.
+- Reordered the product story so sleep scenarios appear before laptop work and phone transit, and added visible detail actions to every scene card.
 
 ### Quiet-space product story
 

@@ -1,7 +1,7 @@
 const translations = {
   zh: {
     title: "SleeePal 睡眠宝 — 创造属于你的静谧空间",
-    description: "SleeePal 用本地声音分析与反相声波创造个人近场静谧空间：笔记本电脑用于工作场景，手机则用于休息和睡眠场景。",
+    description: "SleeePal 优先照顾休息与睡眠，再把本地声音分析和反相声波能力延伸到笔记本办公与手机通勤场景。",
     "nav.philosophy": "静谧空间",
     "nav.science": "原理",
     "nav.features": "功能",
@@ -15,9 +15,10 @@ const translations = {
     "hero.pretitle": "PERSONAL QUIET SPACE · WORK + REST",
     "hero.kicker": "SleeePal 睡眠宝",
     "hero.headline": "创造属于你的<br/><em>静谧空间</em>",
-    "hero.sub": "白天专注工作，夜晚放松入睡。<br/><strong>同一套本地声音能力，跟随你的设备与生活节奏。</strong>",
-    "hero.brand": "笔记本电脑用于工作场景，手机则用于休息和睡眠场景。",
+    "hero.sub": "先陪你安静入睡，再把静谧带进白天。<br/><strong>同一套本地声音能力，跟随你的设备与生活节奏。</strong>",
+    "hero.brand": "手机优先用于休息和睡眠；笔记本电脑再把静谧延伸到工作场景。",
     "hero.primary": "开始体验",
+    "hero.downloadHint": "进入版本选择页，查看 Mac、Windows、iOS 与 Android。",
     "hero.secondary": "了解工作原理",
     "hero.wave.antiMeta": "等待扬声器",
     "marquee.1": "笔记本电脑 · 工作静谧",
@@ -33,8 +34,11 @@ const translations = {
     "support.cta": "告诉睡眠宝",
     "support.note": "您的消息会由团队查看；发送前可自行决定是否附上截图、夜报或设备信息。",
     "download.eyebrow": "DOWNLOADS",
-    "download.title": "自动匹配<br/><em>你的设备</em>",
-    "download.sub": "电脑端点击首屏“开始体验”，自动下载当前系统版本。",
+    "download.title": "选择版本，<br/><em>开始体验</em>",
+    "download.sub": "进入版本选择页，查看 Mac、Windows、iOS 与 Android 的可用状态。",
+    "download.choose": "选择系统版本",
+    "download.detected": "已识别当前设备：{platform}。请确认版本后再下载安装。",
+    "download.detected.unknown": "请选择要安装的系统版本。",
     "download.desktop": "电脑版本",
     "download.detecting": "正在识别当前设备…",
     "download.ready.macos": "已识别 Mac，点击开始下载。",
@@ -45,8 +49,8 @@ const translations = {
     "download.pending.windows": "Windows 公开安装包正在完成构建与签名，当前不会跳转到其他页面。",
     "download.pending.ios": "iOS 安装包准备中。",
     "download.pending.android": "Android 安装包准备中。",
-    "download.pending.unknown": "暂未识别当前系统；Mac 与 Windows 安装包就绪后会在这里自动匹配。",
-    "download.desktop.mobile": "请在 Mac 或 Windows 电脑打开官网，自动匹配安装包",
+    "download.pending.unknown": "暂未识别当前系统，请从版本列表中选择。",
+    "download.desktop.mobile": "请从 Mac 或 Windows 版本中选择",
     "download.package.pending": "安装包准备中",
     "download.package.install": "安装",
     "download.coming1": "iPhone · 休息/睡眠",
@@ -59,6 +63,7 @@ const translations = {
     "download.openTuning": "调节",
     "download.openReport": "夜报",
     "download.openDevices": "设备",
+    "scene.details": "查看详情",
     "hero.proof1Value": "工作",
     "hero.proof1Label": "笔记本电脑·专注",
     "hero.proof2Value": "休息",
@@ -78,28 +83,28 @@ const translations = {
     "hero.stat.cancel": "处理边界",
     "hero.stat.confidence": "首轮检查",
     "spaces.kicker": "TWO DEVICES · ONE QUIET SPACE",
-    "spaces.title": "工作与休息，<br/><em>静谧有不同入口</em>",
-    "spaces.lead": "不需要为每个时刻准备另一套复杂设备。靠近哪块屏幕，就从哪里开始创造静谧。",
+    "spaces.title": "先照顾睡眠，<br/><em>再把静谧带进白天</em>",
+    "spaces.lead": "先从手机枕边睡眠开始，再延伸到笔记本办公与通勤刷手机。",
     "spaces.work.title": "笔记本电脑，<br/><em>用于工作场景</em>",
     "spaces.work.body": "在办公室、咖啡厅或交通途中，内置 Mic 与面向用户的扬声器，让静谧集中在屏幕与耳朵之间。",
     "spaces.work.point1": "专注办公与深度工作",
     "spaces.work.point2": "咖啡厅与共享空间",
     "spaces.work.point3": "火车、候机与移动办公",
-    "spaces.work.cta": "进入笔记本工作场景 →",
+    "spaces.work.cta": "查看笔记本工作场景详情 →",
     "spaces.work.caption": "屏幕 ↔ 耳朵·工作近场",
     "spaces.rest.title": "手机，<br/><em>用于休息和睡眠场景</em>",
     "spaces.rest.body": "午休、沙发放松或晚上入睡时，手机就在身边。用它完成本地感知、声景选择与枕边控制，需要时再连接音箱。",
     "spaces.rest.point1": "午休、沙发放松与睡前阅读",
     "spaces.rest.point2": "枕边入睡与整夜陪伴",
     "spaces.rest.point3": "婴儿房、合住空间与旅途休息",
-    "spaces.rest.cta": "进入手机休息和睡眠场景 →",
+    "spaces.rest.cta": "查看手机睡眠场景详情 →",
     "spaces.rest.caption": "手机 ↔ 枕边·休息和睡眠",
     "brand.headline": "同一种静谧，<em><strong>跟随你的节奏。</strong></em>",
     "brand.sub": "白天靠近电脑，夜晚回到枕边。<br/>设备不同，目标一致：把噪音削弱在你真正所在的位置。",
     "philosophy.quote": "昨晚发生了什么，第二天可以清楚知道。",
     "science.kicker": "反相声波 · 个人近场静谧",
-    "science.title": "同一套声学逻辑，<br/><em>适配工作与休息</em>",
-    "science.desc": "笔记本电脑用于工作场景，手机则用于休息和睡眠场景。<br/>它们都通过本地声音分析与反相输出，尝试在人真正所在的近场区域削弱部分持续噪音。",
+    "science.title": "先聆听环境噪声，<br/><em>再智能建模并输出反向声波</em>",
+    "science.desc": "先聆听环境噪声、再智能建模、然后输出反向声波，实现抵消噪音。<br/>真实环境中只能削弱部分噪音，效果受设备、距离、延迟与空间反射影响。",
     "science.compare.earphone.kicker": "传统降噪耳机",
     "science.compare.earphone.zone": "控制点 = 耳道",
     "science.compare.earphone.body": "麦克风在耳罩里<br/>控制点在<strong>耳道内</strong><br/>必须佩戴耳机",
@@ -130,10 +135,10 @@ const translations = {
     "science.why.title": "不用让整个环境无声，<br/><em>先让身边少一点打扰</em>",
     "science.why.body1": "声音会被墙面、家具、床品和人体不断反射。SleeePal 不追求让整个空间无声，而是把作用集中在电脑与耳朵之间，或手机与枕边之间。",
     "science.why.body2": "笔记本电脑用于工作与专注；手机用于休息和睡眠。需要更低延迟或更多输出余量时，再连接有线或低延迟音箱。",
-    "science.list1": "<strong>笔记本工作模式</strong> — 办公室、咖啡厅与交通途中，用电脑内置 Mic 与扬声器开始",
-    "science.list2": "<strong>手机休息模式</strong> — 午休、沙发放松与睡前阅读，手机单机即可轻松开始",
-    "science.list3": "<strong>手机睡眠模式</strong> — 手机靠近枕边负责感知与控制，需要更稳定输出时连接有线或低延迟音箱",
-    "science.list4": "<strong>居家专用硬件</strong> — 长期固定在床头的画框、墙内或床头带形态，延续手机的睡眠入口",
+    "science.list1": "<strong>手机睡眠模式</strong> — 手机靠近枕边负责感知与控制，需要更稳定输出时连接有线或低延迟音箱",
+    "science.list2": "<strong>居家专用硬件</strong> — 长期固定在床头的画框、墙内或床头带形态，延续手机的睡眠入口",
+    "science.list3": "<strong>手机休息模式</strong> — 午休、沙发放松与睡前阅读，手机单机即可轻松开始",
+    "science.list4": "<strong>笔记本工作模式</strong> — 办公室、咖啡厅与交通途中，用电脑内置 Mic 与扬声器开始",
     "science.note": "蓝牙适合轻松体验监测、柔化和声景；想获得更低延迟、更稳定的整夜表现，建议使用有线设备。",
     "laptop.kicker": "笔记本静谧空间 · 工作与专注",
     "laptop.title": "在办公室、咖啡厅或旅途中，<br/><em>为自己留一小片静谧</em>",
@@ -156,18 +161,18 @@ const translations = {
     "laptop.cta": "选择 Mac 或 Windows 版本",
     "science.device.phone": "手机",
     "science.device.speaker": "扬声器",
-    "science.visualCard1.title": "笔记本电脑",
-    "science.visualCard1.zone": "工作·专注·移动办公",
-    "science.visualCard1.badge": "工作入口",
-    "science.visualCard2.title": "手机单机",
-    "science.visualCard2.zone": "午休·放松·睡前",
-    "science.visualCard2.badge": "休息入口",
-    "science.visualCard3.title": "手机 + 音箱",
-    "science.visualCard3.zone": "枕边·入睡·整夜",
-    "science.visualCard3.badge": "睡眠入口",
-    "science.visualCard4.title": "居家专用硬件",
-    "science.visualCard4.zone": "画框·墙内·床头带",
-    "science.visualCard4.badge": "固定睡眠形态",
+    "science.visualCard1.title": "手机 + 音箱",
+    "science.visualCard1.zone": "枕边·入睡·整夜",
+    "science.visualCard1.badge": "睡眠入口",
+    "science.visualCard2.title": "居家专用硬件",
+    "science.visualCard2.zone": "画框·墙内·床头带",
+    "science.visualCard2.badge": "固定睡眠形态",
+    "science.visualCard3.title": "手机单机",
+    "science.visualCard3.zone": "午休·放松·睡前",
+    "science.visualCard3.badge": "休息入口",
+    "science.visualCard4.title": "笔记本电脑",
+    "science.visualCard4.zone": "工作·专注·移动办公",
+    "science.visualCard4.badge": "工作入口",
     "faq.kicker": "常见问题",
     "faq.title": "关于近场降噪、音箱和<strong>白噪声推荐</strong>",
     "faq.q1": "音箱体积越大，改善效果就越好吗？",
@@ -263,8 +268,8 @@ const translations = {
     "appLinks.travel": "交通途中",
     "appLinks.fallback": "还没安装？查看下载状态",
     "slogan.label": "睡眠宝如何陪你入睡",
-    "slogan.headline": "先听懂环境，<br/><em>再让枕边更安静</em>",
-    "slogan.body": "从睡前选择场景，到夜间观察、声波调节和晨间夜报，SleeePal 把每一步放在同一个简单流程里。今晚容易开始，明早看得明白。",
+    "slogan.headline": "先聆听环境噪声，<br/><em>再智能建模并输出反向声波</em>",
+    "slogan.body": "先聆听环境噪声、再智能建模、然后输出反向声波，实现抵消噪音。噪音会被削弱，但不可能完全抵消消除。",
     "slogan.stat1": "耳机耳塞<br/>佩戴需求",
     "slogan.stat2": "路实时波形<br/>效果可见",
     "slogan.stat3": "蓝牙体验 / 有线增强<br/>按需要选择",
@@ -390,7 +395,7 @@ const translations = {
   },
   en: {
     title: "SleeePal — Create your personal quiet space",
-    description: "SleeePal creates a personal near-field quiet space with local sound analysis and antiphase sound: laptops for work and focus, phones for rest and sleep.",
+    description: "SleeePal starts with rest and sleep, then extends local sound analysis and antiphase output to laptop work and phone transit scenes.",
     "nav.philosophy": "Quiet spaces",
     "nav.science": "Science",
     "nav.features": "Features",
@@ -404,9 +409,10 @@ const translations = {
     "hero.pretitle": "PERSONAL QUIET SPACE · WORK + REST",
     "hero.kicker": "SleeePal",
     "hero.headline": "Create your own<br/><em>quiet space</em>",
-    "hero.sub": "At work, your laptop creates a near-field quiet space between the screen and your ears.<br/><strong>For rest and sleep, your phone brings quiet closer to you and your pillow.</strong>",
-    "hero.brand": "One local sound system that follows your device, location, and daily rhythm.",
+    "hero.sub": "First, sleep with fewer disturbances. Then bring a little more quiet into the day.<br/><strong>One local sound system follows your device and daily rhythm.</strong>",
+    "hero.brand": "The phone comes first for rest and sleep; the laptop then extends quiet into work.",
     "hero.primary": "Start",
+    "hero.downloadHint": "Open the version page for Mac, Windows, iOS, and Android.",
     "hero.secondary": "How it works",
     "hero.wave.antiMeta": "Waiting for speaker",
     "marquee.1": "LAPTOP · QUIET FOR WORK",
@@ -422,8 +428,11 @@ const translations = {
     "support.cta": "Tell SleeePal",
     "support.note": "Our team will read your message. You decide whether to include screenshots, a night report, or device details.",
     "download.eyebrow": "DOWNLOADS",
-    "download.title": "Matched to<br/><em>your device</em>",
-    "download.sub": "On desktop, choose Start and the current Mac or Windows build downloads automatically.",
+    "download.title": "Choose a version,<br/><em>then get started</em>",
+    "download.sub": "Open the version page to check availability for Mac, Windows, iOS, and Android.",
+    "download.choose": "Choose a system version",
+    "download.detected": "Detected device: {platform}. Confirm the version before installing.",
+    "download.detected.unknown": "Choose the system version you want to install.",
     "download.desktop": "Desktop",
     "download.detecting": "Detecting this device…",
     "download.ready.macos": "Mac detected. Choose Start to download.",
@@ -434,8 +443,8 @@ const translations = {
     "download.pending.windows": "The public Windows package is completing its build and signing. This button will not redirect elsewhere.",
     "download.pending.ios": "The iOS package is being prepared.",
     "download.pending.android": "The Android package is being prepared.",
-    "download.pending.unknown": "This system was not recognized. Mac and Windows packages will be matched here when ready.",
-    "download.desktop.mobile": "Open this site on Mac or Windows to match the desktop package automatically",
+    "download.pending.unknown": "This system was not recognized. Choose a version from the list.",
+    "download.desktop.mobile": "Choose the Mac or Windows version",
     "download.package.pending": "Package in preparation",
     "download.package.install": "Install",
     "download.coming1": "iPhone · rest/sleep",
@@ -448,6 +457,7 @@ const translations = {
     "download.openTuning": "Tuning",
     "download.openReport": "Report",
     "download.openDevices": "Devices",
+    "scene.details": "View details",
     "hero.proof1Value": "Work",
     "hero.proof1Label": "Laptop · focus",
     "hero.proof2Value": "Rest",
@@ -467,28 +477,28 @@ const translations = {
     "hero.stat.cancel": "processing boundary",
     "hero.stat.confidence": "first check",
     "spaces.kicker": "TWO DEVICES · ONE QUIET SPACE",
-    "spaces.title": "Quiet for work.<br/><em>Quiet for rest.</em>",
-    "spaces.lead": "You do not need a separate complicated setup for every moment. Start with the screen already closest to you.",
+    "spaces.title": "Sleep comes first.<br/><em>Then quiet moves into the day.</em>",
+    "spaces.lead": "Start with phone-led bedside sleep, then extend the same idea to laptop work and phone transit browsing.",
     "spaces.work.title": "Your laptop,<br/><em>for work</em>",
     "spaces.work.body": "At the office, in a café, or in transit, the built-in mic and user-facing speakers focus the quiet field between the screen and your ears.",
     "spaces.work.point1": "Focused office work and deep work",
     "spaces.work.point2": "Cafés and shared spaces",
     "spaces.work.point3": "Trains, airport waits, and mobile work",
-    "spaces.work.cta": "Enter the laptop work scene →",
+    "spaces.work.cta": "View laptop work details →",
     "spaces.work.caption": "Screen ↔ ears · work near field",
     "spaces.rest.title": "Your phone,<br/><em>for rest and sleep</em>",
     "spaces.rest.body": "During a nap, sofa wind-down, or bedtime, your phone is already beside you. Use it for local sensing, soundscape choice, and bedside control; connect a speaker when needed.",
     "spaces.rest.point1": "Naps, sofa wind-down, and bedtime reading",
     "spaces.rest.point2": "Falling asleep and overnight support",
     "spaces.rest.point3": "Nurseries, shared homes, and travel rest",
-    "spaces.rest.cta": "Enter phone rest and sleep scenes →",
+    "spaces.rest.cta": "View phone sleep details →",
     "spaces.rest.caption": "Phone ↔ pillow · rest and sleep",
     "brand.headline": "The same quiet, <em><strong>following your rhythm.</strong></em>",
     "brand.sub": "Stay close to your laptop by day, then return to the pillow at night.<br/>Different devices, one goal: reduce noise where you actually are.",
     "philosophy.quote": "What happened last night should be clear the next day.",
     "science.kicker": "Antiphase sound · personal near-field quiet",
-    "science.title": "One acoustic system,<br/><em>adapted for work and rest</em>",
-    "science.desc": "Laptops serve work situations; phones serve rest and sleep.<br/>Both use local sound analysis and antiphase output to reduce some steady noise in the near field where you actually are.",
+    "science.title": "Listen to ambient noise,<br/><em>model it, then emit antiphase sound</em>",
+    "science.desc": "First capture ambient noise, then build a local model, then emit antiphase sound to cancel part of the noise.<br/>Real rooms prevent complete cancellation; results depend on hardware, distance, latency, and reflections.",
     "science.compare.earphone.kicker": "Traditional ANC headphones",
     "science.compare.earphone.zone": "Control point = ear canal",
     "science.compare.earphone.body": "The microphone sits inside the ear cup<br/>The quiet zone lives <strong>inside the ear canal</strong><br/>You must wear headphones",
@@ -519,10 +529,10 @@ const translations = {
     "science.why.title": "The whole environment need not be silent.<br/><em>Start with fewer disturbances around you.</em>",
     "science.why.body1": "Sound keeps reflecting from walls, furniture, bedding, and the body. SleeePal concentrates its effect between laptop and ears, or between phone and pillow, rather than promising silence everywhere.",
     "science.why.body2": "Laptops suit work and focus; phones suit rest and sleep. Connect a wired or low-latency speaker when you need lower delay or more output headroom.",
-    "science.list1": "<strong>Laptop work mode</strong> — use the built-in mic and speakers at the office, in cafés, and while working in transit",
-    "science.list2": "<strong>Phone rest mode</strong> — start easily for naps, sofa wind-down, and bedtime reading",
-    "science.list3": "<strong>Phone sleep mode</strong> — keep the phone near the pillow for sensing and control; connect a wired or low-latency speaker for steadier output",
-    "science.list4": "<strong>Dedicated home hardware</strong> — picture-frame, in-wall, or headboard forms extend the phone-led sleep entry into a fixed bedside setup",
+    "science.list1": "<strong>Phone sleep mode</strong> — keep the phone near the pillow for sensing and control; connect a wired or low-latency speaker for steadier output",
+    "science.list2": "<strong>Dedicated home hardware</strong> — picture-frame, in-wall, or headboard forms extend the phone-led sleep entry into a fixed bedside setup",
+    "science.list3": "<strong>Phone rest mode</strong> — start easily for naps, sofa wind-down, and bedtime reading",
+    "science.list4": "<strong>Laptop work mode</strong> — use the built-in mic and speakers at the office, in cafés, and while working in transit",
     "science.note": "Bluetooth is convenient for trying monitoring, gentler sound, and soundscapes. Use wired devices for lower latency and steadier overnight performance.",
     "laptop.kicker": "Laptop quiet space · work and focus",
     "laptop.title": "At work, in a café, or in transit,<br/><em>keep a small quiet space for yourself</em>",
@@ -545,18 +555,18 @@ const translations = {
     "laptop.cta": "Choose Mac or Windows",
     "science.device.phone": "Phone",
     "science.device.speaker": "Speaker",
-    "science.visualCard1.title": "Laptop",
-    "science.visualCard1.zone": "Work · focus · mobile office",
-    "science.visualCard1.badge": "Work entry",
-    "science.visualCard2.title": "Phone only",
-    "science.visualCard2.zone": "Nap · wind-down · bedtime",
-    "science.visualCard2.badge": "Rest entry",
-    "science.visualCard3.title": "Phone + speaker",
-    "science.visualCard3.zone": "Pillow · sleep onset · overnight",
-    "science.visualCard3.badge": "Sleep entry",
-    "science.visualCard4.title": "Dedicated home hardware",
-    "science.visualCard4.zone": "Frame · in-wall · headboard",
-    "science.visualCard4.badge": "Fixed sleep form",
+    "science.visualCard1.title": "Phone + speaker",
+    "science.visualCard1.zone": "Pillow · sleep onset · overnight",
+    "science.visualCard1.badge": "Sleep entry",
+    "science.visualCard2.title": "Dedicated home hardware",
+    "science.visualCard2.zone": "Frame · in-wall · headboard",
+    "science.visualCard2.badge": "Fixed sleep form",
+    "science.visualCard3.title": "Phone only",
+    "science.visualCard3.zone": "Nap · wind-down · bedtime",
+    "science.visualCard3.badge": "Rest entry",
+    "science.visualCard4.title": "Laptop",
+    "science.visualCard4.zone": "Work · focus · mobile office",
+    "science.visualCard4.badge": "Work entry",
     "faq.kicker": "FAQ",
     "faq.title": "Bedside quiet optimization, speakers, and noise-sound recommendations",
     "faq.q1": "Does a bigger speaker always improve the result?",
@@ -652,8 +662,8 @@ const translations = {
     "appLinks.travel": "Travel",
     "appLinks.fallback": "Not installed yet? View download status",
     "slogan.label": "How SleeePal helps you rest",
-    "slogan.headline": "Understand the room first,<br/><em>then make the pillow area quieter</em>",
-    "slogan.body": "From choosing a setting before bed to overnight awareness, sound adjustment, and the morning report, SleeePal keeps every step in one simple flow.",
+    "slogan.headline": "Listen to ambient noise,<br/><em>model it, then emit antiphase sound</em>",
+    "slogan.body": "First capture ambient noise, then build an intelligent model, then emit antiphase sound to reduce the noise. Noise can be weakened, but it cannot be cancelled completely.",
     "slogan.stat1": "headphones or earplugs<br/>required",
     "slogan.stat2": "live wave tracks<br/>you can actually see",
     "slogan.stat3": "bluetooth experience / wired enhancement<br/>choose what fits",
@@ -786,9 +796,8 @@ const toggle = document.querySelector("[data-lang-toggle]");
 const mobileNavToggle = document.querySelector("[data-mobile-nav-toggle]");
 const primaryNavigation = document.querySelector("#primary-navigation");
 const releaseNodes = {
-  autoDownloadLinks: Array.from(document.querySelectorAll("[data-auto-download]")),
   downloadStatus: Array.from(document.querySelectorAll("[data-download-status]")),
-  desktopPackageStatus: document.querySelector("[data-desktop-package-status]"),
+  detectedPlatform: Array.from(document.querySelectorAll("[data-detected-platform]")),
   packageStatus: new Map(
     Array.from(document.querySelectorAll("[data-package-status]")).map((node) => [
       node.getAttribute("data-package-status"),
@@ -893,7 +902,7 @@ function downloadStatusMessage(platform, ready, lang) {
     || copy["download.pending.unknown"];
 }
 
-function applyMobilePackage(platform, lang) {
+function applyPackage(platform, lang) {
   const statusNode = releaseNodes.packageStatus.get(platform);
   const link = releaseNodes.packageLinks.get(platform);
   const artifact = approvedDownload(platform);
@@ -921,38 +930,15 @@ function applyReleaseInfo(lang) {
   const copy = translations[lang] || translations.zh;
   const platform = detectDownloadPlatform();
   const artifact = approvedDownload(platform);
-  releaseNodes.autoDownloadLinks.forEach((link) => {
-    if (artifact) {
-      link.href = artifact.url;
-      link.dataset.releaseState = "download";
-      link.removeAttribute("aria-disabled");
-      link.removeAttribute("aria-describedby");
-      link.setAttribute(
-        "aria-label",
-        `${copy["hero.primary"]} · ${platformLabel(platform, lang)}${artifact.version ? ` v${artifact.version}` : ""}`,
-      );
-    } else {
-      link.href = "#download";
-      link.dataset.releaseState = "unavailable";
-      link.removeAttribute("aria-disabled");
-      link.setAttribute("aria-describedby", "hero-download-status");
-      link.removeAttribute("aria-label");
-    }
-  });
   releaseNodes.downloadStatus.forEach((node) => {
     node.textContent = downloadStatusMessage(platform, Boolean(artifact), lang);
   });
-  if (releaseNodes.desktopPackageStatus) {
-    if (["macos", "windows"].includes(platform)) {
-      releaseNodes.desktopPackageStatus.textContent = artifact
-        ? `${platformLabel(platform, lang)}${artifact.version ? ` · v${artifact.version}` : ""}`
-        : downloadStatusMessage(platform, false, lang);
-    } else {
-      releaseNodes.desktopPackageStatus.textContent = copy["download.desktop.mobile"];
-    }
-  }
-  applyMobilePackage("ios", lang);
-  applyMobilePackage("android", lang);
+  releaseNodes.detectedPlatform.forEach((node) => {
+    node.textContent = platform === "unknown"
+      ? copy["download.detected.unknown"]
+      : copy["download.detected"].replace("{platform}", platformLabel(platform, lang));
+  });
+  ["macos", "windows", "ios", "android"].forEach((item) => applyPackage(item, lang));
 }
 
 async function loadReleaseInfo() {
@@ -997,9 +983,11 @@ function replaceWithSafeInlineMarkup(node, markup) {
 function applyLanguage(lang) {
   const copy = translations[lang] || translations.zh;
   root.lang = lang === "en" ? "en" : "zh-CN";
-  document.title = copy.title;
-  if (titleEl) titleEl.textContent = copy.title;
-  if (descEl) descEl.setAttribute("content", copy.description);
+  if (document.body?.dataset.page !== "downloads") {
+    document.title = copy.title;
+    if (titleEl) titleEl.textContent = copy.title;
+    if (descEl) descEl.setAttribute("content", copy.description);
+  }
 
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     const key = node.getAttribute("data-i18n");
@@ -1024,20 +1012,9 @@ const initialLang = getCurrentLang();
 applyLanguage(initialLang);
 loadReleaseInfo();
 
-releaseNodes.autoDownloadLinks.forEach((link) => {
-  link.addEventListener("click", (event) => {
-    if (link.dataset.releaseState === "download") return;
-    event.preventDefault();
-    releaseNodes.downloadStatus.forEach((node) => {
-      node.classList.remove("is-notice");
-      globalThis.requestAnimationFrame(() => node.classList.add("is-notice"));
-    });
-  });
-});
-
 function initializeSectionFades() {
   const sections = Array.from(document.querySelectorAll(
-    "body > section, body > .philosophy-band, body > .marquee-band",
+    "body > section, body > .philosophy-band, body > .marquee-band, .scenario-story-order > section",
   ));
   if (!sections.length) return;
   sections.forEach((section) => {

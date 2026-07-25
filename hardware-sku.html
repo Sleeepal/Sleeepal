@@ -3,39 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SleeePal 智能硬件 — 加装款与隐形款</title>
-  <meta name="description" content="SleeePal 枕边近场降噪智能硬件分为加装款与隐形款：现有卧室可直接加装床头条、壁挂或床头柜侧边设备，也可选择融入画框或预埋墙体的隐形方案。" />
+  <title>SleeePal 智能硬件 — 外置式与隐形款</title>
+  <meta name="description" content="SleeePal 枕边近场降噪智能硬件分为外置式与隐形款：现有卧室可直接摆放或安装床头条、壁挂与床头柜侧边设备，也可选择融入画框或预埋墙体的隐形方案。" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
   <link rel="icon" href="./favicon.ico" sizes="any" />
-  <link rel="stylesheet" href="./hardware-sku.css?v=20260725-smart-hardware1" />
+  <link rel="stylesheet" href="./hardware-sku.css?v=20260725-sleep-external2" />
   <script src="./hardware-sku.js?v=20260725-acoustic-scenes5" defer></script>
 </head>
 <body>
   <header class="hardware-nav">
-    <a class="brand" href="./index.html" aria-label="SleeePal home">
-      <img src="./assets/logo-light.svg" alt="SleeePal" />
-    </a>
+    <div class="hardware-brand-lockup">
+      <a class="brand" href="./index.html" aria-label="SleeePal home">
+        <img src="./assets/logo-light.svg" alt="SleeePal" />
+      </a>
+      <span>智能硬件</span>
+    </div>
     <nav aria-label="智能硬件页面导航">
-      <a class="hardware-category-link" href="#add-on">加装款</a>
+      <a href="#people-demo">使用场景</a>
+      <a class="hardware-category-link" href="#external">外置式</a>
       <a class="hardware-category-link" href="#concealed">隐形款</a>
-      <a href="#one-tap">一键体验</a>
-      <a href="#status">使用场景</a>
     </nav>
   </header>
 
-  <main>
+  <main class="hardware-catalog">
     <section class="hero" id="hardware-top">
       <div class="hero-copy">
         <p class="eyebrow">SleeePal smart hardware</p>
         <h1>SleeePal <span class="hardware-title-zh">智能硬件</span></h1>
         <p class="lead">
-          手机和电脑提供纯软件体验；智能硬件把 Mic、扬声器与本地处理固定在更合适的位置。现有卧室可直接加装，也可在画框或墙体中隐形安装。
+          手机和电脑提供纯软件体验；智能硬件把 Mic、扬声器与本地处理固定在更合适的位置。现有卧室可直接放置或安装外置式设备，也可在画框或墙体中隐形安装。
         </p>
         <div class="hardware-category-switch" aria-label="智能硬件二级类目">
-          <a href="#add-on">
-            <span>01 · 加装款</span>
-            <strong>现有卧室，直接安装</strong>
+          <a href="#external">
+            <span>01 · 外置式</span>
+            <strong>无需装修，直接安装</strong>
             <small>床头条 · 壁挂 · 床头柜侧边</small>
           </a>
           <a href="#concealed">
@@ -49,7 +51,7 @@
         <a href="./hardware-detail.html?item=sku-headboard">
           <img src="./assets/headboard-strip-wide-warm.png" alt="SleeePal Headboard Strip 2 米宽双人床暖光产品图" />
         </a>
-        <figcaption>加装款 · Headboard Strip：单只可独立使用，左右组合覆盖双人床。</figcaption>
+        <figcaption>外置式 · Headboard Strip：单只可独立使用，左右组合覆盖双人床。</figcaption>
       </figure>
     </section>
 
@@ -63,76 +65,11 @@
       </p>
     </section>
 
-    <section class="one-tap-system" id="one-tap">
-      <div class="one-tap-copy">
-        <p class="eyebrow">One-tap trial · Three-layer enhancement</p>
-        <h2>一键体验：先听、再判断、<strong>再输出。</strong></h2>
-        <p>
-          点击后先启动监听，再按当前场景切换推荐链路，并开启反相输出、低频柔化和声景辅助。抵消呼噜以改善率呈现，帮助你判断这一晚的环境是否更容易入睡。
-        </p>
-        <div class="one-tap-flow" aria-label="一键体验流程">
-          <span>监听环境</span>
-          <i></i>
-          <span>推荐链路</span>
-          <i></i>
-          <span>三层增强</span>
-        </div>
-        <div class="one-tap-actions">
-          <a href="sleeepal://devices?action=calibrate" data-app-link="hardware-devices">打开设备检查</a>
-          <small>体验前确认 Mic、扬声器与连接状态</small>
-        </div>
-      </div>
-
-      <div class="quiet-console" aria-label="一键体验三位一体增强展示">
-        <div class="console-top">
-          <div>
-            <span>当前场景</span>
-            <strong>抵消呼噜</strong>
-          </div>
-          <button type="button">一键体验</button>
-        </div>
-
-        <div class="relief-meter">
-          <div>
-            <span>上一分钟改善率</span>
-            <strong>18%</strong>
-            <small>主频 -1.7 dB · 每分钟动态监测</small>
-          </div>
-          <div class="meter-ring">
-            <b></b>
-          </div>
-        </div>
-
-        <div class="layer-stack">
-          <div>
-            <strong>反相输出</strong>
-            <span>改善稳定鼾声干扰</span>
-            <em></em>
-          </div>
-          <div>
-            <strong>低频柔化</strong>
-            <span>把沉闷低频压迫感变钝</span>
-            <em></em>
-          </div>
-          <div>
-            <strong>声景辅助</strong>
-            <span>遮蔽残余断续干扰</span>
-            <em></em>
-          </div>
-        </div>
-
-        <div class="snore-trace" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </section>
-
-    <section class="strip-detail" id="add-on">
+    <section class="strip-detail" id="external">
+      <span class="legacy-section-anchor" id="add-on" aria-hidden="true"></span>
       <span class="legacy-section-anchor" id="strip" aria-hidden="true"></span>
       <div class="section-head">
-        <p class="eyebrow">Add-on hardware · 加装款</p>
+        <p class="eyebrow">External hardware · 外置式</p>
         <h2>不用改造墙体，<br />把智能硬件<strong>直接装进现有卧室。</strong></h2>
       </div>
 
@@ -144,10 +81,10 @@
           </p>
           <div class="spec-list">
             <div><strong>安装</strong><span>贴合现有床头，保持床体和床面空间完整</span></div>
-            <div><strong>一键体验</strong><span>先监听环境，再按场景开启反相输出、低频柔化和声景辅助</span></div>
+            <div><strong>软件控制</strong><span>先选择系统版本并安装软件；启动后由 Mic 采集环境噪声、本地智能建模，再输出反向声波</span></div>
             <div><strong>抗鼾改善</strong><span>面向部分稳定呼噜干扰显示改善率，帮助判断摆位和效果</span></div>
             <div><strong>灯光</strong><span>背向枕区低亮度漫反射，避免直射眼睛</span></div>
-            <div><strong>交互</strong><span>保留一键体验、暂停、停止实体操作，半睡状态也能操作</span></div>
+            <div><strong>交互</strong><span>保留启动、暂停、停止实体操作，半睡状态也能操作</span></div>
             <div><strong>组合</strong><span>单只入门，双只覆盖情侣/夫妻场景</span></div>
           </div>
         </div>
@@ -188,7 +125,7 @@
             <span></span>
           </div>
           <div class="carousel-note">
-            <span>一键体验</span>
+            <span>开始降噪</span>
             <span>暂停</span>
             <span>停止</span>
             <small>增强 · 延迟 · 相位</small>
@@ -235,7 +172,10 @@
             <h3>SleeePal QuietCanvas</h3>
             <p class="concealed-role">可换画芯家族 · 宽景、1/4 正方形与 1/2 横向长条</p>
           </div>
-          <span class="concept-badge">3 种比例 · 同一声学链路</span>
+          <div class="concealed-head-actions">
+            <span class="concept-badge">3 种比例 · 同一声学链路</span>
+            <a class="concealed-detail-action" href="#quietcanvas-core">查看详情</a>
+          </div>
         </div>
 
         <section class="concealed-core-overview quietcanvas-core-overview" id="quietcanvas-core" aria-labelledby="quietcanvas-core-title">
@@ -260,7 +200,7 @@
               透声画芯只承担视觉与声学保护；Mic、喇叭、DSP、功放和电源都固定在独立底盘。换画不接触线缆，检修也不需要破坏画芯或墙面。
             </p>
             <dl class="concealed-core-points">
-              <div><dt>01</dt><dd><strong>上缘参考 Mic</strong><span>先听见房间噪音，为本地计算保留提前量</span></dd></div>
+              <div><dt>01</dt><dd><strong>上缘参考 Mic</strong><span>采集房间环境噪音，为本地计算保留提前量</span></dd></div>
               <div><dt>02</dt><dd><strong>下缘反馈 Mic</strong><span>左右外侧朝枕头向下，测量耳边残余噪音</span></dd></div>
               <div><dt>03</dt><dd><strong>左右喇叭腔</strong><span>两组独立密闭腔向下倾斜，对应左右枕位</span></dd></div>
               <div><dt>04</dt><dd><strong>中央电子舱</strong><span>DSP、功放和电源分区屏蔽并连接背部散热脊</span></dd></div>
@@ -407,7 +347,10 @@
             <h3>SleeePal QuietWall Linear</h3>
             <p class="concealed-role">小体积墙内长条模块 · 外部木格栅、音孔或音条由用户定制</p>
           </div>
-          <span class="concept-badge">长条立方体 · 正面维护</span>
+          <div class="concealed-head-actions">
+            <span class="concept-badge">长条立方体 · 正面维护</span>
+            <a class="concealed-detail-action" href="#quietwall-core">查看详情</a>
+          </div>
         </div>
 
         <section class="concealed-core-overview" id="quietwall-core" aria-labelledby="quietwall-core-title">
@@ -690,7 +633,7 @@
         </p>
         <div class="demo-steps">
           <div><strong>1. 多 Mic 听见噪音</strong><span>麦克风阵列采集空调低频、邻居声、鼾声和突发声。</span></div>
-          <div><strong>2. 一键体验推荐链路</strong><span>未运行时点击一键体验：先启动监听，再按场景开启三位一体增强。</span></div>
+          <div><strong>2. 智能建立噪音模型</strong><span>先聆听环境噪声，再智能建模，然后输出反向声波，实现抵消噪音。</span></div>
           <div><strong>3. 抵消呼噜干扰</strong><span>对部分稳定鼾声和持续低频做局部反相抵消，降低 1 dB 也记录为改善。</span></div>
           <div><strong>4. 多输出指向枕区</strong><span>反相/声景输出阵列专注头部附近，减少对整间卧室的打扰。</span></div>
           <div><strong>5. 手动可微调</strong><span>增强、延迟、相位保留实体旋钮，自动推荐后还能自己找最佳点。</span></div>
@@ -823,8 +766,8 @@
 
     <section class="lineup" id="lineup">
       <div class="section-head">
-        <p class="eyebrow">Add-on product lineup</p>
-        <h2>三款加装外设，覆盖不同<strong>卧室安装方式。</strong></h2>
+        <p class="eyebrow">External product lineup</p>
+        <h2>三款外置式设备，覆盖不同<strong>卧室安装方式。</strong></h2>
       </div>
 
       <div class="sku-grid">
@@ -1038,7 +981,7 @@
         <div>
           <span>03</span>
           <h3>App 联动体验</h3>
-          <p>手机 App 提供一键体验、改善率、声景选择、夜报和下一晚建议，帮助用户找到更适合自己的睡眠设置。</p>
+          <p>手机 App 提供软件启动、改善率、声景选择、夜报和下一晚建议，帮助用户找到更适合自己的睡眠设置。</p>
         </div>
       </div>
       <p class="public-note">

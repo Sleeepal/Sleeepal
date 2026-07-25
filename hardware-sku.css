@@ -30,6 +30,41 @@ figure a,
 .concept-grid a {
   display: block;
 }
+.hero-visual > a,
+.sku-carousel figure > a,
+.demo-photo > a,
+.scenario-visual,
+.sku > a,
+.pillar-feature figure > a,
+.concept-grid article > a {
+  position: relative;
+}
+.hero-visual > a::after,
+.sku-carousel figure > a::after,
+.demo-photo > a::after,
+.scenario-visual::after,
+.sku > a::after,
+.pillar-feature figure > a::after,
+.concept-grid article > a::after {
+  content: "查看详情";
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 5;
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 1px solid rgba(248, 250, 252, 0.36);
+  background: rgba(5, 8, 18, 0.84);
+  color: #f8fafc;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
 
 .hardware-nav {
   position: sticky;
@@ -52,6 +87,36 @@ figure a,
   font-size: 14px;
   font-weight: 700;
 }
+.hardware-brand-lockup {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 16px;
+}
+.hardware-brand-lockup > span {
+  padding-left: 16px;
+  border-left: 1px solid rgba(167, 139, 250, 0.26);
+  color: rgba(226, 232, 240, 0.82);
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.hardware-catalog {
+  display: flex;
+  flex-direction: column;
+}
+.hardware-catalog > .hero { order: 1; }
+.hardware-catalog > .sleep-scenarios { order: 2; }
+.hardware-catalog > .live-demo { order: 3; }
+.hardware-catalog > .concept-shelf { order: 4; }
+.hardware-catalog > .strip-detail { order: 5; }
+.hardware-catalog > .lineup { order: 6; }
+.hardware-catalog > .pillar-showcase { order: 7; }
+.hardware-catalog > .concealed-forms { order: 8; }
+.hardware-catalog > .principle { order: 9; }
+.hardware-catalog > .zero-rf { order: 10; }
+.hardware-catalog > .public-status { order: 11; }
 
 .hero {
   min-height: calc(100svh - 70px);
@@ -2015,6 +2080,23 @@ body,
   font-size: 12px;
   font-weight: 900;
   white-space: nowrap;
+}
+.concealed-head-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+}
+.concealed-detail-action {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 1px solid rgba(94, 230, 197, 0.36);
+  color: var(--mint);
+  font-size: 12px;
+  font-weight: 850;
 }
 
 .concealed-core-overview {
