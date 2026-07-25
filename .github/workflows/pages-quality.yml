@@ -39,7 +39,7 @@ jobs:
           const allowed = new Set([
             ".github/workflows/pages-quality.yml",
             "CNAME", "LICENSE", "README.md", "docs/website-release-notes.md",
-            "index.html", "styles.css", "site.js", "desktop.html", "desktop.js",
+            "index.html", "styles.css", "site.js", "desktop.html",
             "feedback.html", "feedback.js",
             "privacy.html", "terms.html", "3d-printing-workshop.html", "dream-lab.css",
             "dream-lab.js", "release.json", "favicon.ico", "hardware-sku.html",
@@ -51,7 +51,7 @@ jobs:
             "assets/concealed-inwall-linear-microperforated-v1.jpg",
             "assets/concealed-inwall-linear-walnut-v1.jpg",
             "assets/demo-child-protected-sleep-warm.png",
-            "assets/demo-couple-protected-sleep-warm-wide.png",
+            "assets/demo-couple-protected-sleep-warm-real-bed-v2.jpg",
             "assets/demo-sleep-people-quiet-zone-triptych-warm.png",
             "assets/demo-woman-protected-sleep-warm.png",
             "assets/favicon-16.png", "assets/favicon-32.png",
@@ -98,8 +98,31 @@ jobs:
           }
 
           const release = JSON.parse(fs.readFileSync("release.json", "utf8"));
-          assert.equal(release.publicDownload, false);
-          assert.equal("downloadPath" in release, false);
-          assert.equal("downloadUrl" in release, false);
+          assert.equal(release.schemaVersion, 2);
+          assert.deepEqual(Object.keys(release.downloads || {}).sort(), ["android", "ios", "macos", "windows"]);
+          for (const [platform, artifact] of Object.entries(release.downloads)) {
+            assert.equal(artifact.publicDownload, false, `${platform}: public download exposed`);
+            assert.equal("downloadPath" in artifact, false, `${platform}: local path exposed`);
+            assert.equal("downloadUrl" in artifact, false, `${platform}: unapproved URL exposed`);
+          }
+          const scripts = ["site.js", "feedback.js", "dream-lab.js", "hardware-sku.js"]
+            .map((file) => fs.readFileSync(file, "utf8"))
+            .join("\n");
+          assert.equal(/scrollIntoView|scrollTo\(|scrollBy\(/.test(scripts), false, "scripted page scrolling remains");
+          assert.equal(/scroll-behavior:\s*smooth/.test(fs.readFileSync("styles.css", "utf8")), false, "smooth page scrolling remains");
+
+          const dreamHtml = fs.readFileSync("3d-printing-workshop.html", "utf8");
+          const dreamScript = fs.readFileSync("dream-lab.js", "utf8");
+          assert.match(dreamHtml, /canonical[^>]+sleeepal\.com\/3d-printing-workshop\.html/);
+          assert.doesNotMatch(dreamHtml, /canonical[^>]+dream\.sleeepal\.com/);
+          assert.match(dreamScript, /connect-src 'none'/, "offline artifact CSP missing");
+          assert.match(dreamScript, /artifactPreviewFrame\.srcdoc = payload\.content/);
+          assert.doesNotMatch(dreamScript, /artifactPreviewFrame\.src\s*=/, "preview bypasses hardened srcdoc");
+          assert.match(dreamScript, /hostname === "dream\.sleeepal\.com"/, "future account API boundary missing");
+          assert.match(dreamHtml, /data-wallet-preview disabled>钱包账号 · 即将开放</, "unavailable wallet login is not fail-closed");
+
+          for (const file of ["hardware-sku.html", "hardware-detail.html"]) {
+            assert.match(fs.readFileSync(file, "utf8"), /Content-Security-Policy/);
+          }
           console.log(`Pages quality: ok (${tracked.length} tracked files)`);
           NODE

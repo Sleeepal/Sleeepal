@@ -271,7 +271,7 @@ async function openGitHubIssue() {
     return;
   }
   await copyPackage();
-  window.open("https://github.com/HiClawBot/Sleeepal/issues/new", "_blank", "noopener,noreferrer");
+  window.open("https://github.com/Sleeepal/Sleeepal/issues/new", "_blank", "noopener,noreferrer");
 }
 
 function updatePublicShareState() {

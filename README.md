@@ -6,14 +6,20 @@ This branch contains only the allowlisted files published at [sleeepal.com](http
 
 ## Public pages
 
-- Product overview and current validation status
+- Personal quiet-space overview for laptop work and phone rest/sleep scenarios
+- Automatic platform matching from one “开始体验” entry, with fail-closed public downloads
+- Near-field acoustic principle, phase overlay, and three-layer field visualizations
+- Public hardware forms, concealed installation concepts, and human sleep scenarios
 - Local-first feedback package
 - Beta privacy and usage boundaries
-- SleeePal Lab: “梦想成真” product method
+- SleeePal Lab: multi-dream cards, local conversation, progress, preview, and export
+- Future-facing “梦境再现” concept with research references and explicit availability/privacy boundaries
 
 ## Release boundary
 
-- No public app download is exposed before signing, notarization, and physical acceptance.
+- No public app download is exposed before signing, notarization, and physical acceptance; the homepage stays in place instead of redirecting to GitHub.
+- The only GitHub entry is kept in the homepage footer.
+- The former `/desktop.html` URL remains as a lightweight compatibility page and routes visitors back to the homepage entry.
 - Feedback does not upload audio, screenshots, reports, or logs automatically.
 - GitHub Issues are public and stay disabled until the visitor confirms the content contains no sensitive information.
 - Undisclosed implementation, engineering, supplier, and user-submitted material is not published here.

@@ -9,7 +9,7 @@ const translations = {
     "nav.hardware": "产品形态",
     "nav.pro": "Pro",
     "nav.feedback": "反馈",
-    "nav.cta": "下载状态",
+    "nav.cta": "开始体验",
     "nav.open": "打开导航",
     "nav.close": "关闭导航",
     "hero.pretitle": "PERSONAL QUIET SPACE · WORK + REST",
@@ -17,7 +17,7 @@ const translations = {
     "hero.headline": "创造属于你的<br/><em>静谧空间</em>",
     "hero.sub": "白天专注工作，夜晚放松入睡。<br/><strong>同一套本地声音能力，跟随你的设备与生活节奏。</strong>",
     "hero.brand": "笔记本电脑用于工作场景，手机则用于休息和睡眠场景。",
-    "hero.primary": "选择我的静谧空间",
+    "hero.primary": "开始体验",
     "hero.secondary": "了解工作原理",
     "hero.wave.antiMeta": "等待扬声器",
     "marquee.1": "笔记本电脑 · 工作静谧",
@@ -32,10 +32,23 @@ const translations = {
     "support.item3": "建议、问题与体验反馈",
     "support.cta": "告诉睡眠宝",
     "support.note": "您的消息会由团队查看；发送前可自行决定是否附上截图、夜报或设备信息。",
-    "download.eyebrow": "选择你的静谧入口",
-    "download.sub": "工作场景选择 Mac / Windows；休息和睡眠场景选择 iPhone / Android",
-    "download.button": "选择电脑版本",
-    "download.sysreq": "macOS 与 Windows x64 · 了解电脑版本计划",
+    "download.eyebrow": "DOWNLOADS",
+    "download.title": "自动匹配<br/><em>你的设备</em>",
+    "download.sub": "电脑端点击首屏“开始体验”，自动下载当前系统版本。",
+    "download.desktop": "电脑版本",
+    "download.detecting": "正在识别当前设备…",
+    "download.ready.macos": "已识别 Mac，点击开始下载。",
+    "download.ready.windows": "已识别 Windows，点击开始下载。",
+    "download.ready.ios": "已识别 iPhone / iPad，点击开始安装。",
+    "download.ready.android": "已识别 Android，点击开始安装。",
+    "download.pending.macos": "Mac 公开安装包正在完成签名与公证，当前不会跳转到其他页面。",
+    "download.pending.windows": "Windows 公开安装包正在完成构建与签名，当前不会跳转到其他页面。",
+    "download.pending.ios": "iOS 安装包准备中。",
+    "download.pending.android": "Android 安装包准备中。",
+    "download.pending.unknown": "暂未识别当前系统；Mac 与 Windows 安装包就绪后会在这里自动匹配。",
+    "download.desktop.mobile": "请在 Mac 或 Windows 电脑打开官网，自动匹配安装包",
+    "download.package.pending": "安装包准备中",
+    "download.package.install": "安装",
     "download.coming1": "iPhone · 休息/睡眠",
     "download.coming2": "Android · 休息/睡眠",
     "download.coming3": "Windows x64 · 工作",
@@ -182,9 +195,13 @@ const translations = {
     "mobile.kicker": "手机静谧空间 · 休息和睡眠",
     "mobile.title": "放下工作之后，<br/><em>让手机把静谧带到枕边</em>",
     "mobile.lead": "手机是休息和睡眠场景的轻量入口：靠近人和枕头，负责本地感知、声景选择、时间设定与整夜陪伴。",
-    "mobile.device": "本地感知·声景与睡眠控制",
+    "mobile.device": "Mic 采集·扬声器前向输出",
     "mobile.rest": "午休·沙发放松·睡前阅读",
     "mobile.sleep": "枕边入睡·整夜陪伴",
+    "mobile.layer1": "近枕层·最集中",
+    "mobile.layer2": "休息层·逐步减弱",
+    "mobile.layer3": "外缘层·作用较弱",
+    "mobile.flightMode": "请在使用前打开飞行模式，避免手机来电打扰您的美好睡眠。",
     "mobile.moment1.title": "午休与放松",
     "mobile.moment1.body": "手机单机即可开始，用熟悉的声景把注意力从工作切换到休息。",
     "mobile.moment2.title": "睡前入静",
@@ -343,6 +360,7 @@ const translations = {
     "footer.about3": "问题反馈",
     "footer.copy": "© 2026 SleeePal 睡眠宝 · sleeepal.com",
     "footer.disclaimer": "SleeePal 为非药物助眠辅助工具，不构成医疗建议或诊断。理论效果因实际空间、设备及摆位不同而存在差异。",
+    "footer.github": "前往 GitHub",
     "maker.title": "美梦成真",
     "maker.body": "把你的想法或愿望描述出来，让睡眠宝成为你的 AI 助手，生成真实可用、可以不断优化的数字产物。"
   },
@@ -356,7 +374,7 @@ const translations = {
     "nav.hardware": "Product forms",
     "nav.pro": "Pro",
     "nav.feedback": "Feedback",
-    "nav.cta": "Download status",
+    "nav.cta": "Start",
     "nav.open": "Open navigation",
     "nav.close": "Close navigation",
     "hero.pretitle": "PERSONAL QUIET SPACE · WORK + REST",
@@ -364,7 +382,7 @@ const translations = {
     "hero.headline": "Create your own<br/><em>quiet space</em>",
     "hero.sub": "At work, your laptop creates a near-field quiet space between the screen and your ears.<br/><strong>For rest and sleep, your phone brings quiet closer to you and your pillow.</strong>",
     "hero.brand": "One local sound system that follows your device, location, and daily rhythm.",
-    "hero.primary": "Choose my quiet space",
+    "hero.primary": "Start",
     "hero.secondary": "How it works",
     "hero.wave.antiMeta": "Waiting for speaker",
     "marquee.1": "LAPTOP · QUIET FOR WORK",
@@ -379,10 +397,23 @@ const translations = {
     "support.item3": "Ideas, issues, and experience feedback",
     "support.cta": "Tell SleeePal",
     "support.note": "Our team will read your message. You decide whether to include screenshots, a night report, or device details.",
-    "download.eyebrow": "Choose your quiet-space entry",
-    "download.sub": "Choose Mac / Windows for work, and iPhone / Android for rest and sleep",
-    "download.button": "Choose your desktop",
-    "download.sysreq": "macOS and Windows x64 · explore the desktop roadmap",
+    "download.eyebrow": "DOWNLOADS",
+    "download.title": "Matched to<br/><em>your device</em>",
+    "download.sub": "On desktop, choose Start and the current Mac or Windows build downloads automatically.",
+    "download.desktop": "Desktop",
+    "download.detecting": "Detecting this device…",
+    "download.ready.macos": "Mac detected. Choose Start to download.",
+    "download.ready.windows": "Windows detected. Choose Start to download.",
+    "download.ready.ios": "iPhone / iPad detected. Choose Start to install.",
+    "download.ready.android": "Android detected. Choose Start to install.",
+    "download.pending.macos": "The public Mac package is completing signing and notarization. This button will not redirect elsewhere.",
+    "download.pending.windows": "The public Windows package is completing its build and signing. This button will not redirect elsewhere.",
+    "download.pending.ios": "The iOS package is being prepared.",
+    "download.pending.android": "The Android package is being prepared.",
+    "download.pending.unknown": "This system was not recognized. Mac and Windows packages will be matched here when ready.",
+    "download.desktop.mobile": "Open this site on Mac or Windows to match the desktop package automatically",
+    "download.package.pending": "Package in preparation",
+    "download.package.install": "Install",
     "download.coming1": "iPhone · rest/sleep",
     "download.coming2": "Android · rest/sleep",
     "download.coming3": "Windows x64 · work",
@@ -529,9 +560,13 @@ const translations = {
     "mobile.kicker": "Phone quiet space · rest and sleep",
     "mobile.title": "When work is done,<br/><em>let your phone bring quiet to the pillow</em>",
     "mobile.lead": "The phone is the lightest entry into rest and sleep: close to you and your pillow for local sensing, soundscapes, timing, and overnight control.",
-    "mobile.device": "Local sensing · soundscape and sleep control",
+    "mobile.device": "Mic sensing · forward speaker output",
     "mobile.rest": "Nap · sofa wind-down · bedtime reading",
     "mobile.sleep": "Falling asleep · overnight support",
+    "mobile.layer1": "Near-pillow · most focused",
+    "mobile.layer2": "Rest layer · gradually weaker",
+    "mobile.layer3": "Outer edge · limited effect",
+    "mobile.flightMode": "Turn on airplane mode before use so calls do not interrupt your sleep.",
     "mobile.moment1.title": "Naps and wind-down",
     "mobile.moment1.body": "Start with the phone alone and use a familiar soundscape to shift your attention from work into rest.",
     "mobile.moment2.title": "Settling before sleep",
@@ -690,6 +725,7 @@ const translations = {
     "footer.about3": "Feedback",
     "footer.copy": "© 2026 SleeePal · sleeepal.com",
     "footer.disclaimer": "SleeePal is a non-medical sleep assistance tool. It does not provide diagnosis or medical advice. Real-world performance depends on space, hardware, and placement.",
+    "footer.github": "Visit GitHub",
     "maker.title": "Make a dream real",
     "maker.body": "Describe an idea or wish and let SleeePal become your AI assistant, creating a usable digital product that can keep improving."
   }
@@ -702,60 +738,30 @@ const toggle = document.querySelector("[data-lang-toggle]");
 const mobileNavToggle = document.querySelector("[data-mobile-nav-toggle]");
 const primaryNavigation = document.querySelector("#primary-navigation");
 const releaseNodes = {
-  downloadLink: document.querySelector(".btn-lux-download"),
-  downloadSub: document.querySelector(".dl-lux-sub"),
-  downloadSysreq: document.querySelector(".dl-sysreq"),
-  buttonLabel: document.querySelector("[data-release-button-label]"),
-  alternateLink: document.querySelector("[data-release-alternate]"),
-  releaseLabel: document.querySelector("[data-release-label]"),
-  releaseVersion: document.querySelector("[data-release-version]"),
-  releaseTime: document.querySelector("[data-release-time]"),
-  releaseNote: document.querySelector("[data-release-note]"),
-  releaseProgress: Array.from(document.querySelectorAll("[data-release-progress]")),
+  autoDownloadLinks: Array.from(document.querySelectorAll("[data-auto-download]")),
+  downloadStatus: Array.from(document.querySelectorAll("[data-download-status]")),
+  desktopPackageStatus: document.querySelector("[data-desktop-package-status]"),
+  packageStatus: new Map(
+    Array.from(document.querySelectorAll("[data-package-status]")).map((node) => [
+      node.getAttribute("data-package-status"),
+      node,
+    ]),
+  ),
+  packageLinks: new Map(
+    Array.from(document.querySelectorAll("[data-package-link]")).map((node) => [
+      node.getAttribute("data-package-link"),
+      node,
+    ]),
+  ),
 };
 
 let currentRelease = {
-  version: "0.3.133",
-  publicDownload: false,
-  progressUrl: "https://github.com/HiClawBot/Sleeepal",
-  buildTime: "2026-06-06 01:12 CEST",
-  buildNote: {
-    zh: "工作静谧 · 手机休息和睡眠 · 本地声音处理",
-    en: "Work quiet space · mobile rest and sleep · local audio processing",
+  downloads: {
+    macos: { publicDownload: false },
+    windows: { publicDownload: false },
+    ios: { publicDownload: false },
+    android: { publicDownload: false },
   },
-  downloadSub: {
-    zh: "工作场景选择 Mac / Windows；休息和睡眠场景选择 iPhone / Android",
-    en: "Choose Mac / Windows for work, and iPhone / Android for rest and sleep",
-  },
-  downloadButton: {
-    zh: "选择电脑版本",
-    en: "Choose your desktop",
-  },
-  sysreq: {
-    zh: "macOS 与 Windows x64 · 了解电脑版本计划",
-    en: "macOS and Windows x64 · explore the desktop roadmap",
-  },
-  releaseLabel: {
-    zh: "当前版本",
-    en: "Current version",
-  },
-  packagedLabel: {
-    zh: "更新时间",
-    en: "Updated",
-  },
-  progress: {
-    zh: [
-      "笔记本电脑端面向工作与专注，支持本地声音分析与近场调节。",
-      "手机端面向休息和睡眠，负责枕边感知、声景选择与连接设备控制。",
-      "居家专用硬件把更稳定的采集与输出带到床头近场。",
-    ],
-    en: [
-      "The laptop experience is designed for work and focus, with local sound analysis and near-field tuning.",
-      "The phone experience is designed for rest and sleep, handling bedside sensing, soundscapes, and connected-device control.",
-      "Dedicated home hardware brings steadier sensing and output to the bedside near field.",
-    ],
-  },
-  alternateDownloads: [],
 };
 
 function getCurrentLang() {
@@ -768,72 +774,137 @@ function pickLocalized(value, lang, fallback = "") {
   return value[lang] || value.zh || value.en || fallback;
 }
 
-function approvedArtifactUrl(release) {
+function detectDownloadPlatform(nav = globalThis.navigator) {
+  const userAgent = String(nav?.userAgent || "").toLowerCase();
+  const reportedPlatform = String(
+    nav?.userAgentData?.platform || nav?.platform || "",
+  ).toLowerCase();
+  const combined = `${reportedPlatform} ${userAgent}`;
+  if (combined.includes("android")) return "android";
   if (
-    release?.publicDownload !== true
-    || release?.artifactStatus !== "approved"
-    || release?.signed !== true
-    || release?.notarized !== true
-  ) return null;
+    /iphone|ipad|ipod/u.test(combined)
+    || (reportedPlatform.includes("mac") && Number(nav?.maxTouchPoints || 0) > 1)
+  ) return "ios";
+  if (combined.includes("windows") || combined.includes("win32")) return "windows";
+  if (combined.includes("mac")) return "macos";
+  return "unknown";
+}
 
+function trustedDownloadUrl(value) {
+  if (
+    typeof value !== "string"
+    || !value.trim()
+  ) return null;
   try {
-    const url = new URL(release.downloadUrl);
-    if (url.protocol !== "https:" || ["localhost", "127.0.0.1"].includes(url.hostname)) return null;
+    const base = globalThis.location?.href || "https://sleeepal.com/";
+    const url = new URL(value, base);
+    if (url.protocol !== "https:" || ["localhost", "127.0.0.1"].includes(url.hostname)) {
+      return null;
+    }
+    const sameOrigin = Boolean(globalThis.location?.origin)
+      && url.origin === globalThis.location.origin;
+    const publicReleaseAsset = url.hostname === "github.com"
+      && url.pathname.startsWith("/Sleeepal/Sleeepal/releases/download/");
+    const mobileStore = [
+      "apps.apple.com",
+      "testflight.apple.com",
+      "play.google.com",
+    ].includes(url.hostname);
+    if (!sameOrigin && !publicReleaseAsset && !mobileStore) return null;
     return url.href;
   } catch {
     return null;
   }
 }
 
-function applyReleaseInfo(lang) {
-  const packagedLabel = pickLocalized(currentRelease.packagedLabel, lang, "Packaged");
-  const progress = currentRelease.progress?.[lang] || currentRelease.progress?.zh || [];
-  const approvedDownload = approvedArtifactUrl(currentRelease);
-  const publicDownload = Boolean(approvedDownload);
+function approvedDownload(platform, release = currentRelease) {
+  const artifact = release?.downloads?.[platform];
+  if (
+    !artifact
+    || artifact.publicDownload !== true
+    || artifact.artifactStatus !== "approved"
+    || artifact.signed !== true
+  ) return null;
+  if (platform === "macos" && artifact.notarized !== true) return null;
+  const url = trustedDownloadUrl(artifact.downloadUrl);
+  return url ? { ...artifact, url } : null;
+}
 
-  if (releaseNodes.downloadLink) {
-    const destination = publicDownload ? approvedDownload : "./desktop.html";
-    releaseNodes.downloadLink.setAttribute("href", destination);
-    releaseNodes.downloadLink.dataset.releaseState = publicDownload ? "download" : "validation";
+function platformLabel(platform, lang) {
+  const labels = {
+    zh: { macos: "Mac", windows: "Windows", ios: "iOS", android: "Android" },
+    en: { macos: "Mac", windows: "Windows", ios: "iOS", android: "Android" },
+  };
+  return labels[lang]?.[platform] || labels.en[platform] || "Desktop";
+}
+
+function downloadStatusMessage(platform, ready, lang) {
+  const copy = translations[lang] || translations.zh;
+  const state = ready ? "ready" : "pending";
+  return copy[`download.${state}.${platform}`]
+    || copy["download.pending.unknown"];
+}
+
+function applyMobilePackage(platform, lang) {
+  const statusNode = releaseNodes.packageStatus.get(platform);
+  const link = releaseNodes.packageLinks.get(platform);
+  const artifact = approvedDownload(platform);
+  const copy = translations[lang] || translations.zh;
+  if (!statusNode || !link) return;
+  if (!artifact) {
+    statusNode.textContent = copy[`download.pending.${platform}`]
+      || copy["download.package.pending"];
+    link.hidden = false;
+    link.removeAttribute("href");
+    link.setAttribute("aria-disabled", "true");
+    link.textContent = lang === "zh" ? "准备中" : "Preparing";
+    return;
   }
-  if (releaseNodes.downloadSub) {
-    releaseNodes.downloadSub.textContent = pickLocalized(currentRelease.downloadSub, lang, "");
-  }
-  if (releaseNodes.buttonLabel) {
-    releaseNodes.buttonLabel.textContent = pickLocalized(currentRelease.downloadButton, lang, "");
-  }
-  if (releaseNodes.downloadSysreq) {
-    releaseNodes.downloadSysreq.textContent = pickLocalized(currentRelease.sysreq, lang, "");
-  }
-  if (releaseNodes.alternateLink) {
-    const alternate = currentRelease.alternateDownloads?.[0];
-    const alternateDownload = approvedArtifactUrl(alternate);
-    if (alternateDownload) {
-      releaseNodes.alternateLink.hidden = false;
-      releaseNodes.alternateLink.setAttribute("href", alternateDownload);
-      const alternateLabel = alternate.arch === "darwin-x64" ? "Intel Mac" : "Apple Silicon";
-      releaseNodes.alternateLink.textContent = lang === "zh"
-        ? `${alternateLabel} 候选包 v${alternate.version}`
-        : `${alternateLabel} candidate v${alternate.version}`;
+  statusNode.textContent = artifact.version
+    ? `${platformLabel(platform, lang)} · v${artifact.version}`
+    : platformLabel(platform, lang);
+  link.hidden = false;
+  link.removeAttribute("aria-disabled");
+  link.href = artifact.url;
+  link.textContent = copy["download.package.install"];
+}
+
+function applyReleaseInfo(lang) {
+  const copy = translations[lang] || translations.zh;
+  const platform = detectDownloadPlatform();
+  const artifact = approvedDownload(platform);
+  releaseNodes.autoDownloadLinks.forEach((link) => {
+    if (artifact) {
+      link.href = artifact.url;
+      link.dataset.releaseState = "download";
+      link.removeAttribute("aria-disabled");
+      link.removeAttribute("aria-describedby");
+      link.setAttribute(
+        "aria-label",
+        `${copy["hero.primary"]} · ${platformLabel(platform, lang)}${artifact.version ? ` v${artifact.version}` : ""}`,
+      );
     } else {
-      releaseNodes.alternateLink.hidden = true;
+      link.href = "#download";
+      link.dataset.releaseState = "unavailable";
+      link.removeAttribute("aria-disabled");
+      link.setAttribute("aria-describedby", "hero-download-status");
+      link.removeAttribute("aria-label");
+    }
+  });
+  releaseNodes.downloadStatus.forEach((node) => {
+    node.textContent = downloadStatusMessage(platform, Boolean(artifact), lang);
+  });
+  if (releaseNodes.desktopPackageStatus) {
+    if (["macos", "windows"].includes(platform)) {
+      releaseNodes.desktopPackageStatus.textContent = artifact
+        ? `${platformLabel(platform, lang)}${artifact.version ? ` · v${artifact.version}` : ""}`
+        : downloadStatusMessage(platform, false, lang);
+    } else {
+      releaseNodes.desktopPackageStatus.textContent = copy["download.desktop.mobile"];
     }
   }
-  if (releaseNodes.releaseLabel) {
-    releaseNodes.releaseLabel.textContent = pickLocalized(currentRelease.releaseLabel, lang, "");
-  }
-  if (releaseNodes.releaseVersion && currentRelease.version) {
-    releaseNodes.releaseVersion.textContent = `v${currentRelease.version}`;
-  }
-  if (releaseNodes.releaseTime && currentRelease.buildTime) {
-    releaseNodes.releaseTime.textContent = `${packagedLabel} · ${currentRelease.buildTime}`;
-  }
-  if (releaseNodes.releaseNote && currentRelease.buildNote) {
-    releaseNodes.releaseNote.textContent = pickLocalized(currentRelease.buildNote, lang, "");
-  }
-  releaseNodes.releaseProgress.forEach((node, index) => {
-    node.textContent = progress[index] || "";
-  });
+  applyMobilePackage("ios", lang);
+  applyMobilePackage("android", lang);
 }
 
 async function loadReleaseInfo() {
@@ -841,7 +912,14 @@ async function loadReleaseInfo() {
     const response = await fetch("./release.json", { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
-    currentRelease = { ...currentRelease, ...data };
+    currentRelease = {
+      ...currentRelease,
+      ...data,
+      downloads: {
+        ...currentRelease.downloads,
+        ...(data.downloads || {}),
+      },
+    };
   } catch (error) {
     console.debug("Unable to load release metadata:", error);
   }
@@ -897,6 +975,50 @@ function applyLanguage(lang) {
 const initialLang = getCurrentLang();
 applyLanguage(initialLang);
 loadReleaseInfo();
+
+releaseNodes.autoDownloadLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (link.dataset.releaseState === "download") return;
+    event.preventDefault();
+    releaseNodes.downloadStatus.forEach((node) => {
+      node.classList.remove("is-notice");
+      globalThis.requestAnimationFrame(() => node.classList.add("is-notice"));
+    });
+  });
+});
+
+function initializeSectionFades() {
+  const sections = Array.from(document.querySelectorAll(
+    "body > section, body > .philosophy-band, body > .marquee-band",
+  ));
+  if (!sections.length) return;
+  sections.forEach((section) => {
+    section.classList.add("section-fade");
+    const rect = section.getBoundingClientRect();
+    section.classList.toggle(
+      "is-visible",
+      rect.bottom > 0 && rect.top < globalThis.innerHeight,
+    );
+  });
+  if (
+    globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    || !("IntersectionObserver" in globalThis)
+  ) {
+    sections.forEach((section) => section.classList.add("is-visible"));
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
+      });
+    },
+    { rootMargin: "-5% 0px -5%", threshold: 0.04 },
+  );
+  sections.forEach((section) => observer.observe(section));
+}
+
+initializeSectionFades();
 
 toggle?.addEventListener("click", () => {
   const next = getCurrentLang() === "zh" ? "en" : "zh";

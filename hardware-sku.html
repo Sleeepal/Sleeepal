@@ -4,10 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SleeePal Hardware — 枕边近场降噪产品形态</title>
-  <meta name="description" content="SleeePal 枕边近场降噪产品形态，包括床头外设、三种比例的可换画芯声学画框与小体积装修预埋墙内长条款；逐款呈现环境声采集、反向声波输出和枕位静谧空间实测路径。" />
+  <meta name="description" content="SleeePal 枕边近场降噪产品形态，包括床头外设、三种比例的可换画芯声学画框与小体积装修预埋墙内长条款；逐款呈现环境声采集、反向声波输出和枕位静谧空间验证路径。" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
   <link rel="icon" href="./favicon.ico" sizes="any" />
-  <link rel="stylesheet" href="./hardware-sku.css?v=20260723-construction4" />
-  <script src="./hardware-sku.js?v=20260723-acoustic5" defer></script>
+  <link rel="stylesheet" href="./hardware-sku.css?v=20260725-acoustic-scenes5" />
+  <script src="./hardware-sku.js?v=20260725-acoustic-scenes5" defer></script>
 </head>
 <body>
   <header class="hardware-nav">
@@ -15,13 +17,12 @@
       <img src="./assets/logo-light.svg" alt="SleeePal" />
     </a>
     <nav>
-      <a href="sleeepal://devices?action=calibrate" data-app-link="hardware-devices">打开设备检查</a>
+      <a href="#status">使用场景</a>
       <a href="#one-tap">一键体验</a>
       <a href="#concealed">隐形款</a>
       <a href="#lineup">明装款</a>
       <a href="#demo">真人演示</a>
       <a href="#zero-rf">0 蓝牙模式</a>
-      <a href="#status">使用场景</a>
     </nav>
   </header>
 
@@ -34,8 +35,7 @@
           床头外包静谧条：一键体验反相输出、低频柔化和声景辅助，在枕头和头部附近改善呼噜干扰与持续低频，服务双人床、情侣/夫妻和长期卧室场景。
         </p>
         <div class="hero-actions">
-          <a href="sleeepal://devices?action=calibrate" data-app-link="hardware-hero" class="primary-action">在桌面版检查链路</a>
-          <a href="#strip" class="secondary-action">查看床头款</a>
+          <a href="#strip" class="primary-action">查看床头款</a>
         </div>
       </div>
       <figure class="hero-visual">
@@ -69,6 +69,10 @@
           <span>推荐链路</span>
           <i></i>
           <span>三层增强</span>
+        </div>
+        <div class="one-tap-actions">
+          <a href="sleeepal://devices?action=calibrate" data-app-link="hardware-devices">打开设备检查</a>
+          <small>体验前确认 Mic、扬声器与连接状态</small>
         </div>
       </div>
 
@@ -690,39 +694,82 @@
     <section class="sleep-scenarios" id="people-demo">
       <div class="section-head">
         <p class="eyebrow">Protected sleep scenarios</p>
-        <h2>女士独睡、儿童房、夫妻双人床，各有合适的<strong>枕区静谧方式。</strong></h2>
+        <h2>成年人单人床、儿童床、夫妻双人床，清楚看见<strong>声音如何被处理。</strong></h2>
       </div>
       <div class="scenario-grid">
-        <figure>
-          <a href="./hardware-detail.html?item=demo-woman">
-            <img src="./assets/demo-woman-protected-sleep-warm.png" alt="女士睡在枕头上，SleeePal 在床头进行近场降噪" />
+        <figure class="scenario-card scenario-adult">
+          <a class="scenario-visual" href="./hardware-detail.html?item=demo-woman">
+            <img src="./assets/demo-woman-protected-sleep-warm.png" alt="成年人单人床声学路径示意：环境低频被 Mic 采集，反向声波指向枕边三层递减区域" loading="lazy" width="724" height="724" />
+            <svg class="scenario-acoustic-overlay" viewBox="0 0 1000 750" preserveAspectRatio="none" aria-hidden="true">
+              <path class="scenario-zone zone-outer" d="M500 170 C820 205 905 540 650 690 C410 662 320 350 500 170 Z" />
+              <path class="scenario-zone zone-middle" d="M500 190 C745 235 810 520 635 625 C455 606 385 370 500 190 Z" />
+              <path class="scenario-zone zone-inner" d="M500 214 C666 268 720 493 620 558 C495 548 448 385 500 214 Z" />
+              <path class="scenario-signal signal-noise" d="M28 280 C138 230 260 210 458 184" />
+              <path class="scenario-signal signal-anti" d="M500 205 C525 286 555 364 610 470" />
+              <circle class="scenario-mic" cx="488" cy="190" r="10" />
+            </svg>
+            <span class="scenario-signal-label label-source" data-tone="noise" aria-hidden="true">空调 / 交通低频</span>
+            <span class="scenario-signal-label label-mic" data-tone="mic" aria-hidden="true">Mic 采集</span>
+            <span class="scenario-signal-label label-anti" data-tone="anti" aria-hidden="true">反向声波·削弱噪音</span>
+            <span class="scenario-signal-label label-zone" data-tone="zone" aria-hidden="true">三层枕边静谧区</span>
           </a>
           <figcaption>
-            <strong>女士独睡</strong>
-            <span>设备靠近枕区工作，柔和状态光朝外，避免直射眼睛。</span>
+            <strong>成年人单人床</strong>
+            <span>声学路径仿真示意：环境低频先被 Mic 采集，再由反向声波指向枕区；越靠近枕头，作用越集中。</span>
           </figcaption>
         </figure>
-        <figure>
-          <a href="./hardware-detail.html?item=demo-child">
-            <img src="./assets/demo-child-protected-sleep-warm.png" alt="儿童睡在枕头上，SleeePal 儿童款以保守输出形成柔和的枕边环境" />
+        <figure class="scenario-card scenario-child">
+          <a class="scenario-visual" href="./hardware-detail.html?item=demo-child">
+            <img src="./assets/demo-child-protected-sleep-warm.png" alt="儿童床声学路径示意：门外声和环境声被 Mic 采集，柔和反向输出指向儿童枕边三层递减区域" loading="lazy" width="724" height="724" />
+            <svg class="scenario-acoustic-overlay" viewBox="0 0 1000 750" preserveAspectRatio="none" aria-hidden="true">
+              <path class="scenario-zone zone-outer" d="M515 164 C818 220 868 545 625 690 C395 650 340 352 515 164 Z" />
+              <path class="scenario-zone zone-middle" d="M515 188 C744 250 786 514 615 625 C446 593 402 382 515 188 Z" />
+              <path class="scenario-zone zone-inner" d="M515 216 C672 278 703 487 603 558 C486 530 463 398 515 216 Z" />
+              <path class="scenario-signal signal-noise" d="M30 266 C156 222 300 202 474 180" />
+              <path class="scenario-signal signal-anti" d="M514 205 C536 286 555 365 595 470" />
+              <circle class="scenario-mic" cx="503" cy="190" r="10" />
+            </svg>
+            <span class="scenario-signal-label label-source" data-tone="noise" aria-hidden="true">门外声 / 环境声</span>
+            <span class="scenario-signal-label label-mic" data-tone="mic" aria-hidden="true">Mic 采集</span>
+            <span class="scenario-signal-label label-anti" data-tone="anti" aria-hidden="true">柔和反向输出</span>
+            <span class="scenario-signal-label label-zone" data-tone="zone" aria-hidden="true">三层儿童枕区</span>
           </a>
           <figcaption>
             <strong>儿童守护</strong>
-            <span>以安全、低眩光、柔和声景为主，适合儿童房场景表达。</span>
+            <span>声学路径仿真示意：用更保守的输出指向三层递减枕区；不替代儿童监护设备。</span>
           </figcaption>
         </figure>
-        <figure>
-          <a href="./hardware-detail.html?item=demo-couple">
-            <img src="./assets/demo-couple-protected-sleep-warm-wide.png" alt="夫妻二人睡在双人床上，SleeePal 分别在两侧枕边进行近场降噪" />
+        <figure class="scenario-card scenario-couple">
+          <a class="scenario-visual" href="./hardware-detail.html?item=demo-couple">
+            <img src="./assets/demo-couple-protected-sleep-warm-real-bed-v2.jpg" alt="夫妻双人床声学路径示意：男士鼾声被 Mic 采集，反向声波指向女士枕头附近三层递减区域" loading="lazy" width="1536" height="1024" />
+            <svg class="scenario-acoustic-overlay" viewBox="0 0 1000 750" preserveAspectRatio="none" aria-hidden="true">
+              <path class="scenario-zone zone-outer" d="M314 160 C84 234 54 535 264 688 C458 652 500 340 314 160 Z" />
+              <path class="scenario-zone zone-middle" d="M314 188 C140 252 120 514 274 622 C422 590 449 370 314 188 Z" />
+              <path class="scenario-zone zone-inner" d="M314 218 C194 276 188 486 288 552 C390 526 402 390 314 218 Z" />
+              <path class="scenario-signal signal-noise" d="M720 455 C764 368 790 290 792 188" />
+              <path class="scenario-signal signal-anti" d="M310 205 C300 286 292 368 288 472" />
+              <circle class="scenario-mic" cx="792" cy="182" r="10" />
+              <path class="scenario-snore-wave" d="M710 422 C742 402 758 374 764 340 M730 438 C780 410 802 368 808 318 M748 456 C814 422 846 365 852 294" />
+            </svg>
+            <span class="scenario-signal-label label-source" data-tone="noise" aria-hidden="true">男士鼾声</span>
+            <span class="scenario-signal-label label-mic" data-tone="mic" aria-hidden="true">Mic 采集鼾声</span>
+            <span class="scenario-signal-label label-anti" data-tone="anti" aria-hidden="true">反向声波·部分抵消</span>
+            <span class="scenario-signal-label label-zone" data-tone="zone" aria-hidden="true">女士三层静谧区</span>
           </a>
           <figcaption>
             <strong>夫妻双人</strong>
-            <span>两个枕区各自被照顾，中间保持开放，亲密空间自然保留。</span>
+            <span>声学路径仿真示意：男士鼾声被采集后，反向声波指向女士枕区，尝试削弱部分稳定鼾声。</span>
           </figcaption>
         </figure>
       </div>
+      <div class="scenario-acoustic-legend" aria-label="三种声学标记">
+        <span data-tone="noise"><i></i>噪音来源</span>
+        <span data-tone="mic"><i></i>Mic 采集</span>
+        <span data-tone="anti"><i></i>反向声波</span>
+        <span data-tone="zone"><i></i>三层近场静谧区</span>
+      </div>
       <p class="scenario-note">
-        反相声波只在枕边近场尝试抵消部分持续噪音，并形成相对静谧的小范围区域。改善率用于观察呼噜和低频干扰的变化趋势，睡眠健康问题仍建议结合专业医疗建议判断。
+        图中声场为功能路径示意，并非实测声场。反相声波只在枕边近场尝试抵消部分持续噪音；改善率用于观察呼噜和低频干扰的变化趋势，实际效果以实测为准。睡眠健康问题仍建议结合专业医疗建议判断。
       </p>
     </section>
 
@@ -942,6 +989,24 @@
             <p>儿童场景采用柔和床头守护方向，灯光保持暖暗低眩光。</p>
           </div>
         </article>
+        <article>
+          <a href="./hardware-detail.html?item=demo-woman">
+            <img src="./assets/demo-woman-protected-sleep-warm.png" alt="成年人单人睡眠时，SleeePal 在枕边形成近场静谧区域" loading="lazy" width="724" height="724" />
+          </a>
+          <div>
+            <h3>成年人单人睡眠</h3>
+            <p>设备靠近单侧枕位布置，面向独睡成年人形成更集中的枕边近场静谧区域。</p>
+          </div>
+        </article>
+        <article>
+          <a href="./hardware-detail.html?item=demo-couple">
+            <img src="./assets/demo-couple-protected-sleep-warm-real-bed-v2.jpg" alt="夫妻二人在真实比例宽双人床睡眠时，SleeePal 分别照顾两侧枕区" loading="lazy" width="1536" height="1024" />
+          </a>
+          <div>
+            <h3>夫妻双人床睡眠</h3>
+            <p>宽双人床左右枕位分别布置近场声学设备，中间区域保持开放，适合夫妻长期使用。</p>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -973,24 +1038,5 @@
       </p>
     </section>
   </main>
-  <script>
-    const restoreHashScroll = () => {
-      let target = null;
-      try {
-        const id = decodeURIComponent(window.location.hash.slice(1));
-        target = id ? document.getElementById(id) : null;
-      } catch (_error) {
-        target = null;
-      }
-      if (target) {
-        target.scrollIntoView({ block: "start" });
-      }
-    };
-    window.addEventListener("load", () => {
-      restoreHashScroll();
-      window.setTimeout(restoreHashScroll, 350);
-      window.setTimeout(restoreHashScroll, 1000);
-    });
-  </script>
 </body>
 </html>
