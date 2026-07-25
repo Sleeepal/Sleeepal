@@ -14,6 +14,7 @@
 - Removed scripted and smooth page scrolling from public interactions.
 - Added independent opacity reveals for sections without moving the page after functional button clicks.
 - Hardened desktop and mobile layouts against horizontal overflow, clipped headings, and wrapped hardware navigation.
+- Renamed the homepage entry to “智能硬件”, removed the deep link that opened midway through the concealed section, and added “加装款 / 隐形款” as first-screen hardware subcategories.
 
 ### Quiet-space product story
 

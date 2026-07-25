@@ -125,5 +125,10 @@ jobs:
           for (const file of ["hardware-sku.html", "hardware-detail.html"]) {
             assert.match(fs.readFileSync(file, "utf8"), /Content-Security-Policy/);
           }
+          const homepage = fs.readFileSync("index.html", "utf8");
+          const hardware = fs.readFileSync("hardware-sku.html", "utf8");
+          assert.doesNotMatch(homepage, /hardware-sku\.html#concealed|>产品形态</, "homepage still opens the concealed section or uses the old label");
+          assert.match(homepage, /href="\.\/hardware-sku\.html"[^>]*>智能硬件<\/a>/, "smart-hardware homepage entry missing");
+          assert.match(hardware, /aria-label="智能硬件二级类目"[\s\S]*?href="#add-on"[\s\S]*?>01 · 加装款<[\s\S]*?href="#concealed"[\s\S]*?>02 · 隐形款</, "hardware subcategories missing");
           console.log(`Pages quality: ok (${tracked.length} tracked files)`);
           NODE

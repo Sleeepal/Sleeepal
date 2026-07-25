@@ -9,7 +9,7 @@ This branch contains only the allowlisted files published at [sleeepal.com](http
 - Personal quiet-space overview for laptop work, phone rest/sleep, and headphone-free transit browsing scenarios
 - Automatic platform matching from one “开始体验” entry, with fail-closed public downloads
 - Near-field acoustic principle, phase overlay, and three-layer field visualizations with explicit noise sensing and speaker-output origins
-- Public hardware forms, concealed installation concepts, and human sleep scenarios
+- Smart hardware organized into add-on and concealed-installation categories, with human sleep scenarios
 - Local-first feedback package
 - Beta privacy and usage boundaries
 - SleeePal Lab: multi-dream cards, local conversation, progress, preview, and export
