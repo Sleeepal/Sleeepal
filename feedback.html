@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SleeePal 问题反馈 — 本地优先反馈包</title>
-  <meta name="description" content="提交 SleeePal 问题反馈包。自动整理系统、平台、版本、模块和问题描述，音频、截图和夜报默认不包含。" />
+  <meta name="description" content="提交不含录音的 SleeePal 问题反馈包，整理系统、平台、版本、模块和问题描述。" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
   <link rel="icon" href="./favicon.ico?v=20260426b" sizes="any" />
@@ -45,14 +45,14 @@
         <div class="kicker-lux" data-fb-i18n="hero.kicker">本地优先反馈包</div>
         <h1 data-fb-i18n-html="hero.title">把问题说清楚，<br/><em>不用来回补充上下文</em></h1>
         <p data-fb-i18n="hero.body">
-          在另一台电脑上测试时，把系统、平台、版本、模块和现象一次整理成反馈包。音频、截图和夜报默认不包含，除非你主动附加。
+          在另一台电脑上测试时，把系统、平台、版本、模块和现象一次整理成反馈包。反馈系统不接收录音；截图和夜报只有在你主动选择后才会加入。
         </p>
       </div>
       <div class="feedback-privacy-panel">
-        <span data-fb-i18n="privacy.label">默认隐私边界</span>
+        <span data-fb-i18n="privacy.label">隐私边界</span>
         <strong data-fb-i18n="privacy.title">只收问题上下文，不收敏感音频</strong>
         <ul>
-          <li data-fb-i18n="privacy.item1">不自动上传麦克风音频</li>
+          <li data-fb-i18n="privacy.item1">不接收、不上传任何用户录音</li>
           <li data-fb-i18n="privacy.item2">不自动上传截图、夜报或完整日志</li>
           <li data-fb-i18n="privacy.item3">复制/下载后由你决定发送给谁</li>
         </ul>
@@ -125,7 +125,6 @@
         <div class="feedback-checks">
           <label><input type="checkbox" name="hasScreenshot" /> <span data-fb-i18n="check.screenshot">我会另附截图</span></label>
           <label><input type="checkbox" name="hasReport" /> <span data-fb-i18n="check.report">我会另附夜报/反馈 JSON</span></label>
-          <label><input type="checkbox" name="hasAudio" /> <span data-fb-i18n="check.audio">我明确选择另附音频片段</span></label>
         </div>
 
         <div class="feedback-public-warning" role="note">

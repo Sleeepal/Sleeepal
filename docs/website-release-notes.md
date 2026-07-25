@@ -2,6 +2,14 @@
 
 ## 2026-07-25
 
+### Privacy-first closed-source distribution
+
+- Declared that SleeePal product Apps and the core runtime are closed source and delivered only as official signed/notarized installers or store packages.
+- Replaced ambiguous “audio does not upload by default” wording with the permanent rule that user recordings never upload.
+- Clarified that recordings never enter feedback, accounts, cloud sync, family sharing, analytics, or AI models.
+- Removed the website feedback audio-attachment option and hard-coded `audio_included: false`.
+- Kept local playback and user-initiated filesystem export while separating those actions from any SleeePal upload path.
+
 ### One clear experience entry
 
 - Reduced the homepage to one primary “开始体验” action and added a four-platform transition page that shows Mac, Windows, iOS, and Android availability without automatic downloads.

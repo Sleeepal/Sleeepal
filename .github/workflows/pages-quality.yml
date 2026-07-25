@@ -81,6 +81,7 @@ jobs:
             /patent-disclosure/i, /odm-rfq/i, /权利要求|专利交底|附图编号|磁吸触点/,
             /USDT|USDC|WalletConnect|RainbowKit|收款地址/,
             /反[向相]静谧|反向宁静|静谧提升|Antiphase quiet|Quiet Guard|理论抵消效果/i,
+            /声音默认不上传|敏感音频默认不上云|另附音频片段|attach an audio clip/i,
           ];
           for (const file of publicText) {
             const content = fs.readFileSync(file, "utf8");
@@ -128,7 +129,18 @@ jobs:
           const homepage = fs.readFileSync("index.html", "utf8");
           const hardware = fs.readFileSync("hardware-sku.html", "utf8");
           const downloads = fs.readFileSync("desktop.html", "utf8");
+          const privacy = fs.readFileSync("privacy.html", "utf8");
+          const terms = fs.readFileSync("terms.html", "utf8");
+          const feedback = fs.readFileSync("feedback.html", "utf8");
+          const feedbackScript = fs.readFileSync("feedback.js", "utf8");
           const homepageStyles = fs.readFileSync("styles.css", "utf8");
+          assert.match(privacy, /不上传任何用户录音/, "privacy promise is missing");
+          assert.match(privacy, /录音零上传是持续有效的产品承诺/, "future features can weaken recording privacy");
+          assert.match(terms, /闭源软件发布/, "closed-source distribution boundary is missing");
+          assert.match(downloads, /核心运行时闭源发布/, "download page omits the proprietary installer boundary");
+          assert.doesNotMatch(feedback, /name="hasAudio"/, "feedback still offers recording attachments");
+          assert.doesNotMatch(feedbackScript, /check\.audio|另附音频|attach an audio clip/, "feedback copy still offers recording attachments");
+          assert.match(feedbackScript, /audio_included:\s*false/, "feedback schema does not force audio exclusion");
           assert.doesNotMatch(homepage, /hardware-sku\.html#concealed|>产品形态</, "homepage still opens the concealed section or uses the old label");
           assert.match(homepage, /href="\.\/hardware-sku\.html"[^>]*>智能硬件<\/a>/, "smart-hardware homepage entry missing");
           assert.match(hardware, /<nav aria-label="智能硬件页面导航">[\s\S]*?<a href="#people-demo">使用场景<\/a>[\s\S]*?href="#external">外置式<\/a>[\s\S]*?href="#concealed">隐形款<\/a>/, "hardware navigation order is incorrect");
