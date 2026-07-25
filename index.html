@@ -13,8 +13,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png?v=20260426b" />
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16.png?v=20260426b" />
   <link rel="apple-touch-icon" href="./assets/app-icon-preview.png?v=20260426b" />
-  <link rel="stylesheet" href="./styles.css?v=20260725-experience2" />
-  <script src="./site.js?v=20260725-experience2" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=20260725-mobile-transit1" />
+  <script src="./site.js?v=20260725-mobile-transit1" defer></script>
 </head>
 <body>
 
@@ -832,12 +832,12 @@
             <em>让手机把静谧带到枕边</em>
           </h2>
         </div>
-        <p data-i18n="mobile.lead">手机是休息和睡眠场景的轻量入口：靠近人和枕头，负责本地感知、声景选择、时间设定与整夜陪伴。</p>
+        <p data-i18n="mobile.lead">手机 Mic 先采集枕边背景噪音，再由听筒或顶部扬声器输出反向声波，从机身上沿向枕头与耳朵展开超过半圆的近场声场；距离越远，作用越弱。</p>
       </div>
 
       <figure class="mobile-field-figure">
         <div class="mobile-field-photo">
-          <img src="./assets/mobile-rest-quiet-space-v1.jpg" alt="用户休息时，手机在枕边形成面向耳朵的静谧空间" loading="lazy" width="1800" height="1013" />
+          <img src="./assets/mobile-rest-quiet-space-v1.jpg" alt="手机 Mic 采集枕边背景噪音，并从顶部扬声器向耳朵展开三层扇面静谧空间" loading="lazy" width="1800" height="1013" />
           <svg class="mobile-field-overlay" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <defs>
               <linearGradient id="mobileFieldOuter" x1="0" y1="1" x2="1" y2="0">
@@ -852,22 +852,38 @@
                 <stop offset="0%" stop-color="#5ee6c5" stop-opacity="0.30"/>
                 <stop offset="100%" stop-color="#5ee6c5" stop-opacity="0.08"/>
               </linearGradient>
+              <marker id="mobileNoiseArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#e07b9f"/>
+              </marker>
             </defs>
-            <path class="mobile-field-layer mobile-field-outer" d="M330 610 C620 148 1240 110 1570 610 C1210 662 770 662 330 610 Z" fill="url(#mobileFieldOuter)"/>
-            <path class="mobile-field-layer mobile-field-middle" d="M330 610 C590 258 1050 230 1398 610 C1048 642 688 642 330 610 Z" fill="url(#mobileFieldMiddle)"/>
-            <path class="mobile-field-layer mobile-field-inner" d="M330 610 C548 382 820 352 1188 610 C872 624 594 624 330 610 Z" fill="url(#mobileFieldInner)"/>
-            <path class="mobile-field-glint" d="M1212 170 C1380 250 1500 405 1548 584" fill="none"/>
-            <path class="mobile-field-glint is-middle" d="M1054 274 C1208 334 1324 454 1374 580" fill="none"/>
-            <path class="mobile-field-glint is-inner" d="M864 390 C996 430 1102 506 1166 582" fill="none"/>
-            <path d="M330 610 Q785 500 1200 410" fill="none" stroke="#f8fafc" stroke-opacity="0.34" stroke-width="2" stroke-dasharray="9 12"/>
-            <circle cx="330" cy="610" r="18" fill="#5ee6c5" fill-opacity="0.22" stroke="#5ee6c5" stroke-width="3"/>
-            <circle cx="1200" cy="410" r="13" fill="#f8fafc" fill-opacity="0.18" stroke="#f8fafc" stroke-opacity="0.72" stroke-width="2"/>
+            <path class="mobile-field-layer mobile-field-outer" d="M286 395 C610 52 1260 54 1600 390 C1382 752 804 876 286 395 Z" fill="url(#mobileFieldOuter)"/>
+            <path class="mobile-field-layer mobile-field-middle" d="M286 395 C590 152 1096 136 1442 404 C1212 676 738 742 286 395 Z" fill="url(#mobileFieldMiddle)"/>
+            <path class="mobile-field-layer mobile-field-inner" d="M286 395 C548 238 882 236 1188 430 C974 590 620 620 286 395 Z" fill="url(#mobileFieldInner)"/>
+            <path class="mobile-field-glint" d="M1238 112 C1432 168 1552 264 1590 372" fill="none"/>
+            <path class="mobile-field-glint is-middle" d="M1092 184 C1262 230 1380 304 1428 390" fill="none"/>
+            <path class="mobile-field-glint is-inner" d="M876 270 C1012 304 1118 354 1172 418" fill="none"/>
+            <path class="mobile-noise-wave" d="M68 210 C102 184 136 184 170 210 S238 236 272 210"/>
+            <path class="mobile-noise-wave is-second" d="M86 248 C124 220 162 220 200 248 S276 276 314 248"/>
+            <path class="mobile-noise-route" d="M178 276 C202 430 246 626 316 748" marker-end="url(#mobileNoiseArrow)"/>
+            <path class="mobile-anti-ray" d="M286 395 Q746 416 1192 468"/>
+            <circle class="mobile-speaker-origin" cx="286" cy="395" r="18"/>
+            <circle class="mobile-mic-origin" cx="316" cy="748" r="15"/>
           </svg>
-          <div class="mobile-field-label mobile-field-device"><span>PHONE</span><strong data-i18n="mobile.device">Mic 采集·扬声器前向输出</strong></div>
+          <div class="mobile-field-label mobile-field-signal-label mobile-field-noise"><span>NOISE</span><strong data-i18n="mobile.noise">枕边背景噪音</strong></div>
+          <div class="mobile-field-label mobile-field-signal-label mobile-field-mic"><span>MIC</span><strong data-i18n="mobile.mic">机身 Mic 采集</strong></div>
+          <div class="mobile-field-label mobile-field-signal-label mobile-field-speaker"><span>OUTPUT</span><strong data-i18n="mobile.speaker">听筒/顶部扬声器 · 反向输出</strong></div>
           <div class="mobile-field-label mobile-field-layer-label mobile-field-layer-inner"><span>01</span><strong data-i18n="mobile.layer1">近枕层·最集中</strong></div>
           <div class="mobile-field-label mobile-field-layer-label mobile-field-layer-middle"><span>02</span><strong data-i18n="mobile.layer2">休息层·逐步减弱</strong></div>
           <div class="mobile-field-label mobile-field-layer-label mobile-field-layer-outer"><span>03</span><strong data-i18n="mobile.layer3">外缘层·作用较弱</strong></div>
           <div class="mobile-flight-note" data-i18n="mobile.flightMode">请在使用前打开飞行模式，避免手机来电打扰您的美好睡眠。</div>
+        </div>
+
+        <div class="mobile-signal-legend" aria-label="手机静谧空间工作路径">
+          <span data-i18n="mobile.noise">枕边背景噪音</span>
+          <span aria-hidden="true">→</span>
+          <span data-i18n="mobile.mic">机身 Mic 采集</span>
+          <span aria-hidden="true">→</span>
+          <span data-i18n="mobile.speaker">听筒/顶部扬声器 · 反向输出</span>
         </div>
 
         <figcaption class="mobile-rest-moments">
@@ -880,6 +896,81 @@
       <div class="mobile-field-boundary">
         <p data-i18n="mobile.boundary">手机用于休息和睡眠场景；连接音箱时可获得更多输出余量。真实改善受噪音、设备与摆位影响。</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ══ PHONE-CENTERED TRANSIT QUIET SPACE ══ -->
+  <section class="section phone-transit-section" id="phone-transit">
+    <div class="container">
+      <div class="phone-transit-heading">
+        <div>
+          <div class="kicker-lux" data-i18n="transit.kicker">手机静谧空间 · 日常通勤</div>
+          <h2 class="section-title-lux" data-i18n-html="transit.title">
+            刷手机的时候，<br/>
+            <em>也给耳朵留一点余地</em>
+          </h2>
+        </div>
+        <p data-i18n="transit.lead">在地铁、公交等持续噪音环境中，手机 Mic 采集环境声，听筒或顶部扬声器朝向面部输出反向声波。无需佩戴入耳式或头戴式耳机，也可以尝试削弱一部分稳定低频。</p>
+      </div>
+
+      <figure class="phone-transit-figure">
+        <div class="phone-transit-photo">
+          <img src="./assets/mobile-transit-quiet-space-v1.jpg" alt="乘客在地铁刷手机，耳朵未佩戴耳机，手机向面部形成三层扇面静谧空间" loading="lazy" width="1672" height="941" />
+          <svg class="phone-transit-overlay" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="transitFieldOuter" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#6d5df6" stop-opacity="0.27"/>
+                <stop offset="100%" stop-color="#6d5df6" stop-opacity="0.05"/>
+              </linearGradient>
+              <linearGradient id="transitFieldMiddle" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.31"/>
+                <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.07"/>
+              </linearGradient>
+              <linearGradient id="transitFieldInner" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5ee6c5" stop-opacity="0.32"/>
+                <stop offset="100%" stop-color="#5ee6c5" stop-opacity="0.08"/>
+              </linearGradient>
+              <marker id="transitNoiseArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#e07b9f"/>
+              </marker>
+            </defs>
+            <path class="phone-transit-layer phone-transit-outer" d="M828 618 C892 238 1226 40 1560 224 C1602 524 1276 794 828 618 Z" fill="url(#transitFieldOuter)"/>
+            <path class="phone-transit-layer phone-transit-middle" d="M828 618 C920 330 1180 158 1454 302 C1450 556 1176 702 828 618 Z" fill="url(#transitFieldMiddle)"/>
+            <path class="phone-transit-layer phone-transit-inner" d="M828 618 C946 418 1114 318 1340 398 C1314 564 1094 646 828 618 Z" fill="url(#transitFieldInner)"/>
+            <path class="phone-transit-glint" d="M1268 92 C1440 116 1532 166 1554 210"/>
+            <path class="phone-transit-glint is-middle" d="M1192 196 C1322 216 1402 250 1438 288"/>
+            <path class="phone-transit-glint is-inner" d="M1118 344 C1208 354 1280 374 1324 392"/>
+            <path class="phone-transit-noise-wave" d="M134 332 C178 298 222 298 266 332 S354 366 398 332"/>
+            <path class="phone-transit-noise-wave is-second" d="M166 382 C214 346 262 346 310 382 S406 418 454 382"/>
+            <path class="phone-transit-noise-route" d="M432 402 C574 494 696 638 856 744" marker-end="url(#transitNoiseArrow)"/>
+            <path class="phone-transit-anti-ray" d="M828 618 Q1070 486 1282 356"/>
+            <circle class="phone-transit-speaker-origin" cx="828" cy="618" r="18"/>
+            <circle class="phone-transit-mic-origin" cx="856" cy="744" r="15"/>
+          </svg>
+          <div class="phone-transit-label phone-transit-noise"><span>NOISE</span><strong data-i18n="transit.noise">车厢低频·人声</strong></div>
+          <div class="phone-transit-label phone-transit-mic"><span>MIC</span><strong data-i18n="transit.mic">手机 Mic 采集</strong></div>
+          <div class="phone-transit-label phone-transit-speaker"><span>OUTPUT</span><strong data-i18n="transit.speaker">听筒/顶部扬声器 · 反向输出</strong></div>
+          <div class="phone-transit-label phone-transit-zone phone-transit-zone-inner"><span>01</span><strong data-i18n="transit.layer1">近面层·较集中</strong></div>
+          <div class="phone-transit-label phone-transit-zone phone-transit-zone-middle"><span>02</span><strong data-i18n="transit.layer2">浏览层·逐步减弱</strong></div>
+          <div class="phone-transit-label phone-transit-zone phone-transit-zone-outer"><span>03</span><strong data-i18n="transit.layer3">外缘·作用有限</strong></div>
+        </div>
+
+        <div class="phone-transit-signal-legend" aria-label="通勤静谧空间工作路径">
+          <span data-i18n="transit.noise">车厢低频·人声</span>
+          <span aria-hidden="true">→</span>
+          <span data-i18n="transit.mic">手机 Mic 采集</span>
+          <span aria-hidden="true">→</span>
+          <span data-i18n="transit.speaker">听筒/顶部扬声器 · 反向输出</span>
+        </div>
+
+        <figcaption class="phone-transit-points">
+          <div><span>01</span><strong data-i18n="transit.point1.title">耳朵保持开放</strong><p data-i18n="transit.point1.body">不用佩戴入耳式或头戴式耳机，仍可听到必要的广播和周围提醒。</p></div>
+          <div><span>02</span><strong data-i18n="transit.point2.title">手机到面部</strong><p data-i18n="transit.point2.body">静谧声场主要覆盖听筒或顶部扬声器与面部之间的小范围，远离手机后迅速减弱。</p></div>
+          <div><span>03</span><strong data-i18n="transit.point3.title">更适合稳定低频</strong><p data-i18n="transit.point3.body">持续低频更有机会被部分削弱；突发人声和快速变化的噪音更难处理。</p></div>
+        </figcaption>
+      </figure>
+
+      <p class="phone-transit-boundary" data-i18n="transit.boundary">数据仅供参考，以实际测试为准。该模式不替代专业主动降噪耳机；请始终保留对广播、警报和周围环境的感知。</p>
     </div>
   </section>
 
@@ -1153,6 +1244,21 @@
           <div class="tc-quote">"</div>
           <p data-i18n="testimony.3.body">午休时，手机或蓝牙音箱可以快速开始。熟悉的声景和轻柔的噪音调节，帮助你更快从工作切换到休息。</p>
           <footer data-i18n="testimony.3.footer">— 午休体验场景</footer>
+        </blockquote>
+        <blockquote class="testimony-card tc-work">
+          <div class="tc-quote">"</div>
+          <p data-i18n="testimony.4.body">日常办公时，笔记本内置 Mic 采集周围持续噪音，扬声器把反向声波朝向用户；作用集中在屏幕与耳朵之间，不需要额外佩戴耳机。</p>
+          <footer data-i18n="testimony.4.footer">— 笔记本日常办公</footer>
+        </blockquote>
+        <blockquote class="testimony-card tc-work tc-featured">
+          <div class="tc-quote">"</div>
+          <p data-i18n="testimony.5.body">咖啡厅、候机厅或火车上，固定坐姿和较近的屏幕距离更适合形成小范围静谧；人声和快速变化的噪音不会被完全消除。</p>
+          <footer data-i18n="testimony.5.footer">— 笔记本移动办公</footer>
+        </blockquote>
+        <blockquote class="testimony-card tc-phone">
+          <div class="tc-quote">"</div>
+          <p data-i18n="testimony.6.body">地铁或公交刷手机时，可以尝试削弱部分持续低频与稳定噪音。耳朵保持开放、不用佩戴耳机，但效果弱于专业主动降噪耳机。</p>
+          <footer data-i18n="testimony.6.footer">— 手机通勤浏览</footer>
         </blockquote>
       </div>
     </div>

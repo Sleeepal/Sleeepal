@@ -19,8 +19,11 @@
 
 - Reframed the homepage around creating a personal quiet space: laptops for work, phones for rest and sleep.
 - Added three-layer forward sound-field diagrams for laptop and phone scenarios.
+- Re-anchored the bedside phone field to the earpiece/top speaker, showed background noise entering the phone microphone, and widened the field to a greater-than-semicircular fan toward the pillow.
 - Added a phone airplane-mode reminder and clarified that microphone placement varies by device.
+- Added a headphone-free subway/bus browsing scene with a realistic image, microphone path, speaker origin, three-layer face-directed field, and an explicit ANC/performance boundary.
 - Reworked the phase-overlay module so noise peaks and antiphase troughs share one reference line and leave a smaller, non-zero residual.
+- Expanded “场景观察” to six balanced cards, including everyday laptop work, mobile laptop work, and phone transit browsing.
 
 ### Hardware and real-room scenarios
 
