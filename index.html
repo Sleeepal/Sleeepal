@@ -13,8 +13,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png?v=20260426b" />
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16.png?v=20260426b" />
   <link rel="apple-touch-icon" href="./assets/app-icon-preview.png?v=20260426b" />
-  <link rel="stylesheet" href="./styles.css?v=20260725-sleep-first2" />
-  <script src="./site.js?v=20260725-sleep-first2" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=20260725-acoustic-lab5" />
+  <script src="./site.js?v=20260725-acoustic-lab5" defer></script>
 </head>
 <body>
 
@@ -434,27 +434,38 @@
           <div class="anc-card anc-card-earphone">
             <div class="ancc-kicker" data-i18n="science.compare.earphone.kicker">传统降噪耳机</div>
             <div class="ancc-icon">
-              <svg viewBox="0 0 80 80" fill="none">
-                <ellipse cx="40" cy="40" r="28" stroke="#9e8fca" stroke-width="1" stroke-dasharray="3 3" opacity="0.4"/>
-                <circle cx="40" cy="40" r="12" fill="#9e8fca" opacity="0.15" stroke="#9e8fca" stroke-width="1"/>
-                <circle cx="40" cy="40" r="4" fill="#9e8fca" opacity="0.6"/>
-                <text x="40" y="77" text-anchor="middle" fill="#9e8fca" font-size="9" font-family="Inter,sans-serif" opacity="0.7" data-i18n="science.compare.earphone.zone">控制点 = 耳道</text>
+              <svg viewBox="0 0 220 120" fill="none" aria-hidden="true">
+                <rect x="1" y="1" width="218" height="118" rx="12" stroke="currentColor" stroke-opacity="0.2"/>
+                <path d="M48 80V56C48 28 70 14 94 14C118 14 140 28 140 56V80" stroke="currentColor" stroke-width="3"/>
+                <rect x="34" y="56" width="30" height="46" rx="10" stroke="currentColor" stroke-width="2"/>
+                <rect x="124" y="56" width="30" height="46" rx="10" stroke="currentColor" stroke-width="2"/>
+                <circle cx="49" cy="78" r="4" fill="currentColor"/>
+                <path d="M158 64C178 70 190 78 198 92" stroke="currentColor" stroke-opacity="0.45"/>
+                <path d="M158 76C174 80 184 86 190 96" stroke="currentColor" stroke-opacity="0.7"/>
+                <circle cx="166" cy="80" r="12" stroke="currentColor" stroke-dasharray="3 4"/>
+                <circle cx="166" cy="80" r="4" fill="currentColor"/>
+                <path d="M64 80H124" stroke="currentColor" stroke-opacity="0.15" stroke-dasharray="4 6"/>
               </svg>
             </div>
             <p data-i18n-html="science.compare.earphone.body">麦克风在耳罩里<br/>控制点在<strong>耳道内</strong><br/>必须佩戴耳机</p>
           </div>
-          <div class="anc-arrow-mid">→<br/><span data-i18n="science.compare.expand">从耳道走向个人近场</span></div>
+          <div class="anc-arrow-mid"><b aria-hidden="true">→</b><span data-i18n="science.compare.expand">从耳道走向个人近场</span></div>
           <div class="anc-card anc-card-sleeepal">
             <div class="ancc-kicker" data-i18n="science.compare.sleeepal">SleeePal 个人静谧空间</div>
             <div class="ancc-icon">
-              <svg viewBox="0 0 80 80" fill="none">
-                <ellipse cx="40" cy="36" rx="36" ry="28" stroke="#c9a96e" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.6" class="zone-pulse"/>
-                <circle cx="40" cy="36" r="10" fill="#c9a96e" opacity="0.08"/>
-                <!-- head -->
-                <circle cx="40" cy="30" r="8" fill="#f0e8d4" stroke="#c9a96e" stroke-width="0.8"/>
-                <!-- phone -->
-                <rect x="58" y="42" width="12" height="22" rx="3" fill="#2a1f3d" stroke="#c9a96e" stroke-width="0.8"/>
-                <text x="40" y="76" text-anchor="middle" fill="#c9a96e" font-size="9" font-family="Inter,sans-serif" opacity="0.8" data-i18n="science.compare.launch.zone">作用区域 = 个人近场</text>
+              <svg viewBox="0 0 220 120" fill="none" aria-hidden="true">
+                <rect x="1" y="1" width="218" height="118" rx="12" stroke="currentColor" stroke-opacity="0.2"/>
+                <path d="M34 92H92L82 100H44L34 92Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M42 54H86V91H42V54Z" stroke="currentColor" stroke-width="2"/>
+                <circle cx="50" cy="88" r="3" fill="currentColor"/>
+                <circle cx="78" cy="88" r="3" fill="currentColor"/>
+                <path d="M88 82C116 50 154 34 190 44" stroke="currentColor" stroke-opacity="0.25"/>
+                <path d="M88 82C118 60 148 52 178 58" stroke="currentColor" stroke-opacity="0.48"/>
+                <path d="M88 82C116 70 140 68 164 72" stroke="currentColor" stroke-width="2"/>
+                <ellipse cx="168" cy="72" rx="28" ry="20" stroke="currentColor" stroke-dasharray="4 5"/>
+                <ellipse cx="168" cy="72" rx="15" ry="10" stroke="currentColor" stroke-opacity="0.64"/>
+                <circle cx="168" cy="72" r="4" fill="currentColor"/>
+                <path d="M54 75C62 67 70 83 78 75" stroke="currentColor" stroke-width="2"/>
               </svg>
             </div>
             <p data-i18n-html="science.compare.launch.body">笔记本电脑用于工作，手机用于休息和睡眠<br/>作用区域在<strong>人真正所在的近场</strong><br/>距离越近，越值得优先尝试</p>
@@ -483,124 +494,184 @@
         </div>
       </div>
       <div class="principle-visual">
-        <div class="pv-diagram">
-          <svg viewBox="0 0 560 280" class="pv-svg">
+        <figure class="acoustic-system-figure" aria-labelledby="acoustic-system-title">
+          <figcaption class="acoustic-system-head">
+            <div>
+              <span>LOCAL ACOUSTIC ENGINE · SIGNAL PATH</span>
+              <strong id="acoustic-system-title" data-i18n="science.system.path">环境噪声采集 → 本地智能建模 → 反向声波输出 → 近场残余验证</strong>
+            </div>
+            <p><i aria-hidden="true"></i><span data-i18n="science.system.status">本地实时链路 · 声音默认不上传</span></p>
+          </figcaption>
+
+          <svg class="acoustic-system-canvas" viewBox="0 0 1200 520" role="img" aria-labelledby="acoustic-system-svg-title acoustic-system-svg-desc">
+            <title id="acoustic-system-svg-title">SleeePal 本地声学信号链</title>
+            <desc id="acoustic-system-svg-desc">环境噪声由麦克风采集，本地 DSP 建模后生成反向声波，由扬声器输出，并在枕边近场测量残余噪音。</desc>
             <defs>
-              <radialGradient id="headGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#c9a96e" stop-opacity="0.15"/>
-                <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
+              <pattern id="acousticGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <path d="M32 0H0V32" fill="none" stroke="#8f9dff" stroke-opacity="0.07" stroke-width="1"/>
+              </pattern>
+              <linearGradient id="signalBus" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#f472b6"/>
+                <stop offset="50%" stop-color="#8f9dff"/>
+                <stop offset="100%" stop-color="#5ee6c5"/>
+              </linearGradient>
+              <radialGradient id="focusField" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#5ee6c5" stop-opacity="0.24"/>
+                <stop offset="65%" stop-color="#8f9dff" stop-opacity="0.08"/>
+                <stop offset="100%" stop-color="#8f9dff" stop-opacity="0"/>
               </radialGradient>
-              <linearGradient id="waveGrad1" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#e07b9f" stop-opacity="0.8"/>
-                <stop offset="100%" stop-color="#e07b9f" stop-opacity="0"/>
-              </linearGradient>
-              <linearGradient id="waveGrad2" x1="1" y1="0" x2="0" y2="0">
-                <stop offset="0%" stop-color="#9e8fca" stop-opacity="0.8"/>
-                <stop offset="100%" stop-color="#9e8fca" stop-opacity="0"/>
-              </linearGradient>
+              <filter id="signalGlow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
             </defs>
 
-            <!-- Bed surface -->
-            <rect x="80" y="200" width="400" height="16" rx="8" fill="#f0e8d4" opacity="0.6"/>
-            <!-- Pillow -->
-            <ellipse cx="280" cy="196" rx="120" ry="20" fill="#faf6f0" stroke="#e8d5a3" stroke-width="0.8"/>
+            <rect x="1" y="1" width="1198" height="518" rx="24" fill="#070b16" stroke="#8f9dff" stroke-opacity="0.18"/>
+            <rect x="2" y="2" width="1196" height="516" rx="23" fill="url(#acousticGrid)"/>
+            <path d="M176 160H1018" stroke="url(#signalBus)" stroke-width="2" stroke-opacity="0.34"/>
 
-            <!-- Head (simplified circle) -->
-            <circle cx="280" cy="168" r="36" fill="#faf0e8" stroke="#e8d5a3" stroke-width="1"/>
-            <!-- Face hint -->
-            <circle cx="269" cy="162" r="4" fill="#e8c4a4" opacity="0.5"/>
-            <circle cx="291" cy="162" r="4" fill="#e8c4a4" opacity="0.5"/>
-            <path d="M271 176 Q280 182 289 176" stroke="#e8c4a4" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <g class="system-stage system-stage-input">
+              <rect x="42" y="74" width="232" height="214" rx="16" fill="#0d1427" stroke="#f472b6" stroke-opacity="0.38"/>
+              <text x="66" y="105" fill="#f9a8d4" font-size="14" font-weight="700" letter-spacing="2">01 / CAPTURE</text>
+              <text x="66" y="133" fill="#f8fafc" font-size="19" font-weight="650">REFERENCE MIC</text>
+              <rect x="74" y="188" width="28" height="58" rx="14" fill="none" stroke="#f472b6" stroke-width="2"/>
+              <path d="M88 246V260M68 260H108" stroke="#f472b6" stroke-width="2" stroke-linecap="round"/>
+              <path class="system-wave system-wave-noise" d="M118 214C134 196 150 232 166 214S198 196 214 214S246 232 258 214" fill="none" stroke="#f472b6" stroke-width="3" stroke-linecap="round"/>
+              <text x="66" y="272" fill="#94a3b8" font-size="13">AMBIENT INPUT / 环境噪声</text>
+            </g>
 
-            <!-- Quiet zone bubble -->
-            <ellipse cx="280" cy="158" rx="110" ry="80" fill="url(#headGlow)" stroke="#c9a96e"
-              stroke-width="1" stroke-dasharray="4 4" opacity="0.7" class="zone-pulse"/>
-            <text x="280" y="82" text-anchor="middle" fill="#c9a96e" font-size="11" font-family="'Inter',sans-serif" letter-spacing="1" data-i18n="science.diagram.zoneTitle">枕边近场区域</text>
-            <text x="280" y="96" text-anchor="middle" fill="#c9a96e" font-size="9" font-family="'Inter',sans-serif" opacity="0.6" data-i18n="science.diagram.zoneState">声波持续调节</text>
+            <g class="system-connector">
+              <circle cx="304" cy="160" r="5" fill="#8f9dff" filter="url(#signalGlow)"/>
+              <path d="M274 160H340" stroke="#8f9dff" stroke-width="2" stroke-dasharray="6 8"/>
+            </g>
 
-            <!-- Noise waves coming from left (snoring partner) -->
-            <text x="44" y="110" text-anchor="middle" fill="#e07b9f" font-size="9" font-family="'Inter',sans-serif" opacity="0.7" data-i18n="science.diagram.noise1">呼噜声</text>
-            <text x="44" y="122" text-anchor="middle" fill="#e07b9f" font-size="9" font-family="'Inter',sans-serif" opacity="0.7" data-i18n="science.diagram.noise2">噪音源</text>
-            <path d="M75 140 C90 130 100 150 115 138 C130 126 140 152 155 140 C170 128 180 152 195 140" stroke="#e07b9f" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.8" class="wave-in"/>
-            <path d="M75 160 C90 150 100 170 115 158 C130 146 140 172 155 160 C170 148 180 172 195 160" stroke="#e07b9f" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5" class="wave-in"/>
+            <g class="system-stage system-stage-model">
+              <rect x="340" y="74" width="248" height="214" rx="16" fill="#0d1427" stroke="#8f9dff" stroke-opacity="0.46"/>
+              <text x="364" y="105" fill="#a5b4fc" font-size="14" font-weight="700" letter-spacing="2">02 / MODEL</text>
+              <text x="364" y="133" fill="#f8fafc" font-size="19" font-weight="650">LOCAL DSP</text>
+              <path d="M366 246H562M366 208H562M366 170H562" stroke="#8f9dff" stroke-opacity="0.14"/>
+              <g fill="#8f9dff">
+                <rect x="378" y="218" width="12" height="28" rx="3" opacity="0.42"/>
+                <rect x="400" y="194" width="12" height="52" rx="3" opacity="0.56"/>
+                <rect x="422" y="166" width="12" height="80" rx="3" opacity="0.78"/>
+                <rect x="444" y="184" width="12" height="62" rx="3" opacity="0.62"/>
+                <rect x="466" y="150" width="12" height="96" rx="3"/>
+                <rect x="488" y="176" width="12" height="70" rx="3" opacity="0.72"/>
+                <rect x="510" y="205" width="12" height="41" rx="3" opacity="0.52"/>
+                <rect x="532" y="225" width="12" height="21" rx="3" opacity="0.38"/>
+              </g>
+              <text x="364" y="272" fill="#94a3b8" font-size="13">FREQUENCY · PHASE · DELAY</text>
+            </g>
 
-            <!-- Phone on right side (sound source) -->
-            <rect x="448" y="148" width="38" height="68" rx="8" fill="#2a1f3d" stroke="#c9a96e" stroke-width="1"/>
-            <rect x="452" y="152" width="30" height="48" rx="4" fill="#1a1230"/>
-            <circle cx="467" cy="206" r="4" fill="#c9a96e" opacity="0.6"/>
-            <text x="467" y="230" text-anchor="middle" fill="#c9a96e" font-size="8" font-family="'Inter',sans-serif" data-i18n="science.device.phone">手机</text>
-            <text x="467" y="240" text-anchor="middle" fill="#c9a96e" font-size="8" font-family="'Inter',sans-serif" data-i18n="science.device.speaker">扬声器</text>
+            <g class="system-connector">
+              <circle cx="620" cy="160" r="5" fill="#a78bfa" filter="url(#signalGlow)"/>
+              <path d="M588 160H654" stroke="#a78bfa" stroke-width="2" stroke-dasharray="6 8"/>
+            </g>
 
-            <!-- Antiphase waves from phone going left -->
-            <path d="M445 140 C430 130 420 150 405 138 C390 126 380 152 365 140 C350 128 340 152 325 140" stroke="#9e8fca" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.8" class="wave-out"/>
-            <path d="M445 160 C430 150 420 170 405 158 C390 146 380 172 365 160 C350 148 340 172 325 160" stroke="#9e8fca" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5" class="wave-out"/>
+            <g class="system-stage system-stage-output">
+              <rect x="654" y="74" width="232" height="214" rx="16" fill="#0d1427" stroke="#a78bfa" stroke-opacity="0.46"/>
+              <text x="678" y="105" fill="#c4b5fd" font-size="14" font-weight="700" letter-spacing="2">03 / OUTPUT</text>
+              <text x="678" y="133" fill="#f8fafc" font-size="19" font-weight="650">ANTIPHASE OUT</text>
+              <path class="system-wave system-wave-anti" d="M680 210C696 228 712 192 728 210S760 228 776 210S808 192 824 210S856 228 872 210" fill="none" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+              <path d="M698 242H850" stroke="#a78bfa" stroke-opacity="0.18"/>
+              <path d="M730 172H822" stroke="#a78bfa" stroke-opacity="0.18"/>
+              <text x="678" y="272" fill="#94a3b8" font-size="13">MIRRORED PHASE / 反向声波</text>
+            </g>
 
-            <!-- Cancellation zone indicator -->
-            <text x="280" y="258" text-anchor="middle" fill="#999" font-size="9" font-family="'Inter',sans-serif" data-i18n="science.diagram.caption">反相声波 + 环境噪音 → 部分抵消 → 残余更柔和</text>
+            <g class="system-connector">
+              <circle cx="918" cy="160" r="5" fill="#5ee6c5" filter="url(#signalGlow)"/>
+              <path d="M886 160H952" stroke="#5ee6c5" stroke-width="2" stroke-dasharray="6 8"/>
+            </g>
 
-            <!-- Labels -->
-            <text x="200" y="138" fill="#e07b9f" font-size="8" font-family="'Inter',sans-serif" opacity="0.9" data-i18n="science.diagram.noiseWave">噪音波 →</text>
-            <text x="305" y="138" fill="#9e8fca" font-size="8" font-family="'Inter',sans-serif" opacity="0.9" data-i18n="science.diagram.antiWave">← 反相波</text>
+            <g class="system-stage system-stage-verify">
+              <rect x="952" y="74" width="206" height="214" rx="16" fill="#0d1427" stroke="#5ee6c5" stroke-opacity="0.46"/>
+              <text x="976" y="105" fill="#99f6e4" font-size="14" font-weight="700" letter-spacing="2">04 / VERIFY</text>
+              <text x="976" y="133" fill="#f8fafc" font-size="19" font-weight="650">NEAR FIELD</text>
+              <ellipse cx="1056" cy="207" rx="76" ry="52" fill="url(#focusField)" stroke="#8f9dff" stroke-opacity="0.32"/>
+              <ellipse cx="1056" cy="207" rx="54" ry="36" fill="none" stroke="#8f9dff" stroke-opacity="0.5"/>
+              <ellipse cx="1056" cy="207" rx="31" ry="20" fill="none" stroke="#5ee6c5" stroke-width="2"/>
+              <circle cx="1056" cy="207" r="5" fill="#5ee6c5" filter="url(#signalGlow)"/>
+              <text x="976" y="272" fill="#94a3b8" font-size="13">RESIDUAL MEASUREMENT</text>
+            </g>
+
+            <g class="system-phase-view">
+              <text x="42" y="340" fill="#64748b" font-size="13" font-weight="700" letter-spacing="2">PHASE ALIGNMENT / 同一零位基准</text>
+              <path d="M42 414H1158" stroke="#94a3b8" stroke-opacity="0.28"/>
+              <path class="system-wave system-wave-noise" d="M72 414C112 350 152 478 192 414S272 350 312 414S392 478 432 414S512 350 552 414" fill="none" stroke="#f472b6" stroke-width="3"/>
+              <path class="system-wave system-wave-anti" d="M72 414C112 478 152 350 192 414S272 478 312 414S392 350 432 414S512 478 552 414" fill="none" stroke="#a78bfa" stroke-width="3"/>
+              <path d="M612 414C652 404 692 424 732 414S812 404 852 414S932 424 972 414S1052 404 1092 414" fill="none" stroke="#5ee6c5" stroke-width="4" filter="url(#signalGlow)"/>
+              <text x="72" y="475" fill="#f9a8d4" font-size="13">NOISE + ANTIPHASE</text>
+              <text x="612" y="475" fill="#99f6e4" font-size="13">REDUCED RESIDUAL / 剩余波峰</text>
+            </g>
           </svg>
-        </div>
+
+          <div class="acoustic-system-mobile-path" aria-hidden="true">
+            <span><b>01</b> Mic 采集</span><i></i>
+            <span><b>02</b> DSP 建模</span><i></i>
+            <span><b>03</b> 反向输出</span><i></i>
+            <span><b>04</b> 枕位验证</span>
+          </div>
+
+          <div class="acoustic-system-note">
+            <span data-i18n="science.system.phase">噪音波峰与反相波谷在同一基准线上镜像叠加，发生抵消。</span>
+            <strong data-i18n="science.system.boundary">噪音会被削弱，但不可能完全抵消消除。</strong>
+          </div>
+        </figure>
       </div>
 
-      <!-- 4-step flow — Bose-style step-by-step authority -->
-      <div class="tech-steps">
-        <div class="tech-step">
-          <div class="ts-num">01</div>
+      <div class="tech-steps" aria-label="SleeePal 声学处理四步">
+        <article class="tech-step">
+          <div class="ts-num">01 / CAPTURE</div>
           <div class="ts-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="#e07b9f" stroke-width="0.8"/>
-              <path d="M14 24 Q24 10 34 24" stroke="#e07b9f" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <circle cx="24" cy="24" r="3" fill="#e07b9f"/>
+            <svg viewBox="0 0 120 64" fill="none" aria-hidden="true">
+              <rect x="1" y="1" width="118" height="62" rx="8" stroke="currentColor" stroke-opacity="0.28"/>
+              <rect x="17" y="18" width="14" height="28" rx="7" stroke="currentColor" stroke-width="2"/>
+              <path d="M24 46V53M15 53H33" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M42 32C50 22 58 42 66 32S82 22 90 32S106 42 112 32" stroke="currentColor" stroke-width="2"/>
             </svg>
           </div>
-          <h3 data-i18n="science.step1.title">麦克风持续侦测</h3>
-          <p data-i18n="science.step1.body">麦克风在本机持续观察设备附近的环境变化，用于识别交通低频、空调、人声与鼾声等干扰。</p>
-        </div>
-        <div class="ts-arrow">→</div>
-        <div class="tech-step">
-          <div class="ts-num">02</div>
+          <h3 data-i18n="science.step1.title">Mic 采集环境噪声</h3>
+          <p data-i18n="science.step1.body">设备麦克风持续采集附近环境噪声，识别交通低频、空调、人声与鼾声等干扰。</p>
+        </article>
+        <article class="tech-step">
+          <div class="ts-num">02 / MODEL</div>
           <div class="ts-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="#9e8fca" stroke-width="0.8"/>
-              <rect x="14" y="32" width="4" height="8" rx="2" fill="#9e8fca" transform="translate(0,-8)"/>
-              <rect x="20" y="32" width="4" height="14" rx="2" fill="#9e8fca" transform="translate(0,-14)"/>
-              <rect x="26" y="32" width="4" height="10" rx="2" fill="#9e8fca" transform="translate(0,-10)"/>
-              <rect x="32" y="32" width="4" height="18" rx="2" fill="#c9a96e" transform="translate(0,-18)"/>
+            <svg viewBox="0 0 120 64" fill="none" aria-hidden="true">
+              <rect x="1" y="1" width="118" height="62" rx="8" stroke="currentColor" stroke-opacity="0.28"/>
+              <path d="M15 49H106M15 32H106M15 15H106" stroke="currentColor" stroke-opacity="0.18"/>
+              <g fill="currentColor"><rect x="22" y="35" width="8" height="14" rx="2" opacity=".35"/><rect x="36" y="25" width="8" height="24" rx="2" opacity=".5"/><rect x="50" y="13" width="8" height="36" rx="2" opacity=".8"/><rect x="64" y="20" width="8" height="29" rx="2"/><rect x="78" y="30" width="8" height="19" rx="2" opacity=".6"/><rect x="92" y="39" width="8" height="10" rx="2" opacity=".4"/></g>
             </svg>
           </div>
-          <h3 data-i18n="science.step2.title">DSP 频谱分析</h3>
-          <p data-i18n="science.step2.body">本地频谱分析持续估计主要干扰与能量变化，用于推荐当前的工作、休息或睡眠场景。</p>
-        </div>
-        <div class="ts-arrow">→</div>
-        <div class="tech-step">
-          <div class="ts-num">03</div>
+          <h3 data-i18n="science.step2.title">本地 DSP 智能建模</h3>
+          <p data-i18n="science.step2.body">本地分析频率、能量、相位与延迟，建立当前环境的实时声学模型。</p>
+        </article>
+        <article class="tech-step">
+          <div class="ts-num">03 / OUTPUT</div>
           <div class="ts-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="#c9a96e" stroke-width="0.8"/>
-              <path d="M14 24 Q24 38 34 24" stroke="#c9a96e" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <circle cx="24" cy="24" r="3" fill="#c9a96e"/>
+            <svg viewBox="0 0 120 64" fill="none" aria-hidden="true">
+              <rect x="1" y="1" width="118" height="62" rx="8" stroke="currentColor" stroke-opacity="0.28"/>
+              <path d="M12 32H108" stroke="currentColor" stroke-opacity="0.22"/>
+              <path d="M14 32C22 17 30 47 38 32S54 17 62 32S78 47 86 32S102 17 110 32" stroke="currentColor" stroke-width="2"/>
+              <path d="M14 32C22 47 30 17 38 32S54 47 62 32S78 17 86 32S102 47 110 32" stroke="currentColor" stroke-width="2" stroke-opacity="0.48"/>
             </svg>
           </div>
-          <h3 data-i18n="science.step3.title">生成反相声波</h3>
-          <p data-i18n="science.step3.body">生成与目标噪音相位相反的输出信号，并持续观察麦克风到扬声器的传播延迟、摆位变化与回授风险。</p>
-        </div>
-        <div class="ts-arrow">→</div>
-        <div class="tech-step">
-          <div class="ts-num">04</div>
+          <h3 data-i18n="science.step3.title">输出反向声波</h3>
+          <p data-i18n="science.step3.body">扬声器输出与目标噪音相位相反的声波，并根据传播延迟与摆位持续修正。</p>
+        </article>
+        <article class="tech-step">
+          <div class="ts-num">04 / VERIFY</div>
           <div class="ts-icon-wrap">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="#4caf8a" stroke-width="0.8"/>
-              <path d="M16 24 Q24 20 32 24 Q24 28 16 24Z" fill="#4caf8a" opacity="0.3"/>
-              <circle cx="24" cy="24" r="7" stroke="#4caf8a" stroke-width="1.5" fill="none"/>
-              <circle cx="24" cy="24" r="2" fill="#4caf8a"/>
+            <svg viewBox="0 0 120 64" fill="none" aria-hidden="true">
+              <rect x="1" y="1" width="118" height="62" rx="8" stroke="currentColor" stroke-opacity="0.28"/>
+              <ellipse cx="60" cy="32" rx="42" ry="22" stroke="currentColor" stroke-opacity="0.28"/>
+              <ellipse cx="60" cy="32" rx="29" ry="15" stroke="currentColor" stroke-opacity="0.5"/>
+              <ellipse cx="60" cy="32" rx="14" ry="7" stroke="currentColor" stroke-width="2"/>
+              <circle cx="60" cy="32" r="3" fill="currentColor"/>
             </svg>
           </div>
-          <h3 data-i18n="science.step4.title">形成近场静谧区</h3>
-          <p data-i18n="science.step4.body">反相声波在电脑或手机附近尝试削弱部分持续噪音，三路实时波形帮助你看清声音如何变化。</p>
-        </div>
+          <h3 data-i18n="science.step4.title">验证近场残余噪音</h3>
+          <p data-i18n="science.step4.body">在电脑与耳朵之间或手机与枕边之间测量残余噪音，观察实际削弱趋势。</p>
+        </article>
       </div>
 
       <!-- Why near-field works -->

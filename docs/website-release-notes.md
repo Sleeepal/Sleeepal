@@ -16,6 +16,7 @@
 - Hardened desktop and mobile layouts against horizontal overflow, clipped headings, and wrapped hardware navigation.
 - Renamed the homepage entry to “智能硬件”, removed the deep link that opened midway through the concealed section, and added “外置式 / 隐形款” as first-screen hardware subcategories.
 - Reordered the product story so sleep scenarios appear before laptop work and phone transit, and added visible detail actions to every scene card.
+- Replaced the simplified acoustic cartoons with a precision local-signal board and four compact measurement stages for capture, modeling, output, and verification.
 
 ### Quiet-space product story
 

@@ -144,5 +144,8 @@ jobs:
           assert.equal((homepage.match(/data-i18n="scene\.details"/g) || []).length, 12, "homepage scenes need visible detail actions");
           assert.match(homepageStyles, /scenario-story-order > #mobile-quiet\s*\{\s*order:\s*1/, "sleep scenes are not first");
           assert.match(homepageStyles, /scenario-story-order > #laptop-quiet\s*\{\s*order:\s*3/, "laptop scene is not after sleep scenes");
+          assert.match(homepage, /class="acoustic-system-figure"/, "precision acoustic signal board is missing");
+          assert.doesNotMatch(homepage, /class="pv-diagram"/, "retired cartoon acoustic diagram remains");
+          assert.equal((homepage.match(/<article class="tech-step">/g) || []).length, 4, "science rail needs four stages");
           console.log(`Pages quality: ok (${tracked.length} tracked files)`);
           NODE
