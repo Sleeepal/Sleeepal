@@ -2,6 +2,12 @@
 
 ## 2026-07-25
 
+### Dream trajectory rail alignment
+
+- Moved the animated progress line into a dedicated number rail beside the trajectory copy.
+- Removed viewport-specific section-wide positioning that could place the line through large Chinese titles.
+- Kept the line centered behind the numbered circles on desktop and mobile.
+
 ### Clearer principle and download navigation
 
 - Pointed “原理” directly to the phase-overlay explanation and removed the retired standalone “可视化” navigation label.

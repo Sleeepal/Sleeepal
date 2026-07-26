@@ -122,6 +122,10 @@ jobs:
           assert.doesNotMatch(dreamScript, /artifactPreviewFrame\.src\s*=/, "preview bypasses hardened srcdoc");
           assert.match(dreamScript, /hostname === "dream\.sleeepal\.com"/, "future account API boundary missing");
           assert.match(dreamHtml, /data-wallet-preview disabled>钱包账号 · 即将开放</, "unavailable wallet login is not fail-closed");
+          assert.match(dreamHtml, /class="dream-trajectory-track dream-reveal"[\s\S]*?class="dream-trajectory-list"[\s\S]*?class="dream-trajectory-line"/, "trajectory line is not scoped to the number rail");
+          const dreamStyles = fs.readFileSync("dream-lab.css", "utf8");
+          assert.doesNotMatch(dreamStyles, /left:\s*calc\(45\.2%/, "trajectory line still uses a section-wide horizontal guess");
+          assert.match(dreamStyles, /\.dream-trajectory-line\s*\{[\s\S]*?left:\s*24px;/, "desktop trajectory line is not centered in the number rail");
 
           for (const file of ["hardware-sku.html", "hardware-detail.html"]) {
             assert.match(fs.readFileSync(file, "utf8"), /Content-Security-Policy/);
