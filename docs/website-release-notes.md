@@ -2,6 +2,14 @@
 
 ## 2026-07-25
 
+### Clearer principle and download navigation
+
+- Pointed “原理” directly to the phase-overlay explanation and removed the retired standalone “可视化” navigation label.
+- Rewrote the work/rest, phone, and antiphase headlines around explicit near-field and limited-effect boundaries.
+- Simplified download language to one task: download the correct local version and begin.
+- Added consistent macOS, Windows, iOS, and Android marks before platform names.
+- Expanded phone and computer guidance to distinguish limited built-in-device relief from stronger external-speaker routes.
+
 ### Privacy-first closed-source distribution
 
 - Declared that SleeePal product Apps and the core runtime are closed source and delivered only as official signed/notarized installers or store packages.

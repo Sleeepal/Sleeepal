@@ -3107,10 +3107,40 @@ ul { list-style: none; }
   font-size: 0.92rem;
 }
 
-.platform-package-row span {
+.platform-package-row > span[data-package-status] {
   color: rgba(238, 242, 255, 0.6);
   font-size: 0.8rem;
   line-height: 1.55;
+}
+
+.platform-package-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.platform-package-name > span:last-child {
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+}
+
+.platform-mark {
+  display: inline-flex;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  align-items: center;
+  justify-content: center;
+  color: #e8dcff;
+}
+
+.platform-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 .platform-package-row a {
@@ -3287,7 +3317,7 @@ ul { list-style: none; }
     gap: 6px 14px;
     padding: 14px 0;
   }
-  .platform-package-row span {
+  .platform-package-row > span[data-package-status] {
     grid-column: 1 / -1;
   }
   .footer-compact-links {
@@ -6774,6 +6804,10 @@ html {
   min-height: calc(100svh - 156px);
 }
 
+.download-portal-hero .desktop-hero-copy h1 {
+  font-size: clamp(2.8rem, 5.25vw, 5.4rem);
+}
+
 .download-detected-note {
   display: inline-flex;
   min-height: 42px;
@@ -7490,7 +7524,7 @@ html {
     padding: 17px 0;
   }
 
-  .download-platform-panel .platform-package-row span {
+  .download-platform-panel .platform-package-row > span[data-package-status] {
     grid-column: 1 / -1;
     grid-row: 2;
   }
