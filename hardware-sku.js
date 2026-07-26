@@ -1,5 +1,25 @@
 (() => {
   const SVG_NS = "http://www.w3.org/2000/svg";
+  const sections = Array.from(document.querySelectorAll("main > section"));
+  sections.forEach((section) => {
+    section.classList.add("section-fade");
+    const rect = section.getBoundingClientRect();
+    section.classList.toggle("is-visible", rect.bottom > 0 && rect.top < globalThis.innerHeight);
+  });
+  if (
+    globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    || !("IntersectionObserver" in globalThis)
+  ) {
+    sections.forEach((section) => section.classList.add("is-visible"));
+  } else {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
+      }),
+      { rootMargin: "-5% 0px -5%", threshold: 0.04 },
+    );
+    sections.forEach((section) => sectionObserver.observe(section));
+  }
   const commonCanvasZones = [
     [675, 710, 190, 105],
     [1095, 710, 190, 105],

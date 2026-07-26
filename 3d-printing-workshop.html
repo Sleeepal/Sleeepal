@@ -8,16 +8,16 @@
   <meta name="theme-color" content="#070a12" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'self'; upgrade-insecure-requests" />
-  <link rel="canonical" href="https://dream.sleeepal.com/" />
+  <link rel="canonical" href="https://sleeepal.com/3d-printing-workshop.html" />
   <meta property="og:title" content="美梦成真 — 从愿望到真实产物" />
   <meta property="og:description" content="先睡好，再把一个真实愿望做成可以打开、使用和继续修改的数字产物。" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://dream.sleeepal.com/" />
+  <meta property="og:url" content="https://sleeepal.com/3d-printing-workshop.html" />
   <meta property="og:image" content="https://sleeepal.com/assets/dream-lab-hero-v1.jpg" />
   <link rel="icon" href="./favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
-  <link rel="stylesheet" href="./dream-lab.css?v=20260724-progress-return-1" />
-  <script src="./dream-lab.js?v=20260724-progress-return-1" defer></script>
+  <link rel="stylesheet" href="./dream-lab.css?v=20260726-timeline1" />
+  <script src="./dream-lab.js?v=20260725-dream-replay-4" defer></script>
 </head>
 <body class="dream-page">
   <a class="dream-skip-link" href="#main">跳到主要内容</a>
@@ -32,7 +32,8 @@
         <a href="#dream-intake">我的梦想</a>
         <a href="#trajectory">轨迹</a>
         <a href="#forge">工具</a>
-        <a href="#proof">SleeePal 案例</a>
+        <a href="#dream-replay">梦境再现</a>
+        <a href="#proof">案例</a>
       </nav>
       <a class="dream-header-action" href="#dream-intake">说出一个美梦</a>
     </div>
@@ -138,7 +139,7 @@
           <div class="dream-local-identity">
             <span data-account-label>本机访客 ID</span>
             <strong data-local-user-id>正在建立…</strong>
-            <button type="button" data-wallet-preview>连接钱包账号</button>
+            <button type="button" data-wallet-preview disabled>钱包账号 · 即将开放</button>
             <small data-account-status>当前梦想只保存在这个浏览器。</small>
           </div>
 
@@ -319,13 +320,14 @@
                   <h4 id="dream-artifacts-title">真实产物</h4>
                 </div>
                 <div class="dream-artifact-create-actions">
-                  <button type="button" data-artifact-board>生成可用行动台</button>
+                  <button type="button" data-artifact-prototype disabled>生成可运行原型</button>
+                  <button type="button" class="is-secondary" data-artifact-board>生成可用行动台</button>
                   <button type="button" class="is-secondary" data-artifact-generate>生成施工任务书</button>
                 </div>
               </div>
               <p>
-                “梦想行动台”是可离线打开、勾选进度和记录反馈的单文件工具；
-                “施工任务书”记录输入修订与校验值，可直接交给后续 Agents。
+                “可运行原型”由 AI 生成结构化规格，再由受控模板制作成离线应用；
+                行动台和施工任务书作为反馈与交接辅助。
               </p>
               <div class="dream-artifact-list" data-artifact-list></div>
               <p class="dream-artifact-status" data-artifact-status aria-live="polite">
@@ -410,37 +412,39 @@
         </p>
       </div>
 
-      <ol class="dream-trajectory-list dream-reveal">
-        <li data-stage="rest">
-          <span>01</span>
-          <div><strong>恢复</strong><p>吃饱、喝足、睡好，重新拥有行动力。</p></div>
-        </li>
-        <li data-stage="wish">
-          <span>02</span>
-          <div><strong>说出美梦</strong><p>从生活里的真实变化开始，而不是从功能清单开始。</p></div>
-        </li>
-        <li data-stage="brief">
-          <span>03</span>
-          <div><strong>看懂目标</strong><p>把愿望整理成目标、限制、成功标准与第一件产物。</p></div>
-        </li>
-        <li data-stage="route">
-          <span>04</span>
-          <div><strong>确认路径</strong><p>你看懂接下来会发生什么，并决定是否继续。</p></div>
-        </li>
-        <li data-stage="forge">
-          <span>05</span>
-          <div><strong>炼丹炉制作</strong><p>大模型、Agents、本地工具和能力积木协同施工。</p></div>
-        </li>
-        <li data-stage="preview">
-          <span>06</span>
-          <div><strong>验梦台试用</strong><p>打开真实产物，完成核心任务，提出修改。</p></div>
-        </li>
-        <li data-stage="grow">
-          <span>07</span>
-          <div><strong>继续生长</strong><p>现实反馈进入下一版本，让美梦越来越接近你真正需要的样子。</p></div>
-        </li>
-      </ol>
-      <div class="dream-trajectory-line" aria-hidden="true"><span data-trajectory-progress></span></div>
+      <div class="dream-trajectory-track dream-reveal">
+        <ol class="dream-trajectory-list">
+          <li data-stage="rest">
+            <span>01</span>
+            <div><strong>恢复</strong><p>吃饱、喝足、睡好，重新拥有行动力。</p></div>
+          </li>
+          <li data-stage="wish">
+            <span>02</span>
+            <div><strong>说出美梦</strong><p>从生活里的真实变化开始，而不是从功能清单开始。</p></div>
+          </li>
+          <li data-stage="brief">
+            <span>03</span>
+            <div><strong>看懂目标</strong><p>把愿望整理成目标、限制、成功标准与第一件产物。</p></div>
+          </li>
+          <li data-stage="route">
+            <span>04</span>
+            <div><strong>确认路径</strong><p>你看懂接下来会发生什么，并决定是否继续。</p></div>
+          </li>
+          <li data-stage="forge">
+            <span>05</span>
+            <div><strong>炼丹炉制作</strong><p>大模型、Agents、本地工具和能力积木协同施工。</p></div>
+          </li>
+          <li data-stage="preview">
+            <span>06</span>
+            <div><strong>验梦台试用</strong><p>打开真实产物，完成核心任务，提出修改。</p></div>
+          </li>
+          <li data-stage="grow">
+            <span>07</span>
+            <div><strong>继续生长</strong><p>现实反馈进入下一版本，让美梦越来越接近你真正需要的样子。</p></div>
+          </li>
+        </ol>
+        <div class="dream-trajectory-line" aria-hidden="true"><span data-trajectory-progress></span></div>
+      </div>
     </section>
 
     <section class="dream-forge" id="forge" aria-labelledby="forge-title">
@@ -514,6 +518,83 @@
       </div>
     </section>
 
+    <section class="dream-replay" id="dream-replay" aria-labelledby="dream-replay-title">
+      <div class="dream-replay-copy dream-reveal">
+        <p class="dream-eyebrow">Future vision · Dream replay</p>
+        <span class="dream-replay-status">未来版本 · 概念预告</span>
+        <h2 id="dream-replay-title">梦境再现</h2>
+        <p class="dream-replay-lead">有一天，梦不再需要被复述。</p>
+        <p>
+          在本人知情授权下，未来的睡眠宝或许能捕捉睡眠中的神经活动线索，
+          由个人化神经解码与多模态 AI 整理为文本、图像，再重建成可以回看的梦境片段。
+        </p>
+      </div>
+
+      <figure class="dream-replay-visual dream-reveal" aria-label="从睡眠神经信号到梦境文本、图像和影像的未来概念路径">
+        <div class="dream-replay-sleeper" aria-hidden="true">
+          <span class="dream-replay-head"></span>
+          <span class="dream-replay-pillow"></span>
+          <svg viewBox="0 0 420 90" preserveAspectRatio="none">
+            <path d="M0 46 C20 46 20 18 40 18 S60 74 80 74 S100 34 120 34 S140 56 160 56 S180 14 200 14 S220 78 240 78 S260 30 280 30 S300 62 320 62 S340 24 360 24 S380 46 420 46" />
+          </svg>
+          <small>睡眠中的神经活动线索</small>
+        </div>
+        <div class="dream-replay-scene" aria-hidden="true">
+          <span class="dream-replay-moon"></span>
+          <span class="dream-replay-horizon"></span>
+          <span class="dream-replay-door"></span>
+          <span class="dream-replay-person"></span>
+          <span class="dream-replay-scan"></span>
+          <div class="dream-replay-caption">
+            <small>片段 03 · 场景语义</small>
+            <strong>夜色、远山、一扇发光的门</strong>
+          </div>
+        </div>
+        <figcaption>
+          <span>脑信号线索</span><i></i><span>语义解码</span><i></i><span>图像重建</span><i></i><span>影像序列</span>
+        </figcaption>
+      </figure>
+
+      <ol class="dream-replay-path dream-reveal">
+        <li><span>01</span><strong>捕捉</strong><p>以未来非侵入式传感器记录经本人授权的睡眠神经活动线索。</p></li>
+        <li><span>02</span><strong>理解</strong><p>个体化模型推测人物、物体、情绪和空间关系，并保留不确定性。</p></li>
+        <li><span>03</span><strong>重建</strong><p>把线索整理成梦境文字，再生成可辨识的图像与连续片段。</p></li>
+        <li><span>04</span><strong>归还</strong><p>只交还给做梦者；可以保存、删除、改写，也可以永不分享。</p></li>
+      </ol>
+
+      <div class="dream-replay-boundary dream-reveal">
+        <div>
+          <p class="dream-eyebrow">Today</p>
+          <h3>研究已经走到哪里</h3>
+          <p>
+            受控实验已能从 fMRI、MEG 等信号中识别部分看见、想象或睡眠初期报告的内容，
+            并尝试重建图像与文字线索；但这远不等于完整读取、忠实录像或在家用设备中复现个人梦境。
+          </p>
+        </div>
+        <div>
+          <p class="dream-eyebrow">SleeePal now</p>
+          <h3>现在仍是未来愿景</h3>
+          <p>
+            当前睡眠宝不读取脑信号，也不具备梦境复现能力。这个栏目记录我们对“人类 + AI”共同进化的长期判断，
+            不把科研样机包装成已经可用的产品。
+          </p>
+        </div>
+      </div>
+
+      <div class="dream-replay-principle dream-reveal">
+        <strong>梦境只属于做梦的人。</strong>
+        <p>默认本地处理、逐次授权、随时删除；不得用于监控、雇佣、保险、广告定向或未经许可的身份判断。</p>
+      </div>
+
+      <div class="dream-replay-research dream-reveal" aria-label="梦境再现研究启发">
+        <span>研究启发</span>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/23558170/" target="_blank" rel="noreferrer">睡眠视觉内容解码 · Science 2013</a>
+        <a href="https://www.nature.com/articles/s41467-025-65541-1" target="_blank" rel="noreferrer">自传式心理图像特征解码 · 2025</a>
+        <a href="https://ai.meta.com/research/publications/brain-to-text-decoding-a-non-invasive-approach-via-typing/" target="_blank" rel="noreferrer">非侵入式脑信号到文本 · 2025</a>
+        <a href="https://arxiv.org/abs/2505.14556" target="_blank" rel="noreferrer">动态 fMRI 图像重建 · 2025</a>
+      </div>
+    </section>
+
     <section class="dream-boundary" id="boundary" aria-labelledby="boundary-title">
       <div class="dream-section-intro dream-reveal">
         <p class="dream-eyebrow">Trust before magic</p>
@@ -565,7 +646,7 @@
         <div>
           <span>SAFE PREVIEW</span>
           <h2 id="dream-artifact-preview-title" data-artifact-preview-title>梦想行动台</h2>
-          <p>预览处于隔离沙箱且不能联网；下载 HTML 后可作为独立离线文件继续使用。</p>
+          <p>预览在独立沙箱中运行，外部网络请求由预览安全策略阻断；下载后可作为独立文件继续使用。</p>
         </div>
         <button type="button" data-artifact-preview-close aria-label="关闭行动台预览">×</button>
       </header>
@@ -573,10 +654,11 @@
         data-artifact-preview-frame
         title="梦想行动台安全预览"
         sandbox="allow-scripts allow-downloads"
+        referrerpolicy="no-referrer"
       ></iframe>
       <footer>
         <p data-artifact-preview-status aria-live="polite">正在准备安全预览…</p>
-        <button type="button" data-artifact-preview-download>下载这份行动台</button>
+        <button type="button" data-artifact-preview-download>下载当前产物</button>
       </footer>
     </div>
   </dialog>
@@ -778,6 +860,42 @@
         <button type="button" data-ai-cancel>继续使用本机模式</button>
       </div>
       <p class="dream-ai-dialog-status" data-ai-dialog-status aria-live="polite"></p>
+    </div>
+  </dialog>
+
+  <dialog class="dream-prototype-dialog" data-prototype-dialog aria-labelledby="dream-prototype-title">
+    <div class="dream-prototype-shell">
+      <header>
+        <div>
+          <span>AI PROTOTYPE · EXPLICIT CONSENT</span>
+          <h2 id="dream-prototype-title">生成可运行原型，<br />先确认这一次边界。</h2>
+        </div>
+        <button type="button" aria-label="关闭原型生成确认" data-prototype-close>×</button>
+      </header>
+
+      <section class="dream-prototype-scope">
+        <h3>确认后会发生</h3>
+        <ul>
+          <li><strong>发送已确认的账号梦卡</strong><span>目标、成功标准、边界与当前修订会发送给 OpenAI；另附不含钱包地址的散列安全标识，用于滥用防护。</span></li>
+          <li><strong>OpenAI 请求使用 <code>store:false</code></strong><span>不提供任何外部工具，也不允许模型发布或执行动作。</span></li>
+          <li><strong>模型只生成结构化规格</strong><span>服务端再用受控模板渲染成可以离线打开的应用。</span></li>
+          <li><strong>不会自动发布或运行外部操作</strong><span>生成结果只进入当前账号的产物版本链，由你预览或下载。</span></li>
+        </ul>
+        <p class="dream-prototype-state-note">
+          原型状态 JSON 只在下载后的应用中本地导出，不在这里导入；系统不会自动附加账号、钱包、梦想、产物或模型服务标识，你在原型中填写的内容会随状态一同导出。
+        </p>
+      </section>
+
+      <label class="dream-prototype-consent" for="dream-prototype-consent">
+        <input id="dream-prototype-consent" type="checkbox" data-prototype-consent />
+        <span>我已看懂本次数据范围，同意生成当前梦想的离线可运行原型。</span>
+      </label>
+
+      <div class="dream-prototype-actions">
+        <button type="button" class="dream-prototype-primary" data-prototype-confirm disabled>确认并生成原型</button>
+        <button type="button" data-prototype-cancel>暂不生成</button>
+      </div>
+      <p class="dream-prototype-status" data-prototype-status aria-live="polite"></p>
     </div>
   </dialog>
 

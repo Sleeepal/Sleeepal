@@ -39,7 +39,7 @@ jobs:
           const allowed = new Set([
             ".github/workflows/pages-quality.yml",
             "CNAME", "LICENSE", "README.md", "docs/website-release-notes.md",
-            "index.html", "styles.css", "site.js", "desktop.html", "desktop.js",
+            "index.html", "styles.css", "site.js", "desktop.html",
             "feedback.html", "feedback.js",
             "privacy.html", "terms.html", "3d-printing-workshop.html", "dream-lab.css",
             "dream-lab.js", "release.json", "favicon.ico", "hardware-sku.html",
@@ -51,7 +51,7 @@ jobs:
             "assets/concealed-inwall-linear-microperforated-v1.jpg",
             "assets/concealed-inwall-linear-walnut-v1.jpg",
             "assets/demo-child-protected-sleep-warm.png",
-            "assets/demo-couple-protected-sleep-warm-wide.png",
+            "assets/demo-couple-protected-sleep-warm-real-bed-v2.jpg",
             "assets/demo-sleep-people-quiet-zone-triptych-warm.png",
             "assets/demo-woman-protected-sleep-warm.png",
             "assets/favicon-16.png", "assets/favicon-32.png",
@@ -59,6 +59,7 @@ jobs:
             "assets/logo-dark.svg", "assets/logo-light.svg",
             "assets/laptop-nearfield-layers-v1.jpg",
             "assets/mobile-rest-quiet-space-v1.jpg",
+            "assets/mobile-transit-quiet-space-v1.jpg",
             "assets/pillar-bedside-gap-sleep-safe.png",
             "assets/pillar-camp-lantern-sleep-safe.png",
             "assets/pillar-care-rail-clip-sleep-safe.png",
@@ -80,6 +81,7 @@ jobs:
             /patent-disclosure/i, /odm-rfq/i, /权利要求|专利交底|附图编号|磁吸触点/,
             /USDT|USDC|WalletConnect|RainbowKit|收款地址/,
             /反[向相]静谧|反向宁静|静谧提升|Antiphase quiet|Quiet Guard|理论抵消效果/i,
+            /声音默认不上传|敏感音频默认不上云|另附音频片段|attach an audio clip/i,
           ];
           for (const file of publicText) {
             const content = fs.readFileSync(file, "utf8");
@@ -98,8 +100,80 @@ jobs:
           }
 
           const release = JSON.parse(fs.readFileSync("release.json", "utf8"));
-          assert.equal(release.publicDownload, false);
-          assert.equal("downloadPath" in release, false);
-          assert.equal("downloadUrl" in release, false);
+          assert.equal(release.schemaVersion, 2);
+          assert.deepEqual(Object.keys(release.downloads || {}).sort(), ["android", "ios", "macos", "windows"]);
+          for (const [platform, artifact] of Object.entries(release.downloads)) {
+            assert.equal(artifact.publicDownload, false, `${platform}: public download exposed`);
+            assert.equal("downloadPath" in artifact, false, `${platform}: local path exposed`);
+            assert.equal("downloadUrl" in artifact, false, `${platform}: unapproved URL exposed`);
+          }
+          const scripts = ["site.js", "feedback.js", "dream-lab.js", "hardware-sku.js"]
+            .map((file) => fs.readFileSync(file, "utf8"))
+            .join("\n");
+          assert.equal(/scrollIntoView|scrollTo\(|scrollBy\(/.test(scripts), false, "scripted page scrolling remains");
+          assert.equal(/scroll-behavior:\s*smooth/.test(fs.readFileSync("styles.css", "utf8")), false, "smooth page scrolling remains");
+
+          const dreamHtml = fs.readFileSync("3d-printing-workshop.html", "utf8");
+          const dreamScript = fs.readFileSync("dream-lab.js", "utf8");
+          assert.match(dreamHtml, /canonical[^>]+sleeepal\.com\/3d-printing-workshop\.html/);
+          assert.doesNotMatch(dreamHtml, /canonical[^>]+dream\.sleeepal\.com/);
+          assert.match(dreamScript, /connect-src 'none'/, "offline artifact CSP missing");
+          assert.match(dreamScript, /artifactPreviewFrame\.srcdoc = payload\.content/);
+          assert.doesNotMatch(dreamScript, /artifactPreviewFrame\.src\s*=/, "preview bypasses hardened srcdoc");
+          assert.match(dreamScript, /hostname === "dream\.sleeepal\.com"/, "future account API boundary missing");
+          assert.match(dreamHtml, /data-wallet-preview disabled>钱包账号 · 即将开放</, "unavailable wallet login is not fail-closed");
+          assert.match(dreamHtml, /class="dream-trajectory-track dream-reveal"[\s\S]*?class="dream-trajectory-list"[\s\S]*?class="dream-trajectory-line"/, "trajectory line is not scoped to the number rail");
+          const dreamStyles = fs.readFileSync("dream-lab.css", "utf8");
+          assert.doesNotMatch(dreamStyles, /left:\s*calc\(45\.2%/, "trajectory line still uses a section-wide horizontal guess");
+          assert.match(dreamStyles, /\.dream-trajectory-line\s*\{[\s\S]*?left:\s*24px;/, "desktop trajectory line is not centered in the number rail");
+
+          for (const file of ["hardware-sku.html", "hardware-detail.html"]) {
+            assert.match(fs.readFileSync(file, "utf8"), /Content-Security-Policy/);
+          }
+          const homepage = fs.readFileSync("index.html", "utf8");
+          const hardware = fs.readFileSync("hardware-sku.html", "utf8");
+          const downloads = fs.readFileSync("desktop.html", "utf8");
+          const privacy = fs.readFileSync("privacy.html", "utf8");
+          const terms = fs.readFileSync("terms.html", "utf8");
+          const feedback = fs.readFileSync("feedback.html", "utf8");
+          const feedbackScript = fs.readFileSync("feedback.js", "utf8");
+          const homepageStyles = fs.readFileSync("styles.css", "utf8");
+          assert.match(privacy, /不上传任何用户录音/, "privacy promise is missing");
+          assert.match(privacy, /录音零上传是持续有效的产品承诺/, "future features can weaken recording privacy");
+          assert.match(terms, /闭源软件发布/, "closed-source distribution boundary is missing");
+          assert.match(downloads, /核心运行时闭源发布/, "download page omits the proprietary installer boundary");
+          assert.doesNotMatch(feedback, /name="hasAudio"/, "feedback still offers recording attachments");
+          assert.doesNotMatch(feedbackScript, /check\.audio|另附音频|attach an audio clip/, "feedback copy still offers recording attachments");
+          assert.match(feedbackScript, /audio_included:\s*false/, "feedback schema does not force audio exclusion");
+          assert.doesNotMatch(homepage, /hardware-sku\.html#concealed|>产品形态</, "homepage still opens the concealed section or uses the old label");
+          assert.match(homepage, /href="\.\/hardware-sku\.html"[^>]*>智能硬件<\/a>/, "smart-hardware homepage entry missing");
+          assert.match(hardware, /<nav aria-label="智能硬件页面导航">[\s\S]*?<a href="#people-demo">使用场景<\/a>[\s\S]*?href="#external">外置式<\/a>[\s\S]*?href="#concealed">隐形款<\/a>/, "hardware navigation order is incorrect");
+          assert.match(hardware, /aria-label="智能硬件二级类目"[\s\S]*?href="#external"[\s\S]*?>01 · 外置式<[\s\S]*?href="#concealed"[\s\S]*?>02 · 隐形款</, "hardware subcategories missing");
+          assert.doesNotMatch(hardware, /id="(?:one-tap|legacy-software-experience)"/, "software experience remains in smart hardware");
+          assert.doesNotMatch(homepage, /data-auto-download/, "homepage still bypasses explicit version selection");
+          assert.match(homepage, /class="btn-lux-primary" href="\.\/desktop\.html"/, "homepage Start does not open downloads");
+          assert.match(downloads, /canonical[^>]+sleeepal\.com\/desktop\.html/, "download page canonical URL is incorrect");
+          assert.match(downloads, /script-src 'self'; connect-src 'self'/, "download page cannot load release metadata safely");
+          for (const platform of ["macos", "windows", "ios", "android"]) {
+            assert.equal((downloads.match(new RegExp(`data-package-platform="${platform}"`, "g")) || []).length, 1, `${platform}: download row missing or duplicated`);
+          }
+          assert.equal((homepage.match(/data-i18n="scene\.details"/g) || []).length, 12, "homepage scenes need visible detail actions");
+          assert.match(homepage, /href="#visual" data-i18n="nav\.science">原理<\/a>/, "Principle navigation does not open the phase-overlay explanation");
+          assert.doesNotMatch(homepage, /data-i18n="nav\.visual"/, "Visualization remains a separate navigation item");
+          assert.doesNotMatch(fs.readFileSync("site.js", "utf8"), /"nav\.visual"/, "Retired visualization navigation copy remains");
+          assert.match(homepage, /工作与休息，[\s\S]*?SleeePal 都能创造近场静谧空间。/);
+          assert.match(homepage, /根据环境噪音音波，[\s\S]*?用反向声波进行抵消，从而实现降噪。/);
+          assert.match(homepage, /让手机为你营造静谧空间，[\s\S]*?虽然只是很有限的降噪。/);
+          assert.doesNotMatch(fs.readFileSync("site.js", "utf8"), /下载状态|Download status/);
+          assert.match(downloads, /下载到你的本机，[\s\S]*?即可开始体验。/);
+          assert.doesNotMatch(downloads, /选择你的版本/);
+          assert.equal((downloads.match(/class="platform-mark"/g) || []).length, 4, "every operating system needs a platform mark");
+          assert.match(downloads, /日常浏览手机时，可小幅度抵消环境噪音/);
+          assert.match(downloads, /用于办公、专注与移动工作时间的有限环境噪音抵消。/);
+          assert.match(homepageStyles, /scenario-story-order > #mobile-quiet\s*\{\s*order:\s*1/, "sleep scenes are not first");
+          assert.match(homepageStyles, /scenario-story-order > #laptop-quiet\s*\{\s*order:\s*3/, "laptop scene is not after sleep scenes");
+          assert.match(homepage, /class="acoustic-system-figure"/, "precision acoustic signal board is missing");
+          assert.doesNotMatch(homepage, /class="pv-diagram"/, "retired cartoon acoustic diagram remains");
+          assert.equal((homepage.match(/<article class="tech-step">/g) || []).length, 4, "science rail needs four stages");
           console.log(`Pages quality: ok (${tracked.length} tracked files)`);
           NODE

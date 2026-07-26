@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SleeePal — Beta 隐私说明</title>
-  <meta name="description" content="SleeePal Beta 的本地音频、梦想卡、钱包账号、可选 AI 对话、导出和删除边界。" />
+  <meta name="description" content="SleeePal 的录音零上传承诺、本地音频、梦想卡、钱包账号、可选 AI 对话、导出和删除边界。" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests" />
   <link rel="icon" type="image/svg+xml" href="./assets/app-icon.svg" />
@@ -15,36 +15,36 @@
     <a href="./index.html" class="policy-brand"><img src="./assets/logo-light.svg" alt="SleeePal" /></a>
     <div class="policy-nav-links">
       <a href="sleeepal://devices" data-app-link="privacy-nav">打开桌面版</a>
-      <a href="./index.html#download">验证状态</a>
+      <a href="./desktop.html">选择版本</a>
       <a href="./feedback.html">问题反馈</a>
     </div>
   </nav>
 
   <main class="policy-shell">
     <header class="policy-hero">
-      <p class="policy-kicker">LOCAL-FIRST · BETA NOTICE</p>
-      <h1>你的夜晚声音，<br />默认留在你的<strong>设备里。</strong></h1>
-      <p>这是一份面向创始人验证阶段的隐私说明，用普通语言解释桌面 Beta 与“美梦成真”网页会处理什么、什么默认留在本机，以及什么时候才会发送到远程服务。</p>
-      <div class="policy-status">Beta 说明 · 更新于 2026-07-23</div>
+      <p class="policy-kicker">PRIVACY FIRST · RECORDINGS STAY LOCAL</p>
+      <h1>你的录音，<br />始终留在你的<strong>设备里。</strong></h1>
+      <p>SleeePal 不上传任何用户录音。这里用普通语言说明睡眠音频、本地文件、反馈与“美梦成真”账号之间严格分离的数据边界。</p>
+      <div class="policy-status">隐私说明 · 更新于 2026-07-25</div>
     </header>
 
     <section class="policy-section" aria-labelledby="privacy-local">
-      <div><span>01</span><h2 id="privacy-local">本地处理</h2></div>
-      <p>实时麦克风分析、反相计算、声景排除和夜间事件判断优先在本机完成。当前版本不会自动把麦克风原始音频上传到 SleeePal 服务器。</p>
+      <div><span>01</span><h2 id="privacy-local">录音零上传</h2></div>
+      <p>实时麦克风分析、反相计算、声景排除和夜间事件判断在本机完成。麦克风原始音频、整夜录音、事件片段、导入录音以及可恢复语音内容的音频数据不会上传到 SleeePal、模型提供商、分析服务或其他远程服务。</p>
     </section>
 
     <section class="policy-section" aria-labelledby="privacy-files">
       <div><span>02</span><h2 id="privacy-files">可能保存在本机的内容</h2></div>
       <ul>
-        <li>创始人 / QA 构建可能在应用支持目录生成本地夜报、事件时间、时长和强弱等结构化记录。</li>
-        <li>音频片段只应在对应功能明确开启后保存在本机；不会因为打开反馈页而自动附加或上传。</li>
+        <li>桌面应用可能在应用支持目录生成本地夜报、事件时间、时长和强弱等结构化记录。</li>
+        <li>音频片段只会在对应功能明确开启后保存在本机；反馈、账号、同步和家庭共享均不接收录音。</li>
         <li>只有你在官网反馈页主动下载或复制时，才会生成由你管理的反馈 JSON。</li>
       </ul>
     </section>
 
     <section class="policy-section" aria-labelledby="privacy-control">
-      <div><span>03</span><h2 id="privacy-control">由你决定分享</h2></div>
-      <p>截图、完整日志、夜报和音频默认不会加入反馈包。复制、下载、邮件或 GitHub Issue 都需要由你主动触发；发送前请再次检查内容。</p>
+      <div><span>03</span><h2 id="privacy-control">本地导出与反馈</h2></div>
+      <p>SleeePal 反馈包不包含也不接收录音。截图、夜报和经检查的非录音诊断信息只有在你主动选择后才会进入反馈内容。你可以在本机回放、删除或导出自己的录音；导出后使用操作系统或第三方工具移动文件，是你在 SleeePal 产品链路之外的独立操作。</p>
     </section>
 
     <section class="policy-section" aria-labelledby="privacy-dreams">
@@ -61,17 +61,18 @@
       <div><span>05</span><h2 id="privacy-ai">可选 AI 对话</h2></div>
       <p>AI 模式必须单独开启。每次发送会把当前账号梦卡、这条新消息和最近 8 条账号 AI 对话经 SleeePal 服务端发送给 OpenAI；浏览器中的本机历史不会自动加入。账号数据库会保存你主动发送的账号对话、模型回复、同意记录、梦卡建议、授权决定、你生成的 Markdown 或 HTML 产物版本和必要的运行审计。</p>
       <p>模型请求显式设置 <code>store:false</code>，用于关闭 Responses API 的应用状态存储；这不等同于 OpenAI 组织级“零数据保留（ZDR）”。请不要在早期 Beta 中提交密码、私钥、助记词、支付凭据、未脱敏的健康资料或其他不应交给远程模型的秘密。</p>
+      <p>“美梦成真”与睡眠音频运行时彼此独立。AI 对话只接收你在该模块主动提交的内容，不接收麦克风音频、睡眠录音或事件片段。</p>
     </section>
 
     <section class="policy-section" aria-labelledby="privacy-delete">
       <div><span>06</span><h2 id="privacy-delete">保留与删除</h2></div>
       <p>浏览器梦想可以逐个删除或导出。“美梦成真”账号管理中也提供完整 JSON 备份，包含账号梦卡、AI 对话、建议、授权、任务证据和 Markdown/HTML 产物正文；备份文件由你自行保管。梦想行动台下载后把勾选与笔记默认留在打开它的浏览器，也可由你导出独立进度 JSON；这些下载后的本机数据不会自动回传账号。彻底删除账号需要再次勾选不可恢复提示并输入确认短语，完成后会删除服务器中的钱包身份、会话和全部账号内容。本机浏览器里的梦想与已下载文件不会随服务器账号一起删除，仍需由你单独清理。</p>
-      <p>桌面 QA 构建可能把报告或经你选择的片段留在本机；这些本机文件不属于网页账号删除范围。公开 Beta 上线前仍需确定统一保留期限、生产备份生命周期和运营侧删除响应流程。</p>
+      <p>桌面应用可能把报告或经你选择的片段留在本机；这些本机文件从不上传，也不属于网页账号删除范围。线上账号数据的保留期限、备份周期和删除响应方式会在对应功能开放时明确说明。</p>
     </section>
 
     <section class="policy-section" aria-labelledby="privacy-boundary">
       <div><span>07</span><h2 id="privacy-boundary">当前边界</h2></div>
-      <p>桌面音频 Beta 仍以本地处理为主；“美梦成真”的钱包账号与 AI 服务处于独立早期验证阶段，线上可能尚未配置或暂时不可用。AI 当前没有工具和执行器，梦卡建议不会自动生效，授权卡也不会触发发布、发送、购买、删除或连接外部服务。</p>
+      <p>录音零上传是持续有效的产品承诺，不会被未来的云同步、家庭共享、远程诊断、反馈、AI 功能或账号开关覆盖。“美梦成真”的钱包账号与 AI 服务处于独立早期验证阶段；AI 当前没有工具和执行器，梦卡建议不会自动生效，授权卡也不会触发发布、发送、购买、删除或连接外部服务。</p>
     </section>
 
     <div class="policy-cta">

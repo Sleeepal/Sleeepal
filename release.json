@@ -1,45 +1,29 @@
 {
-  "version": "0.3.133",
-  "buildTime": "2026-06-06 01:12 CEST",
-  "buildNote": "Work quiet space · Mobile rest and sleep · Local audio processing",
-  "appSize": "97M",
-  "arch": "darwin-arm64",
-  "publicDownload": false,
-  "artifactStatus": "withdrawn",
-  "signed": false,
-  "notarized": false,
-  "progressUrl": "https://github.com/HiClawBot/Sleeepal",
-  "downloadSub": {
-    "zh": "工作场景选择 Mac / Windows；休息与睡眠场景选择 iPhone / Android",
-    "en": "Choose Mac / Windows for work, and iPhone / Android for rest and sleep"
-  },
-  "downloadButton": {
-    "zh": "选择电脑版本",
-    "en": "Choose your desktop"
-  },
-  "sysreq": {
-    "zh": "macOS 与 Windows x64 · 了解电脑版本计划",
-    "en": "macOS and Windows x64 · explore the desktop roadmap"
-  },
-  "releaseLabel": {
-    "zh": "当前版本",
-    "en": "Current version"
-  },
-  "packagedLabel": {
-    "zh": "更新时间",
-    "en": "Updated"
-  },
-  "progress": {
-    "zh": [
-      "笔记本电脑端面向工作与专注，支持本地声音分析与近场调节。",
-      "手机端面向休息与睡眠，负责枕边感知、声景选择与连接设备控制。",
-      "居家专用硬件把更稳定的采集与输出带到床头近场。"
-    ],
-    "en": [
-      "The laptop experience is designed for work and focus, with local sound analysis and near-field tuning.",
-      "The phone experience is designed for rest and sleep, handling bedside sensing, soundscapes, and connected-device control.",
-      "Dedicated home hardware brings steadier sensing and output to the bedside near field."
-    ]
-  },
-  "alternateDownloads": []
+  "schemaVersion": 2,
+  "updatedAt": "2026-07-25T00:00:00+02:00",
+  "downloads": {
+    "macos": {
+      "version": "0.3.134",
+      "publicDownload": false,
+      "artifactStatus": "withdrawn",
+      "signed": false,
+      "notarized": false
+    },
+    "windows": {
+      "version": "0.3.134",
+      "publicDownload": false,
+      "artifactStatus": "qa-only",
+      "signed": false
+    },
+    "ios": {
+      "publicDownload": false,
+      "artifactStatus": "planned",
+      "signed": false
+    },
+    "android": {
+      "publicDownload": false,
+      "artifactStatus": "planned",
+      "signed": false
+    }
+  }
 }
