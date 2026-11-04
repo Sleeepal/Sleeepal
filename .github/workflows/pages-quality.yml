@@ -27,7 +27,6 @@ jobs:
           node --check site.js
           node --check feedback.js
           node --check dream-lab.js
-          node --check hardware-sku.js
       - name: Public boundary and links
         run: |
           node <<'NODE'
@@ -42,36 +41,15 @@ jobs:
             "index.html", "styles.css", "site.js", "desktop.html",
             "feedback.html", "feedback.js",
             "privacy.html", "terms.html", "3d-printing-workshop.html", "dream-lab.css",
-            "dream-lab.js", "release.json", "favicon.ico", "hardware-sku.html",
-            "hardware-sku.css", "hardware-sku.js", "hardware-detail.html",
-            "hardware-listener.html", "hardware-listener.css", "assets/listener-square-v018.png",
+            "dream-lab.js", "release.json", "favicon.ico",
             "assets/app-icon-preview.png", "assets/app-icon.svg",
-            "assets/concealed-art-frame-bedroom-v1.jpg",
-            "assets/concealed-art-frame-panorama-bar-v1.jpg",
-            "assets/concealed-inwall-linear-light-oak-v1.jpg",
-            "assets/concealed-inwall-linear-microperforated-v1.jpg",
-            "assets/concealed-inwall-linear-walnut-v1.jpg",
-            "assets/demo-child-protected-sleep-warm.png",
-            "assets/demo-couple-protected-sleep-warm-real-bed-v2.jpg",
-            "assets/demo-sleep-people-quiet-zone-triptych-warm.png",
-            "assets/demo-woman-protected-sleep-warm.png",
             "assets/favicon-16.png", "assets/favicon-32.png",
-            "assets/headboard-strip-wide-warm.png",
             "assets/logo-dark.svg", "assets/logo-light.svg",
             "assets/laptop-nearfield-layers-v1.jpg",
             "assets/mobile-rest-quiet-space-v1.jpg",
             "assets/mobile-transit-quiet-space-v1.jpg",
-            "assets/pillar-bedside-gap-sleep-safe.png",
-            "assets/pillar-camp-lantern-sleep-safe.png",
-            "assets/pillar-care-rail-clip-sleep-safe.png",
-            "assets/pillar-child-guard-mini-sleep-safe.png",
-            "assets/pillar-family-sleep-safe-warm.png",
-            "assets/quietcanvas-family-construction-v1.jpg",
-            "assets/quietwall-linear-core-module-v3.jpg",
-            "assets/sku-couple-strip-wide-warm.png", "assets/sku-halo.png",
-            "assets/sku-pebble.png", "assets/symbol-mark-white.png",
+            "assets/symbol-mark-white.png",
             "assets/dream-lab-hero-v1.jpg",
-            "assets/wall-pod-bun-wired-down-drop-sleep-safe.png",
           ]);
           const tracked = execFileSync("git", ["ls-files"], { encoding: "utf8" }).trim().split("\n");
           assert.deepEqual(tracked.filter((file) => !allowed.has(file)), [], "unexpected public files");
@@ -108,7 +86,7 @@ jobs:
             assert.equal("downloadPath" in artifact, false, `${platform}: local path exposed`);
             assert.equal("downloadUrl" in artifact, false, `${platform}: unapproved URL exposed`);
           }
-          const scripts = ["site.js", "feedback.js", "dream-lab.js", "hardware-sku.js"]
+          const scripts = ["site.js", "feedback.js", "dream-lab.js"]
             .map((file) => fs.readFileSync(file, "utf8"))
             .join("\n");
           assert.equal(/scrollIntoView|scrollTo\(|scrollBy\(/.test(scripts), false, "scripted page scrolling remains");
@@ -128,11 +106,10 @@ jobs:
           assert.doesNotMatch(dreamStyles, /left:\s*calc\(45\.2%/, "trajectory line still uses a section-wide horizontal guess");
           assert.match(dreamStyles, /\.dream-trajectory-line\s*\{[\s\S]*?left:\s*24px;/, "desktop trajectory line is not centered in the number rail");
 
-          for (const file of ["hardware-sku.html", "hardware-detail.html", "hardware-listener.html"]) {
-            assert.match(fs.readFileSync(file, "utf8"), /Content-Security-Policy/);
-          }
           const homepage = fs.readFileSync("index.html", "utf8");
-          const hardware = fs.readFileSync("hardware-sku.html", "utf8");
+          const publishedProductFiles = /^(?:hardware-|assets\/(?:concealed-|headboard-|listener-|pillar-|quietcanvas-|quietwall-|sku-|wall-pod-))/i;
+          assert.deepEqual(tracked.filter((file) => publishedProductFiles.test(file)), [], "hardware materials must remain off the public site");
+          assert.doesNotMatch(homepage, /hardware-(?:sku|detail|listener)\.html|data-i18n="nav\.hardware"/, "public hardware entry remains");
           const downloads = fs.readFileSync("desktop.html", "utf8");
           const privacy = fs.readFileSync("privacy.html", "utf8");
           const terms = fs.readFileSync("terms.html", "utf8");
@@ -146,11 +123,6 @@ jobs:
           assert.doesNotMatch(feedback, /name="hasAudio"/, "feedback still offers recording attachments");
           assert.doesNotMatch(feedbackScript, /check\.audio|另附音频|attach an audio clip/, "feedback copy still offers recording attachments");
           assert.match(feedbackScript, /audio_included:\s*false/, "feedback schema does not force audio exclusion");
-          assert.doesNotMatch(homepage, /hardware-sku\.html#concealed|>产品形态</, "homepage still opens the concealed section or uses the old label");
-          assert.match(homepage, /href="\.\/hardware-sku\.html"[^>]*>智能硬件<\/a>/, "smart-hardware homepage entry missing");
-          assert.match(hardware, /<nav aria-label="智能硬件页面导航">[\s\S]*?<a href="#people-demo">使用场景<\/a>[\s\S]*?href="#external">外置式<\/a>[\s\S]*?href="#concealed">隐形款<\/a>/, "hardware navigation order is incorrect");
-          assert.match(hardware, /aria-label="智能硬件二级类目"[\s\S]*?href="#external"[\s\S]*?>01 · 外置式<[\s\S]*?href="#concealed"[\s\S]*?>02 · 隐形款</, "hardware subcategories missing");
-          assert.doesNotMatch(hardware, /id="(?:one-tap|legacy-software-experience)"/, "software experience remains in smart hardware");
           assert.doesNotMatch(homepage, /data-auto-download/, "homepage still bypasses explicit version selection");
           assert.match(homepage, /class="btn-lux-primary" href="\.\/desktop\.html"/, "homepage Start does not open downloads");
           assert.match(downloads, /canonical[^>]+sleeepal\.com\/desktop\.html/, "download page canonical URL is incorrect");
