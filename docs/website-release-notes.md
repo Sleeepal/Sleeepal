@@ -35,8 +35,7 @@
 
 - Removed scripted and smooth page scrolling from public interactions.
 - Added independent opacity reveals for sections without moving the page after functional button clicks.
-- Hardened desktop and mobile layouts against horizontal overflow, clipped headings, and wrapped hardware navigation.
-- Renamed the homepage entry to “智能硬件”, removed the deep link that opened midway through the concealed section, and added “外置式 / 隐形款” as first-screen hardware subcategories.
+- Hardened desktop and mobile layouts against horizontal overflow, clipped headings.
 - Reordered the product story so sleep scenarios appear before laptop work and phone transit, and added visible detail actions to every scene card.
 - Replaced the simplified acoustic cartoons with a precision local-signal board and four compact measurement stages for capture, modeling, output, and verification.
 
@@ -50,13 +49,6 @@
 - Reworked the phase-overlay module so noise peaks and antiphase troughs share one reference line and leave a smaller, non-zero residual.
 - Expanded “场景观察” to six balanced cards, including everyday laptop work, mobile laptop work, and phone transit browsing.
 
-### Hardware and real-room scenarios
-
-- Added three replaceable-art-frame forms and compact in-wall linear concepts with construction, microphone, loudspeaker, control, installation, and measurement guidance.
-- Moved device checking into the one-tap module and placed usage scenarios first in hardware navigation.
-- Completed the six-card sleep-scene grid with adult single-bed and realistic 1.8–2.0 m couple-bed imagery.
-- Added responsive acoustic overlays for adult, child, and couple scenes: noise source, microphone capture, antiphase output, and three-layer pillow-area quiet zones.
-
 ### SleeePal Lab · 美梦成真
 
 - Expanded the local-first dream workspace with multiple dream cards, progress, per-dream conversation, action-board preview, export, archive, and delete controls.
@@ -69,7 +61,6 @@
 - Kept the historic `/desktop.html` route alive to avoid breaking old bookmarks.
 - Aligned the “美梦成真” canonical URL with its public main-domain route and retained fail-closed service detection.
 - Hardened generated HTML previews with a no-network Content Security Policy and local `srcdoc` sandbox rendering.
-- Added security policies to the public hardware pages and labeled acoustic overlays as simulations rather than measured sound fields.
 
 ## 2026-07-22
 
