@@ -44,6 +44,7 @@ jobs:
             "privacy.html", "terms.html", "3d-printing-workshop.html", "dream-lab.css",
             "dream-lab.js", "release.json", "favicon.ico", "hardware-sku.html",
             "hardware-sku.css", "hardware-sku.js", "hardware-detail.html",
+            "hardware-listener.html", "hardware-listener.css", "assets/listener-square-v018.png",
             "assets/app-icon-preview.png", "assets/app-icon.svg",
             "assets/concealed-art-frame-bedroom-v1.jpg",
             "assets/concealed-art-frame-panorama-bar-v1.jpg",
@@ -127,7 +128,7 @@ jobs:
           assert.doesNotMatch(dreamStyles, /left:\s*calc\(45\.2%/, "trajectory line still uses a section-wide horizontal guess");
           assert.match(dreamStyles, /\.dream-trajectory-line\s*\{[\s\S]*?left:\s*24px;/, "desktop trajectory line is not centered in the number rail");
 
-          for (const file of ["hardware-sku.html", "hardware-detail.html"]) {
+          for (const file of ["hardware-sku.html", "hardware-detail.html", "hardware-listener.html"]) {
             assert.match(fs.readFileSync(file, "utf8"), /Content-Security-Policy/);
           }
           const homepage = fs.readFileSync("index.html", "utf8");

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="独立取证听诊器工程方案。USB 或充电宝供电，SD 卡保存原音，含零部件预算和简易组装说明。">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>独立取证听诊器 · SleeePal 智能硬件</title>
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="stylesheet" href="./hardware-listener.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="./hardware-sku.html"><img src="./assets/logo-light.svg" width="96" alt="SleeePal">智能硬件</a>
+    <nav class="nav" aria-label="独立取证听诊器导航">
+      <a href="#design">硬件方案</a><a href="#cost">零部件与成本</a><a href="#assembly">组装说明</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="hero" aria-labelledby="listener-title">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">取证硬件 · 工程方案 v0.0.19</p>
+      <h1 id="listener-title">独立取证听诊器</h1>
+      <p class="hero-lede">接上 USB 电源或充电宝，在现场把原音录进证据卡。结束后用手机回放标记片段、分析并生成报告。</p>
+      <p class="note">工程样机设计。方形外壳已建模，独立录制、掉电保护和续航待实物验收。</p>
+      <div class="actions"><a class="primary" href="#assembly">查看组装说明</a><a href="#cost">查看成本测算</a></div>
+    </div>
+    <figure>
+      <img src="./assets/listener-square-v018.png" width="1536" height="940" alt="圆角方形主机的装配和拆解模型。顶盖分开录制和标记按键孔，前排三个灯位，后方有可替换接口背板。">
+      <figcaption>由结构模型生成。壳体试配尺寸 96 × 96 × 32 mm，端口按选定模块定位。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap guide-section" id="design">
+  <p class="kicker">01 · 硬件方案</p>
+  <h2>采集和保存都在盒子里</h2>
+  <ol class="flow" aria-label="取证信号流程">
+    <li><strong>接触探头</strong>贴墙或贴地，信号经前级送入 USB 声卡 Line-in。</li>
+    <li><strong>独立主控</strong>Pi Zero 2 W 通过 OTG 接带供电的 USB Hub。RTC 保持采集时间。</li>
+    <li><strong>证据卡</strong>主控把原音、时间、标记和质量日志写进可取出的卡。系统卡留在主板。</li>
+    <li><strong>手机取证宝</strong>用读卡器导入兼容短包，核对原音后按标记回听。长录选择性导入待验证。</li>
+  </ol>
+  <p>首台用一只已确认接线的接触探头，预留第二通道。目标原件格式为 48 kHz、16-bit PCM WAV，双声道每 5 分钟约 57.6 MB，24 小时约 16.59 GB。128 GB 证据卡和主板系统卡分开选型。接触通道采用相对电平，用于定位事件，定量声压与结构振动各有独立测量和标定流程。</p>
+  <p>电源选标明可持续输出 <strong>5 V / 3 A</strong> 的 USB 电源或充电宝，台架用 USB 电流表确认主机、Hub、声卡和写卡时的峰值。Pi 的电源口与 OTG 口分开接，Hub 须具备上游回灌隔离。面板 USB-C 作为 5 V 供电入口，内侧转接到主控电源口。模块未量尺寸时先在开敞台架上试接。</p>
+  <p class="note">续航估算按铭牌 Wh × 0.80–0.90 ÷ 实测平均功率。以 10,000 mAh／37 Wh 为例，平均 2–3 W 时约 10–17 小时。20,000 mAh／74 Wh 约 20–33 小时。功耗、转换效率、充电宝自动关机和掉电尾段均需实测。24 小时验收先用稳定 USB 电源。</p>
+</section>
+
+<section class="wrap guide-section" id="cost">
+  <p class="kicker">02 · 人民币预算 · 2026-11-04</p>
+  <h2>从一台自装到千台生产</h2>
+  <p>以一只接触探头、双通道输入、128 GB 耐久证据卡及外接 5 V 为基准。自装列为现金物料，委外打样和批量列含基础装测与收尾供电预算。充电宝、手机读卡器、税运、研发、工装和模具另计。</p>
+  <dl class="cost-summary">
+    <div><dt>自家打印与组装</dt><dd>¥468–948</dd></div>
+    <div><dt>委外打样 · 1 台</dt><dd>¥864–1740</dd></div>
+    <div><dt>模块化 · 100 台</dt><dd>¥588–1067 / 台</dd></div>
+    <div><dt>集成板 · 1000 台</dt><dd>¥321–631 / 台</dd></div>
+  </dl>
+  <table>
+    <caption>零部件与工序预算，单位为元／台。横杠代表该列未计入。</caption>
+    <thead><tr><th scope="col">零部件／工序</th><th scope="col">自家打印</th><th scope="col">委外打样</th><th scope="col">100 台</th><th scope="col">1000 台</th></tr></thead>
+    <tbody><tr><th scope="row">主控＋系统卡</th><td data-label="自家打印">165–280</td><td data-label="委外打样">165–280</td><td data-label="100 台">145–230</td><td data-label="1000 台">36–68</td></tr>
+<tr><th scope="row">双路 Line-in 声卡／同步 ADC</th><td data-label="自家打印">30–60</td><td data-label="委外打样">30–60</td><td data-label="100 台">24–45</td><td data-label="1000 台">24–45</td></tr>
+<tr><th scope="row">接触探头、前级和屏蔽线</th><td data-label="自家打印">30–75</td><td data-label="委外打样">30–75</td><td data-label="100 台">25–55</td><td data-label="1000 台">20–40</td></tr>
+<tr><th scope="row">128 GB 耐久证据卡</th><td data-label="自家打印">120–270</td><td data-label="委外打样">120–270</td><td data-label="100 台">105–180</td><td data-label="1000 台">80–145</td></tr>
+<tr><th scope="row">带供电 Hub＋证据卡读卡器／板载卡座</th><td data-label="自家打印">35–75</td><td data-label="委外打样">35–75</td><td data-label="100 台">24–50</td><td data-label="1000 台">5–12</td></tr>
+<tr><th scope="row">RTC 与电池座</th><td data-label="自家打印">25–55</td><td data-label="委外打样">25–55</td><td data-label="100 台">14–30</td><td data-label="1000 台">6–14</td></tr>
+<tr><th scope="row">5 V 入口、保护和供电线</th><td data-label="自家打印">25–50</td><td data-label="委外打样">25–50</td><td data-label="100 台">20–40</td><td data-label="1000 台">12–25</td></tr>
+<tr><th scope="row">按钮、指示灯、接插件和线束</th><td data-label="自家打印">18–38</td><td data-label="委外打样">18–38</td><td data-label="100 台">12–25</td><td data-label="1000 台">9–18</td></tr>
+<tr><th scope="row">外壳、背板和紧固件</th><td data-label="自家打印">20–45</td><td data-label="委外打样">100–190</td><td data-label="100 台">55–105</td><td data-label="1000 台">18–40</td></tr>
+<tr><th scope="row">整机装配、烧录及基础测试</th><td data-label="自家打印">—</td><td data-label="委外打样">120–250</td><td data-label="100 台">45–90</td><td data-label="1000 台">25–50</td></tr>
+<tr><th scope="row">包装与标签</th><td data-label="自家打印">—</td><td data-label="委外打样">8–20</td><td data-label="100 台">10–20</td><td data-label="1000 台">8–16</td></tr>
+<tr><th scope="row">掉电检测与收尾保持供电</th><td data-label="自家打印">—</td><td data-label="委外打样">75–150</td><td data-label="100 台">55–100</td><td data-label="1000 台">18–40</td></tr>
+<tr><th scope="row">集成主板 PCB 与贴装</th><td data-label="自家打印">—</td><td data-label="委外打样">—</td><td data-label="100 台">—</td><td data-label="1000 台">30–60</td></tr></tbody>
+    <tfoot><tr><th scope="row">直接成本</th><td data-label="自家打印">468–948</td><td data-label="委外打样">751–1513</td><td data-label="100 台">534–970</td><td data-label="1000 台">291–573</td></tr><tr><th scope="row">含预留后的预算</th><td data-label="自家打印">468–948</td><td data-label="委外打样">864–1740</td><td data-label="100 台">588–1067</td><td data-label="1000 台">321–631</td></tr></tfoot>
+  </table>
+  <p><strong>自装可复用。</strong>沿用现有 USB 声卡及完整探头／前级，增量约 <strong>¥408–813</strong>。其中壳体自印及紧固件约 ¥20–45。按 PETG 用量 70–120 g、材料 ¥65–110/kg、加上机器磨耗与小五金估算，具体用量以切片结果为准。委外壳体含背板、试配返工余量和紧固件。</p>
+  <p><strong>批量按两种架构估。</strong>100 台继续用 Linux 模块，按 10% 预留后约 ¥58,800–106,700。1000 台按 ESP32-S3、同步双通道 ADC 和板载卡座设计，单台 ¥321–631，首批生产预算约 ¥32.1万–63.1万。定制板、固件和良率验证是达到该区间的前提。若把项目既有一次性研发、工装、模具及测试预算 ¥12万–33万 全摊入 1000 台，则规划成本约 ¥441–961/台。委外样机按 15% 预留。</p>
+  <p class="note">成本是方案区间，未收到工厂报价。Pi 官方 $15 与美国零售 128 GB 耐久卡 $36.99 仅作参考，表内人民币区间按采购场景估算。打印、贴装、量产卡价和返工需拿实物参数核价。</p>
+  <ul class="source-links note">
+    <li><a href="https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/">Pi 官方规格和标价</a></li>
+    <li><a href="https://www.microcenter.com/product/668929/sandisk-128gb-high-endurance-microsdxc-class-10-uhs-i-flash-memory-card-with-adapter?storeID=205">耐久卡零售参考</a></li>
+    <li><a href="https://jlcpcb.com/help/answers/detail/403-How-do-you-determine-3D-Printing-costs">打印报价因素</a></li>
+    <li><a href="https://documentation.espressif.com/esp32_s3_datasheet_en.pdf">ESP32-S3</a></li>
+    <li><a href="https://www.ti.com/product/PCM1862">双路 ADC 候选</a></li>
+  </ul>
+</section>
+
+<section class="wrap guide-section" id="assembly">
+  <p class="kicker">03 · 简易组装说明</p>
+  <h2>先通电录一分钟，再装入外壳</h2>
+  <ol class="steps">
+    <li><h3>备料和试配</h3><p>准备主控、系统 microSD、带供电 USB Hub、USB 声卡、USB 读卡器和证据卡。底壳开口向上打印，顶盖外观面朝下，背板平放。先用空白背板比对 USB-C、探头和卡座的实际尺寸，试装 M2.5 螺钉、绝缘柱和线缆固定夹。保留插拔和线束弯折空间。</p></li>
+    <li><h3>断电接线</h3><p>探头接匹配的前级，前级输出接声卡的 LINE-IN。Pi 的 USB OTG 接 Hub 上游，声卡和证据卡读卡器接 Hub 下游。充电宝或 USB 电源分别给 Pi 的 PWR IN 和有供电隔离的 Hub 供电。采用成品线，确保 Hub 上游不会把电压送回 Pi。</p></li>
+    <li><h3>装按键和对时模块</h3><p>候选引脚采用 BCM 编号。录制键 GPIO17、标记键 GPIO27，按下接 GND，输入启用上拉。录制、存储、故障灯分别用 GPIO22、23、24，各串约 1 kΩ 后接灯和地。RTC 用 3.3 V 兼容、无充电电路的模块，SDA 接 GPIO2，SCL 接 GPIO3，共地。以模块标注核对电平和接头，确认 RTC 正常读时后记录采集时区。</p></li>
+    <li><h3>装系统并做台架短录</h3><p>用 Raspberry Pi Imager 在系统卡写入 Raspberry Pi OS Lite。首次可用另一台设备做配置。插入独立证据卡，确认它的挂载位置。用 ALSA 查声卡和实际支持的通道，再做一分钟 WAV 验证。每次只激励一路，回放核对声道和噪声。</p></li>
+    <li><h3>安装采集服务后验证脱机</h3><p>工程固件需实现上电自检、长按开始／停止、独立标记、分段 WAV、SHA-256、UTC／帧锚和缺口日志。装入服务后断开调试连接，长按录制键开始，点标记键记事件，停止后等待存储灯提示卸载完成，再取卡。当前可先验证接线和原音。按键封存及兼容包导出需待独立采集服务通过实机测试。</p></li>
+    <li><h3>挂装、验电源并导入</h3><p>主机和充电宝可放同一带固定带的袋中，两件分别固定。线缆留松弛段并做应力释放，避免 USB 插头承重。先试录并检查温升、掉电和充电宝自动关机。取卡后在手机「记录 → 听诊器录音 → 导入录音」选择兼容封存短包，确认时区、标记与回放。</p></li>
+  </ol>
+  <p>台架命令示例。把命令中的声卡名和证据卡路径改成机器实际值。</p>
+  <pre><code>arecord -l
+lsblk -o NAME,LABEL,SIZE,MOUNTPOINTS
+# 确认 /mnt/evidence 是证据卡挂载点
+mountpoint -q /mnt/evidence &amp;&amp; \
+  arecord -D 'hw:CARD=Device,DEV=0' -f S16_LE -r 48000 -c 2 -t wav -d 60 \
+  "/mnt/evidence/bench-$(date -u +%Y%m%dT%H%M%SZ).wav"
+sync</code></pre>
+  <p class="note">此命令用于验证声卡、录音和写卡。正式取证短包另需设备与会话元数据、分段帧范围、质量日志和原件哈希。可以用浏览器的打印功能保存或打印本说明。</p>
+  <p class="note"><a href="https://www.raspberrypi.com/documentation/computers/getting-started.html">Raspberry Pi 系统安装说明</a> · <a href="https://www.raspberrypi.com/documentation/computers/zero.html">Pi Zero 接口说明</a></p>
+</section>
+</main>
+<footer class="wrap site-footer note"><a href="./hardware-sku.html">返回智能硬件</a> · 取证听诊器工程设计 v0.0.19</footer>
+</body>
+</html>
